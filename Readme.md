@@ -12,7 +12,7 @@
     - `run_sim_matching_new` run simulations on a local computer.
     - `create_matching_new.sh` run simulations on clusters. -->
 
-# Individual-level learning
+# xx
 This repository contains the implementation for the paper "xx" in Python. 
 This paper focuses on reinforcement learning (RL) in clustered environments with limited data, a common scenario in healthcare applications. We propose an optimal policy learning algorithm that integrates Generalized Estimating Equations (GEE) into the Bellman equation framework to account for intra-cluster correlations. Our approach not only minimizes the variance of the Q-function estimator but also ensures that the derived policy achieves minimal regret. 
 
