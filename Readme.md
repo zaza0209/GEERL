@@ -22,18 +22,18 @@ We illustrate the motivation behind the proposed approach through a simple tabul
 ## File Overview
 
 - Folder `functions/`:
-    - `generate_joint_data` generate data for simulation.
-    - `GEE_Q` implements fitted Q iteration with GEE.
-    - `cov_struct` contains several correlation structures for GEE.
-    - `utilities` contains some helping functions.
+    - `generate_joint_data`: Generates data for simulation.
+    - `GEE_Q`: Implements the generatlized Fitted Q iteration (FQI) and the optimal FQI with GEE.
+    - `cov_struct`: Contains several correlation structures for GEE.
+    - `utilities`: Contains some helping functions.
 
 
 - Folder `simulation/`:
-    - `R_autoex`: implement the generalized Fitted Q iterations and the proposed optimal Fitted Q iterations with different within cluster correlation structures. 
+    - `R_autoex`: Runs the generalized FQI and the proposed optimal FQI with different within cluster correlation structures. 
     - `create_r_autoex.sh`: Creates SLURM jobs to run `R_autoex.py`.
-    - `Qonline_single.py`: run DQN to approximate the optimal Q function.
+    - `Qonline_single.py`: Run online DQN to approximate the optimal Q function.
     - `create_online_Q.sh`: Creates SLURM jobs to run `Qonline_single.py`.
 
 - Folder `simulation/regret`:
-    - `value_comparison.py`: estimate the regret of the optimal Q function with different noise variance.
+    - `value_comparison.py`: Estimates the regret of the optimal Q function with different noise variance.
     - `create_value_comparison.sh`: Creates SLURM jobs to run `value_comparison.py`.
