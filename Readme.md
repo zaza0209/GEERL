@@ -12,8 +12,8 @@
     - `run_sim_matching_new` run simulations on a local computer.
     - `create_matching_new.sh` run simulations on clusters. -->
 
-# xx
-This repository contains the implementation for the paper "xx" in Python. 
+# Generalized Fitted Q-iteration with Clustered Data
+This repository contains the implementation for the paper "Generalized Fitted Q-iteration with Clustered Data" in Python. 
 This paper focuses on reinforcement learning (RL) in clustered environments with limited data, a common scenario in healthcare applications. We propose an optimal policy learning algorithm that integrates Generalized Estimating Equations (GEE) into the Bellman equation framework to account for intra-cluster correlations. Our approach not only minimizes the variance of the Q-function estimator but also ensures that the derived policy achieves minimal regret. 
 
 We illustrate the motivation behind the proposed approach through a simple tabular example where the optimal Q-function is analytically known (See Section 3.1 for details). Increasing the variance of the Q-function leads to higher regret in the derived policies.
