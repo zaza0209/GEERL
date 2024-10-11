@@ -37,3 +37,9 @@ We illustrate the motivation behind the proposed approach through a simple tabul
 - Folder `simulation/regret`:
     - `value_comparison.py`: Estimates the regret of the optimal Q function with different noise variance.
     - `create_value_comparison.sh`: Creates SLURM jobs to run `value_comparison.py`.
+
+- Folder `semi/codes/`:
+    - `run_individual_rl_ihs.py`: Run the semisynthetic simulation based on IHS dataset.
+    - `run_online_learning.py`: Run the online policy learning on semisynthetic dataset.
+
+- Folder `semi/models`: Include the learned transition and reward functions learned from IHS dataset.
