@@ -21,6 +21,7 @@ We will revise the manuscript to clarify these points and include a discussion o
 
 
 
+
 ### Non-conventional Contributions:
 * The integration of generalized estimating equations (GEE), a classical statistical tool for longitudinal and clustered data, into the reinforcement learning (RL) framework is unconventional. This approach bridges the gap between statistical methods for correlated data and modern RL techniques, addressing a unique set of challenges rarely explored in RL literature.
 
@@ -35,6 +36,10 @@ We will revise the manuscript to clarify these points and include a discussion o
 
     - Thank you for the thoughtful feedback and for highlighting the significance of these contributions.
 
+
+
+### Clarity
+* In my opinion, the paper can be improved in terms of clarity. The introduction section is not clear. After reading the intro I still don’t understand the problem. There is no clear problem statement. Only after reading section 3, that the problem become clear. The authors can improve the clarity of the paper by discussing that traditional RL methods typically assume iid data which is not the case here.
 
 
 
