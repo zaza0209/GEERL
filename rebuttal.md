@@ -58,9 +58,22 @@ We will revise the manuscript to clarify these points and include a discussion o
 
 
 * Regarding Theorem 1, does the result achieve semiparametric efficiency, or is it limited to comparing parameter estimators within the set of estimating equations specified in Equation (5)? The operator in of equation (5) is non-smooth. Does it cause any challenge to the statistical inference?
+    - The result is limited to comparing parameter estimators within the set of estimating equations specified in Equation (5).
+    - Yes. We adopt the uniquess assumption (A3) and the marginal assumption to address this challenge.
 
 
-* Regarding Theorem 2, first it seems that the regret is not properly defined, but only appears in the proof of Theorem 2 in the appendix. The value functions have not been defined either. In addition, the type of regret being discussed is unclear. It seems the focus is on simple regret, not cumulative regret, but this should be explicitly stated. Whichever is being addressed, it is important to connect the theoretical results to existing literature. For example, if the variance of is plugged in, what is the regret? How does the regret scale with key factors such as the dimension of the state space, episode length, and number of episodes?
+* Regarding Theorem 2, first it seems that the regret is not properly defined, but only appears in the proof of Theorem 2 in the appendix. The value functions have not been defined either. In addition, the type of regret being discussed is unclear. It seems the focus is on simple regret, not cumulative regret, but this should be explicitly stated. Whichever is being addressed, it is important to connect the theoretical results to existing literature. For example, if the variance of $\beta$ is plugged in, what is the regret? How does the regret scale with key factors such as the dimension of the state space, episode length, and number of episodes?
+      - If the covariance matrix of the temporal difference error is pluged in, the regret is still $-\frac{1}{2}\mathrm{tr}(\Var(\widehat{\bftheta})H)+O(N^{-3/2})$ as in Theorem 2 we do not assume the correct covariance matrix is used.
+      - we can prove that the regret is
+  $$
+\begin{array}{r}
+\phi_L^{\top}(a, s) \widehat{\beta}_{\left[T_1, T_2\right]}-Q^{\text {opt }}(a, s)=\frac{\phi_L^{\top}(a, s)}{N\left(T_2-T_1\right)} W_{\left[T_1, T_2\right]}^{-1} \sum_{i=1}^N \sum_{t=T_1}^{T_2-1} \phi_L\left(A_{i, t}, S_{i, t}\right) \delta_{i, t}^* \\
++O\left(\frac{L^{-p / d}}{(1-\gamma)^3}\right)+O\left(\frac{L \log (N T)}{(1-\gamma)^3 \in N T}\right)
+\end{array}
+$$
+with probability at least $1-O\left(N^{-1} M^{-1}\right)$, and we recall that $\delta_{i, t}^*$ denotes the temporal difference $\operatorname{error} R_{i, t}+\gamma \max _a Q^{\text {opt }}\left(a, S_{i, t+1}\right)-Q^{\text {opt }}\left(A_{i, t}, S_{i, t}\right)$.
+
+
 
 ### Significance Justification:
 * The empirical results are reasonable, showing that the proposed algorithm outperforms baselines as within-cluster correlation increases. However, a key concern is how the algorithm performs in real-world settings where the common effect within a cluster may not be as strong. For example, it would be helpful for the authors to report the actual value of the within-cluster correlation in their experiments to illustrate what constitutes a typical setting in real-world data.
