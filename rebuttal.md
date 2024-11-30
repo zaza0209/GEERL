@@ -63,16 +63,71 @@ We will revise the manuscript to clarify these points and include a discussion o
 
 
 * Regarding Theorem 2, first it seems that the regret is not properly defined, but only appears in the proof of Theorem 2 in the appendix. The value functions have not been defined either. In addition, the type of regret being discussed is unclear. It seems the focus is on simple regret, not cumulative regret, but this should be explicitly stated. Whichever is being addressed, it is important to connect the theoretical results to existing literature. For example, if the variance of $\beta$ is plugged in, what is the regret? How does the regret scale with key factors such as the dimension of the state space, episode length, and number of episodes?
-      - If the covariance matrix of the temporal difference error is pluged in, the regret is still $-\frac{1}{2}\mathrm{tr}(\Var(\widehat{\bftheta})H)+O(N^{-3/2})$ as in Theorem 2 we do not assume the correct covariance matrix is used.
+      - If the covariance matrix of the temporal difference error is pluged in, the regret is still $-\frac{1}{2}\mathrm{tr}(\mathrm{Var}(\widehat{\theta})H)+O(N^{-3/2})$ as in Theorem 2 we do not assume the correct covariance matrix is used.
       - we can prove that the regret is
   $$
+\sup_{\mathbf{A}, \mathbf{S}}|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) \widehat{\beta}-Q^{*}(\mathbf{A}, \mathbf{S})|=
+O\left(\frac{L^{-1/d}}{(1-\gamma)^2}\right)+O\left(\frac{L \sqrt{\log (MT)}}{(1-\gamma)^2 \sqrt{\epsilon MT} }\right)
+$$
+with probability at least $1-O\left(N^{-1}\right)$. Here $L$ is the number of basis functions and $d$ is the dimension of the state space.
+
+We now begin the proof.
+Finally, to upper bound $\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^1(\mathbf{A}, \mathbf{S})\left(\beta^{(k) *}-\beta^{(k)}\right)\right|$, we define two intermediate quantities
+
+$$
 \begin{array}{r}
-\phi_L^{\top}(a, s) \widehat{\beta}_{\left[T_1, T_2\right]}-Q^{\text {opt }}(a, s)=\frac{\phi_L^{\top}(a, s)}{N\left(T_2-T_1\right)} W_{\left[T_1, T_2\right]}^{-1} \sum_{i=1}^N \sum_{t=T_1}^{T_2-1} \phi_L\left(A_{i, t}, S_{i, t}\right) \delta_{i, t}^* \\
-+O\left(\frac{L^{-p / d}}{(1-\gamma)^3}\right)+O\left(\frac{L \log (N T)}{(1-\gamma)^3 \in N T}\right)
+I_1=\frac{\Sigma^{-1}}{MN} \sum_{i, t}\mathbf{\Phi}_L\left(A_{t}^{(i)}, S_{t}^{(i)}\right)\left\{R_{t}^{(i)}+\gamma \max _{a^{\prime}} \mathbf{\Phi}_L^{\top}\left(a^{\prime}, S_{t+1}^{(i)}\right) \beta^{(k-1)}-\mathbf{\Phi}_L\left(A_{t}^{(i)}, S_{t}^{(i)}\right) \beta^{(k) *}\right\}, \\
 \end{array}
 $$
-with probability at least $1-O\left(N^{-1} M^{-1}\right)$, and we recall that $\delta_{i, t}^*$ denotes the temporal difference $\operatorname{error} R_{i, t}+\gamma \max _a Q^{\text {opt }}\left(a, S_{i, t+1}\right)-Q^{\text {opt }}\left(A_{i, t}, S_{i, t}\right)$.
+<!-- I_2=\frac{\Sigma^{-1}}{T} \sum_{t} \mathbb{E} \mathbf{\Phi}_L\left(A_t, S_t\right)\left\{R_t+\gamma \max _{a^{\prime}} \mathbf{\Phi}_L^{\top}\left(a^{\prime}, S_{t+1}\right) \beta^{(k-1)}-\mathbf{\Phi}_L\left(A_t, S_t\right) \beta^{(k) *}\right\} . -->
 
+It follows from (5) that
+
+$$
+\left\|\beta^{(k) *}-\beta^{(k)}-I_1\right\|_2=O\left(\frac{L(\epsilon N)^{-1} \log (N)}{(1-\gamma)^2}\right)+O\left(\frac{L^{1 / 2-p / d} \sqrt{(\epsilon N)^{-1} \log (N)}}{(1-\gamma)^2}\right),
+$$
+
+with probability at least $1-O\left(N^{-1} \right)$.
+<!-- 
+Meanwhile, using similar arguments to bounding the $\ell_2$ norm in the RHS of (8) in the supplementary, we obtain with probability at least $1-O\left(N^{-1} \right)$ that
+
+$$
+\left\|I_1-I_2\right\|_2=O\left(\frac{\sqrt{L(\epsilon N)^{-1} \log (N)}}{1-\gamma}\right)
+$$
+ -->
+
+We obtain that
+
+$$
+\begin{aligned}
+\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S})\left(\beta^{(k) *}-\beta^{(k)}\right)\right| & \leq \sup _{\mathbf{A}, \mathbf{S}}\left\|\mathbf{\Phi}_L(\mathbf{A}, \mathbf{S})\right\|_2\left\|\beta^{(k) *}-\beta^{(k)}-I_1\right\|_2 +\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) I_2\right|\\
+&=O\left(\frac{L \sqrt{(\epsilon N)^{-1} \log (N)}}{1-\gamma}\right)+\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) I_2\right|,
+\end{aligned}
+$$
+
+under the conditions on $L$ that $L$ is proportional to $N^{c_4}$ for some $0 < c_4 < 1/4$.
+
+Finally, we can show that $\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) I_1\right|=O\left((1-\gamma)^{-1} L^{-1/ d}\right)$ by employing the bias control techniques developed by Huang (2003) (see Lemma 5.1 and Theorem A. 1 therein), based on which we can show that the basis function $\phi_L$ satisfies
+
+$$
+\left[\sup _{\mathbf{A}, \mathbf{S}}\left|h\left(A_t^{(i)}, S_t^{(i)}\right)\right|\right]^{-1} \sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) \frac{\Sigma^{-1}}{N} \sum_{i,t} \mathbb{E}\mathbf{\Phi}_L\left(A_t^{(i)}, S_t^{(i)}\right) h\left(A_t^{(i)}, S_t^{(i)}\right)\right|=O(1),
+$$
+
+where the big- $O$ term on the RHS is uniform in any nonzero function $h$.
+
+Consequently, we have
+
+$$
+\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S})\left(\beta^{(k) *}-\beta^{(k)}\right)\right|=O\left(\frac{L \sqrt{(\epsilon N )^{-1} \log (N)}}{1-\gamma}\right)+O\left(\frac{L^{-1 / d}}{1-\gamma}\right),
+$$
+
+and hence $\sup _{\mathbf{A}, \mathbf{S}}\left|Q^{(k) *}(\mathbf{A}, \mathbf{S})-Q^{(k)}(\mathbf{A}, \mathbf{S})\right|$ is of the same order of magnitude. It follows from the error analysis in (2)  in the supplementary that
+
+$$
+\sup _{\mathbf{A}, \mathbf{S}}\left|Q^{*}(\mathbf{A}, \mathbf{S})-Q^{(k)}(\mathbf{A}, \mathbf{S})\right|=O\left(\frac{L \sqrt{(\epsilon N)^{-1} \log (N)}}{(1-\gamma)^2}\right)+O\left(\frac{L^{-1 / d}}{(1-\gamma)^2}\right)+O\left(\frac{\gamma^k}{1-\gamma}\right),
+$$
+
+with probability at least $1-O\left(N^{-1}\right)$. This establishes the rate of regret by noting that the number of FQI iterations much larger than $\log (N)$.
 
 
 ### Significance Justification:
@@ -101,6 +156,70 @@ We will revise the manuscript to explicitly discuss these technical challenges a
 * The paper spends many pages explaining details of existing methods such as GEE, RL algorithms, and standard MDPs. Readers would benefit more from an explicit discussion of how the current work differs from previous work. This comparison is essential for understanding the novel aspects of the proposed method.
 
 * In contrast, the proposed method is discussed in less detail. For example, key assumptions and theoretical results are omitted from the main paper, making it difficult for readers to grasp the foundation of the proposed method. Without details of Theorem 1, it is hard to understand why the optimal $\Phi$ has the given form on page 6.
+
+
+Thank you for your helpful feedback regarding the clarity of the proposed method, and particularly for highlighting the need for more detail on the key assumptions and theoretical results.
+
+We agree that a more thorough explanation of the assumptions and the formal theoretical results is necessary to fully convey the foundation of the proposed method. In the revised manuscript, we will explicitly include these details to help readers better understand the theoretical framework behind our approach. Below is a summary of the key assumptions and the formal statements of Theorems 1 and 2:
+
+### Assumptions:
+
+1. **Realizability**  
+   We assume the environment follows a linear Markov Decision Process (MDP) [Xie et al., 2023]. Both the reward function and the transition dynamics are linear in a known feature map \(\phi(s,a)\), i.e.,
+   \[
+   \mathcal{T}(s' | a, s) = \phi(a, s)^\top \mu(s'),
+   \]
+   and
+   \[
+   \mathcal{R}(a, s) = \phi(a, s)^\top \omega.
+   \]
+   This assumption ensures that the Q-function and the environment dynamics can be represented by linear structures, which is central to deriving the properties of the GFQI estimator.
+
+2. **Stability**  
+   [The second assumption can be defined here. Add specific details about stability and any other assumptions here.]
+
+---
+
+### Theorem 1: **Asymptotic Distribution of \(\widehat{\beta}\)**
+
+**Formal Statement:**
+Suppose Assumptions 1 and 2 are satisfied. The estimator \(\widehat{\beta}\), computed by Algorithm 1 (Optimal FQI), has the following properties:
+
+1. The asymptotic distribution of \(\sqrt{MN}(\widehat{\beta} - \beta^*)\) is normal:
+   \[
+   \mathcal{N}(\bm{0}, W^{-1} \Sigma W^{-1\top}),
+   \]
+   where:
+   \[
+   W(\bm{\Phi}) = \frac{1}{M} \mathbb{E}\left[ \bm{\Phi}(\mathbf{A}, \mathbf{S}) \left\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\} \right],
+   \]
+   and \(\Sigma(\bm{\Phi}) = \frac{1}{M} \mathbb{E} \left( \bm{\Phi} \mathbf{V}^* \bm{\Phi}^\top \right)\).
+
+2. When the correlation structure of the TD errors is correctly specified, and the estimator \(\widehat{\Phi}^*(\mathbf{A}, \mathbf{S})\) converges to \(\Phi^*(\mathbf{A}, \mathbf{S})\) with a rate at least \(O(N^{-b} \log^{-1}(N))\) for some \(b > 0\), \(\widehat{\beta}\) achieves the minimal asymptotic variance:
+   \[
+   W(\Phi^*)^{-1}.
+   \]
+
+---
+
+### Theorem 2: **Regret of the Estimated Optimal Policy**
+
+**Formal Statement:**
+Suppose Assumptions 1 and 3 are satisfied. The regret of the estimated optimal policy is given by:
+\[
+-\frac{1}{2} \mathrm{tr}(\mathrm{Var}(\widehat{\beta}) H) + O(N^{-3/2}),
+\]
+where \(H = \left. \frac{\partial^2 \mathcal{V}(\pi(\beta))}{\partial \beta \partial \beta^\top} \right|_{\beta = \beta^*}\) and \(\mathcal{V}(\pi(\beta)) = \sum_s V^{\pi(\beta)}(s) \rho(s)\), with \( \pi(\beta) \) derived by:
+\[
+\pi(\beta) = \arg \max_a \phi(a, s)^\top \beta.
+\]
+
+---
+
+We will include these assumptions and the formal statements of Theorems 1 and 2 in the revised manuscript to provide readers with a clearer understanding of the theoretical foundations that underlie our approach. These results provide important insights into the asymptotic behavior and efficiency of the GFQI estimator, and we hope this additional detail will help readers better appreciate the rigor of our method.
+
+Thank you again for your feedback, which has been invaluable in helping us improve the clarity and depth of our presentation.
+
 
 * A description of the real data used would provide helpful context, including the number of users, the number of clusters, and the duration of the study.
 
