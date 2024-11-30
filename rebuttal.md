@@ -229,6 +229,8 @@ Thank you again for your feedback, which has been invaluable in helping us impro
 
     In model II on page 4, $m$ seems to represent the total number of subjects in a cluster, being an observed value of $M$ and taking values from 1 to infinity. However, in the next paragraph, $m$ is used as the index of each trajectory in a cluster, taking values from 1 to $M$. If this understanding is correct, using distinct notations for these cases would reduce ambiguity.
     In the simulation study, the number of decision times per week is unclear. It seems that there is an action for each day $t$, so there are 7 actions in a week. However, the horizon is defined as the number of weeks $T$.
+    
+    - we have corrected the notations.
 
 ## RE: Reviewer MTVu
 
