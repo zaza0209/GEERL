@@ -57,7 +57,8 @@ We will revise the manuscript to clarify these points and include a discussion o
     - We will clarify this point in the revised manuscript to ensure transparency about the scope and limitations of our method. Thank you for bringing this to our attention.
 
 
-* Regarding Theorem 1, does the result achieve semiparametric efficiency, or is it limited to comparing parameter estimators within the set of estimating equations specified in Equation (5)? The operator in of equation (5) is non-smooth. Does it cause any challenge to the statistical inference?
+* Regarding Theorem 1, the operator in of equation (5) is non-smooth. Does this pose any challenges for statistical inference? Are there any assumptions needed to address the non-regularity [1, 2]?
+
     - The result is limited to comparing parameter estimators within the set of estimating equations specified in Equation (5).
     - Yes. We adopt the uniquess assumption (A3) and the marginal assumption to address this challenge.
 
@@ -154,6 +155,31 @@ We will revise the manuscript to explicitly discuss these technical challenges a
 
 ### Clarity
 * The paper spends many pages explaining details of existing methods such as GEE, RL algorithms, and standard MDPs. Readers would benefit more from an explicit discussion of how the current work differs from previous work. This comparison is essential for understanding the novel aspects of the proposed method.
+
+
+Thank you for your thoughtful feedback regarding the balance between background explanation and discussion of the novel aspects of our work.
+
+We agree that the paper devotes significant space to explaining existing methods such as GEE, RL algorithms, and standard MDPs. While these details were included to ensure accessibility for a broad audience, we recognize the importance of focusing on the unique contributions of our work. In the revised manuscript, we will streamline the background sections by removing redundant material and instead allocate more space to explicitly discuss how the proposed Generalized Fitted Q-Iteration (GFQI) differs from Fitted Q-Iteration (FQI).
+
+#### Key Differences Between FQI and GFQI:
+1. **Handling of Intra-Cluster Correlations:**
+   - FQI assumes that all data points are independent and identically distributed (i.i.d.), ignoring any dependencies between data points within the same cluster. This can lead to suboptimal policy estimates in settings where intra-cluster correlations are present.
+   - GFQI, on the other hand, incorporates Generalized Estimating Equations (GEE) to explicitly model and account for intra-cluster correlations via a working correlation matrix. This adjustment improves sample efficiency and ensures more accurate Q-function estimation in clustered data scenarios.
+
+2. **Working Correlation Matrix:**
+   - FQI treats observations as independent, equivalent to using an independence working correlation matrix in GEE.
+   - GFQI allows for flexible working correlation structures (e.g., exchangeable or other forms) to better capture the dependencies within clusters. This leads to more efficient parameter estimation when the correlation structure is appropriately specified.
+
+3. **Theoretical Improvements:**
+   - GFQI achieves minimal asymptotic variance in its Q-function estimation when the working correlation matrix is correctly specified, as shown in our theoretical results (Theorem 1). FQI does not provide this advantage, as it does not model intra-cluster correlations.
+
+4. **Performance in Clustered Settings:**
+   - Empirically, GFQI significantly outperforms FQI in settings with strong intra-cluster correlations, as demonstrated in our numerical studies. This highlights its practical advantage in scenarios where traditional FQI struggles due to its independence assumption.
+
+We will incorporate these points into the revised manuscript to emphasize the novel contributions of GFQI compared to FQI. By focusing more on these differences, we aim to provide readers with a clearer understanding of how our method advances the state of the art in reinforcement learning for clustered data.
+
+Thank you for this valuable feedback, which has helped us refine our presentation and better highlight the contributions of our work.
+
 
 * In contrast, the proposed method is discussed in less detail. For example, key assumptions and theoretical results are omitted from the main paper, making it difficult for readers to grasp the foundation of the proposed method. Without details of Theorem 1, it is hard to understand why the optimal $\Phi$ has the given form on page 6.
 
