@@ -136,7 +136,7 @@ with probability at least $1-O\left(N^{-1}\right)$. This establishes the rate of
 ### Novelty Justification:
 * This work applies GEE to the estimation of Q-functions. This appears to be a relatively straightforward combination of the widely used methods GEE and FQI. While there may be additional technical challenges involved, these challenges are not clearly discussed in the paper.
 
-Thank you for the observation regarding the combination of GEE and FQI in our work. While at first glance this may appear to be a straightforward integration, there are significant technical challenges involved in adapting GEE for Q-function estimation, particularly in the context of reinforcement learning with clustered data. We acknowledge that these challenges were not sufficiently highlighted in the original manuscript, and we appreciate the opportunity to elaborate further.
+Thank you for the observation regarding the combination of GEE and FQI in our work. We acknowledge that these challenges were not sufficiently highlighted in the original manuscript, and we appreciate the opportunity to elaborate further.
 
 1. **Adapting GEE for Temporal Dependencies:**
    - Traditional GEE frameworks are designed for longitudinal or clustered data with independent observations across clusters but do not natively account for temporal dependencies within reinforcement learning trajectories. Adapting GEE to estimate Q-functions requires careful handling of these temporal structures, particularly in the computation of temporal difference (TD) errors and the construction of the working correlation matrix.
