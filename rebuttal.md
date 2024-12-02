@@ -102,12 +102,10 @@ $$
 with probability at least $1-O\left(N^{-1}\right)$. Here $L$ is the number of basis functions and $d$ is the dimension of the state space.
 
 We now begin the proof.
-To upper bound $\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^1(\mathbf{A}, \mathbf{S})\left(\beta^{(k) *}-\beta^{(k)}\right)\right|$, we define two intermediate quantities
+To upper bound $\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^1(\mathbf{A}, \mathbf{S})\left(\beta^{(k) *}-\beta^{(k)}\right)\right|$, we define an intermediate quantity
 
 $$
-\begin{array}{r}
-I_1=\frac{\Sigma^{-1}}{MN} \sum_{i, t}\mathbf{\Phi}_L\left(A_{t}^{(i)}, S_{t}^{(i)}\right)\left\{R_{t}^{(i)}+\gamma \max_{a^{\prime}} \mathbf{\Phi}_L^{\top}\left(a^{\prime}, S_{t+1}^{(i)}\right) \beta^{(k-1)}-\mathbf{\Phi}_L\left(A_{t}^{(i)}, S_{t}^{(i)}\right) \beta^{(k) *}\right\}, \\
-\end{array}
+I_1 = \frac{\Sigma^{-1}}{MN} \sum_{i, t} \mathbf{\Phi}_{L} \left( A_{t}^{(i)}, S_{t}^{(i)} \right) \left\{ R_{t}^{(i)} + \gamma \max_{a^{\prime}} \mathbf{\Phi}_L^{\top} \left( a^{\prime}, S_{t+1}^{(i)} \right) \beta^{(k-1)} - \mathbf{\Phi}_L \left( A_{t}^{(i)}, S_{t}^{(i)} \right) \beta^{(k) *} \right\},
 $$
 
 
@@ -220,7 +218,7 @@ We agree that a more thorough explanation of the assumptions and the formal theo
 ### Assumptions:
 
 1. **Realizability**  
-   We assume the environment follows a linear Markov Decision Process (MDP) [Xie et al., 2023]. Both the reward function and the transition dynamics are linear in a known feature map \(\phi(s,a)\), i.e.,
+   We assume the environment follows a linear Markov Decision Process (MDP) [Xie et al., 2023]. Both the reward function and the transition dynamics are linear in a known feature map $\phi(s,a)$, i.e.,
    \[
    \mathcal{T}(s' | a, s) = \phi(a, s)^\top \mu(s'),
    \]
@@ -253,22 +251,22 @@ Then the expected cumulative reward for $\pi(\beta)$ has third-order derivative 
 
 ---
 
-### Theorem 1: **Asymptotic Distribution of \(\widehat{\beta}\)**
+### Theorem 1: **Asymptotic Distribution of $\widehat{\beta}$**
 
 **Formal Statement:**
-Suppose Assumptions 1 and 2 are satisfied. The estimator \(\widehat{\beta}\), computed by Algorithm 1 (Optimal FQI), has the following properties:
+Suppose Assumptions 1 and 2 are satisfied. The estimator $\widehat{\beta}$, computed by Algorithm 1 (Optimal FQI), has the following properties:
 
-1. The asymptotic distribution of \(\sqrt{MN}(\widehat{\beta} - \beta^*)\) is normal:
+1. The asymptotic distribution of $\sqrt{MN}(\widehat{\beta} - \beta^{*})$ is normal:
    \[
-   \mathcal{N}(\bm{0}, W^{-1} \Sigma W^{-1\top}),
+   \mathcal{N}(\mathbf{0}, W^{-1} \Sigma W^{-1\top}),
    \]
    where:
    \[
-   W(\bm{\Phi}) = \frac{1}{M} \mathbb{E}\left[ \bm{\Phi}(\mathbf{A}, \mathbf{S}) \left\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\} \right],
+   W(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E}\left[ \mathbf{\Phi}(\mathbf{A}, \mathbf{S}) \left\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\} \right],
    \]
-   and \(\Sigma(\bm{\Phi}) = \frac{1}{M} \mathbb{E} \left( \bm{\Phi} \mathbf{V}^* \bm{\Phi}^\top \right)\).
+   and $\Sigma(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E} \left( \mathbf{\Phi} \mathbf{V}^* \mathbf{\Phi}^\top \right)$.
 
-2. When the correlation structure of the TD errors is correctly specified, and the estimator \(\widehat{\Phi}^*(\mathbf{A}, \mathbf{S})\) converges to \(\Phi^*(\mathbf{A}, \mathbf{S})\) with a rate at least \(O(N^{-b} \log^{-1}(N))\) for some \(b > 0\), \(\widehat{\beta}\) achieves the minimal asymptotic variance:
+2. When the correlation structure of the TD errors is correctly specified, and the estimator $\widehat{\Phi}^*(\mathbf{A}, \mathbf{S})$ converges to $\Phi^*(\mathbf{A}, \mathbf{S})$ with a rate at least $O(N^{-b} \log^{-1}(N))$ for some $b > 0$, $\widehat{\beta}$ achieves the minimal asymptotic variance:
    \[
    W(\Phi^*)^{-1}.
    \]
@@ -282,7 +280,7 @@ Suppose Assumptions 1 and 3 are satisfied. The regret of the estimated optimal p
 \[
 -\frac{1}{2} \mathrm{tr}(\mathrm{Var}(\widehat{\beta}) H) + O(N^{-3/2}),
 \]
-where \(H = \left. \frac{\partial^2 \mathcal{V}(\pi(\beta))}{\partial \beta \partial \beta^\top} \right|_{\beta = \beta^*}\) and \(\mathcal{V}(\pi(\beta)) = \sum_s V^{\pi(\beta)}(s) \rho(s)\), with \( \pi(\beta) \) derived by:
+where $H = \left. \frac{\partial^2 \mathcal{V}(\pi(\beta))}{\partial \beta \partial \beta^\top} \right|_{\beta = \beta^*}$ and $\mathcal{V}(\pi(\beta)) = \sum_s V^{\pi(\beta)}(s) \rho(s)$, with $ \pi(\beta) $ derived by:
 \[
 \pi(\beta) = \arg \max_a \phi(a, s)^\top \beta.
 \]
@@ -319,7 +317,7 @@ Thank you for your thoughtful comments and for raising the question regarding th
 
 **Regarding the Soundness of Theorem 1:**
 
-You correctly point out that Theorem 1 assumes the environment is a Linear MDP. This assumption is crucial for establishing the asymptotic properties of the estimator \(\widehat{\beta}\). However, it is important to note that the Linear MDP assumption does not preclude the presence of clustered data. In fact, the clustered structure is explicitly accounted for in the algorithm (GFQI) through the use of Generalized Estimating Equations (GEE), which allows us to model and handle the intra-cluster correlations.
+You correctly point out that Theorem 1 assumes the environment is a Linear MDP. This assumption is crucial for establishing the asymptotic properties of the estimator $\widehat{\beta}$. However, it is important to note that the Linear MDP assumption does not preclude the presence of clustered data. In fact, the clustered structure is explicitly accounted for in the algorithm (GFQI) through the use of Generalized Estimating Equations (GEE), which allows us to model and handle the intra-cluster correlations.
 
 If the linear MDP assumption does not hold, we can relax it to the realiziability assumption and the completeness assumption:
 
@@ -337,21 +335,21 @@ And in this case, the optimal Q function is not guranteed to have a linear form 
 
 **Clarification on the Benefits of GFQI:**
 
-The efficiency claimed in Theorem 1 refers to the asymptotic variance of the estimator \(\widehat{\beta}\). Specifically, when the correlation matrix is correctly specified, GFQI achieves the minimal asymptotic variance among the class of estimators computed by solving (5). This is a significant improvement over the ordinary FQI, which uses an independence correlation structure and thus does not account for the intra-cluster correlations.
+The efficiency claimed in Theorem 1 refers to the asymptotic variance of the estimator $\widehat{\beta}$. Specifically, when the correlation matrix is correctly specified, GFQI achieves the minimal asymptotic variance among the class of estimators computed by solving (5). This is a significant improvement over the ordinary FQI, which uses an independence correlation structure and thus does not account for the intra-cluster correlations.
 
 To reiterate, Theorem 1 states that:
 
-1. The asymptotic distribution of \(\sqrt{MN}(\widehat{\beta} - \beta^*)\) is normal:
+1. The asymptotic distribution of $\sqrt{MN}(\widehat{\beta} - \beta^*)$ is normal:
    \[
-   \mathcal{N}(\bm{0}, W^{-1} \Sigma W^{-1\top}),
+   \mathcal{N}(\mathbf{0}, W^{-1} \Sigma W^{-1\top}),
    \]
    where:
    \[
-   W(\bm{\Phi}) = \frac{1}{M} \mathbb{E}\left[ \bm{\Phi}(\mathbf{A}, \mathbf{S}) \left\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\} \right],
+   W(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E}\left[ \mathbf{\Phi}(\mathbf{A}, \mathbf{S}) \left\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\} \right],
    \]
-   and \(\Sigma(\bm{\Phi}) = \frac{1}{M} \mathbb{E} \left( \bm{\Phi} \mathbf{V}^* \bm{\Phi}^\top \right)\).
+   and $\Sigma(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E} \left( \mathbf{\Phi} \mathbf{V}^* \mathbf{\Phi}^\top \right)$.
 
-2. When the correlation structure of the TD errors is correctly specified, and the estimator \(\widehat{\Phi}^*(\mathbf{A}, \mathbf{S})\) converges to \(\Phi^*(\mathbf{A}, \mathbf{S})\) with a rate at least \(O(N^{-b} \log^{-1}(N))\) for some \(b > 0\), \(\widehat{\beta}\) achieves the minimal asymptotic variance:
+2. When the correlation structure of the TD errors is correctly specified, and the estimator $\widehat{\Phi}^*(\mathbf{A}, \mathbf{S})$ converges to $\Phi^*(\mathbf{A}, \mathbf{S})$ with a rate at least $O(N^{-b} \log^{-1}(N))$ for some $b > 0$, $\widehat{\beta}$ achieves the minimal asymptotic variance:
    \[
    W(\Phi^*)^{-1}.
    \]
@@ -362,12 +360,12 @@ Additionally, based on Theorem 1, we can derive the regret bound for the estimat
 \[
 -\frac{1}{2} \mathrm{tr}(\mathrm{Var}(\widehat{\beta}) H) + O(N^{-3/2}),
 \]
-where \(H = \left. \frac{\partial^2 \mathcal{V}(\pi(\beta))}{\partial \beta \partial \beta^\top} \right|_{\beta = \beta^*}\) and \(\mathcal{V}(\pi(\beta)) = \sum_s V^{\pi(\beta)}(s) \rho(s)\), with \( \pi(\beta) \) derived by:
+where $H = \left. \frac{\partial^2 \mathcal{V}(\pi(\beta))}{\partial \beta \partial \beta^\top} \right|_{\beta = \beta^*}$ and $\mathcal{V}(\pi(\beta)) = \sum_s V^{\pi(\beta)}(s) \rho(s)$, with $ \pi(\beta) $ derived by:
 \[
 \pi(\beta) = \arg \max_a \phi(a, s)^\top \beta.
 \]
 
-This regret bound further underscores the benefits of GFQI, as it shows that the estimation error of \(\beta\) directly translates into the regret of the resulting policy, and GFQI's ability to achieve the minimal asymptotic variance leads to a more efficient policy learning process.
+This regret bound further underscores the benefits of GFQI, as it shows that the estimation error of $\beta$ directly translates into the regret of the resulting policy, and GFQI's ability to achieve the minimal asymptotic variance leads to a more efficient policy learning process.
 
 
 
@@ -384,21 +382,21 @@ To address your request, we provide the exact expressions of the asymptotic vari
 
 **Asymptotic Variance of the Estimated Parameters:**
 
-The asymptotic variance of the estimated parameters \(\widehat{\beta}\) is given by:
+The asymptotic variance of the estimated parameters $\widehat{\beta}$ is given by:
 \[
 W^{-1} \Sigma W^{-1\top},
 \]
 where:
 \[
-W(\bm{\Phi}) = \frac{1}{M} \mathbb{E}\left[ \bm{\Phi}(\mathbf{A}, \mathbf{S}) \left\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\} \right],
+W(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E}\left[ \mathbf{\Phi}(\mathbf{A}, \mathbf{S}) \left\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\} \right],
 \]
-and \(\Sigma(\bm{\Phi}) = \frac{1}{M} \mathbb{E} \left( \bm{\Phi} \mathbf{V}^* \bm{\Phi}^\top \right)\).
+and $\Sigma(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E} \left( \mathbf{\Phi} \mathbf{V}^* \mathbf{\Phi}^\top \right)$.
 
-Here, \(\bm{\Phi}\) can be expressed as:
+Here, $\mathbf{\Phi}$ can be expressed as:
 \[
-\bm{\Phi}^*(\mathbf{S}, \mathbf{A}) = \Big[\phi^*(A^{(1)}, S^{(1)}), \cdots, \phi^*(A^{(M)}, S^{(M)})\Big] \mathbf{V}^{-1},
+\mathbf{\Phi}^*(\mathbf{S}, \mathbf{A}) = \Big[\phi^*(A^{(1)}, S^{(1)}), \cdots, \phi^*(A^{(M)}, S^{(M)})\Big] \mathbf{V}^{-1},
 \]
-where \(\mathbf{V}\) is the working covariance matrix of the TD error. This matrix can be misspecified, meaning it may not accurately reflect the true underlying correlation structure.
+where $\mathbf{V}$ is the working covariance matrix of the TD error. This matrix can be misspecified, meaning it may not accurately reflect the true underlying correlation structure.
 
 **Regret Bound:**
 
@@ -406,7 +404,7 @@ The regret bound for the estimated optimal policy is given by:
 \[
 -\frac{1}{2} \mathrm{tr}(\mathrm{Var}(\widehat{\beta}) H) + O(N^{-3/2}),
 \]
-where \(H = \left. \frac{\partial^2 \mathcal{V}(\pi(\beta))}{\partial \beta \partial \beta^\top} \right|_{\beta = \beta^*}\) and \(\mathcal{V}(\pi(\beta)) = \sum_s V^{\pi(\beta)}(s) \rho(s)\), with \(\pi(\beta)\) derived by:
+where $H = \left. \frac{\partial^2 \mathcal{V}(\pi(\beta))}{\partial \beta \partial \beta^\top} \right|_{\beta = \beta^*}$ and $\mathcal{V}(\pi(\beta)) = \sum_s V^{\pi(\beta)}(s) \rho(s)$, with $\pi(\beta)$ derived by:
 \[
 \pi(\beta) = \arg \max_a \phi(a, s)^\top \beta.
 \]
