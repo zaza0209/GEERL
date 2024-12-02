@@ -106,10 +106,10 @@ Finally, to upper bound $\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^1(\
 
 $$
 \begin{array}{r}
-I_1=\frac{\Sigma^{-1}}{MN} \sum_{i, t}\mathbf{\Phi}_L\left(A_{t}^{(i)}, S_{t}^{(i)}\right)\left\{R_{t}^{(i)}+\gamma \max _{a^{\prime}} \mathbf{\Phi}_L^{\top}\left(a^{\prime}, S_{t+1}^{(i)}\right) \beta^{(k-1)}-\mathbf{\Phi}_L\left(A_{t}^{(i)}, S_{t}^{(i)}\right) \beta^{(k) *}\right\}, \\
+I_1=\frac{\Sigma^{-1}}{MN} \sum_{i, t}\mathbf{\Phi}_L\left(A_{t}^{(i)}, S_{t}^{(i)}\right)\left\{R_{t}^{(i)}+\gamma \max_{a^{\prime}} \mathbf{\Phi}_L^{\top}\left(a^{\prime}, S_{t+1}^{(i)}\right) \beta^{(k-1)}-\mathbf{\Phi}_L\left(A_{t}^{(i)}, S_{t}^{(i)}\right) \beta^{(k) *}\right\}, \\
 \end{array}
 $$
-<!-- I_2=\frac{\Sigma^{-1}}{T} \sum_{t} \mathbb{E} \mathbf{\Phi}_L\left(A_t, S_t\right)\left\{R_t+\gamma \max _{a^{\prime}} \mathbf{\Phi}_L^{\top}\left(a^{\prime}, S_{t+1}\right) \beta^{(k-1)}-\mathbf{\Phi}_L\left(A_t, S_t\right) \beta^{(k) *}\right\} . -->
+
 
 It follows from (5) that
 
