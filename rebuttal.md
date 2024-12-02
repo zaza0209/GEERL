@@ -4,19 +4,47 @@
 
 ### Significance Justification:
 * If I understand correctly, in the numerical study, a single agent learns a generalized policy for each baseline algorithm, which can be applied across different teams or clusters. While training one model is computationally more efficient than training separate models for each cluster, this approach might limit the agent's ability to optimize performance for specific clusters with unique characteristics, as it aims for a one-size-fits-all policy. This appears to be a significant advantage of GFQI compared to the baseline approaches. Training a separate agent for each cluster could allow the learning process to better adapt to the specific dynamics and characteristics of individual clusters, potentially improving performance. Could the authors please clarify or provide additional insights on this aspect?
+ 
+Thank you for your insightful feedback and for raising the important issue of accommodating heterogeneity in the numerical study. We appreciate your thoughtful consideration of the trade-offs between training a single generalized policy versus separate models for each cluster.
 
+**Accommodating Heterogeneity:**
 
-Thank you for this thoughtful observation regarding the trade-off between training a generalized policy across clusters and training separate policies for each cluster.
+To address the heterogeneity of clusters, we propose several strategies that can be employed within our framework:
 
-You are correct that in the numerical study, a single agent learns a generalized policy for each baseline algorithm, which can then be applied across different teams or clusters. This approach is computationally efficient and aligns with the primary goal of our study: to design a method that accommodates intra-cluster correlations while maintaining scalability. GFQI’s strength lies in its ability to leverage information across clusters through the working correlation matrix, effectively addressing shared structures and dependencies, which are often present in real-world clustered data.
+1. **Incorporating Cluster Characteristics in the State:**
+   - We can augment the state representation with cluster-specific characteristics such as university or major categories, as in our motivating example from the Intern Health Study (IHS). This allows the agent to learn policies that are more tailored to the specific dynamics and characteristics of individual clusters.
+   - If cluster characteristics are not explicitly available, we can add a one-hot vector for each subject to indicate their cluster membership. This provides a simple yet effective way to incorporate cluster-specific information into the state representation.
 
-However, we agree that training separate models for each cluster could, in principle, allow for better adaptation to the unique dynamics and characteristics of individual clusters. While this might improve performance in cases where clusters exhibit highly distinct behaviors, it also comes with notable drawbacks:
-1. **Increased Computational Cost:** Training separate agents for each cluster can significantly increase computational demands, especially when the number of clusters is large.
-2. **Data Limitations:** Many real-world scenarios involve clusters with limited data. Training a separate model for each cluster could lead to overfitting or suboptimal performance due to insufficient data within individual clusters.
-3. **Loss of Generalization:** A cluster-specific approach might not generalize well to new or unseen clusters, limiting its applicability in scenarios where policy transferability is important.
+2. **Transfer Reinforcement Learning:**
+   - Transfer Reinforcement Learning (RL) techniques can be used to leverage knowledge from one cluster to improve learning in another. This approach can help mitigate the challenges of heterogeneity by sharing information across clusters while still allowing for adaptation to individual cluster dynamics.
 
-GFQI strikes a balance by learning a generalized policy that incorporates intra-cluster correlations, making it robust to shared structures across clusters while retaining computational feasibility. We recognize that for settings where clusters have drastically different characteristics and sufficient data is available, training cluster-specific models might offer complementary benefits. This could be an interesting direction for future work, where GFQI could be extended to hybrid approaches that combine cluster-specific and generalized policies.
+**Bias-Variance Trade-off:**
 
+We agree that there is a trade-off between fitting a single common model and fitting separate models for each cluster. Here are the pros and cons of each approach:
+
+**Fitting a Single Common Model:**
+
+- **Pros:**
+  - **Information Sharing:** A single model can share information across different clusters, potentially leading to more robust and generalizable policies.
+  - **Computational Efficiency:** Training a single model is computationally more efficient than training separate models for each cluster.
+  - **Scalability:** A single model can be more scalable to large datasets with many clusters.
+
+- **Cons:**
+  - **Lack of Individual Adaptation:** A single model may lack the ability to fully adapt to the unique characteristics of each cluster, potentially limiting performance in highly heterogeneous settings.
+  - **Bias:** The model may introduce bias if the common dynamics do not accurately represent the specific dynamics of some clusters.
+
+**Fitting Separate Models:**
+
+- **Pros:**
+  - **Individual Adaptation:** Separate models can better adapt to the specific dynamics and characteristics of individual clusters, potentially improving performance in heterogeneous settings.
+  - **Flexibility:** Each model can be fine-tuned to the unique needs of its respective cluster, leading to more personalized policies.
+
+- **Cons:**
+  - **Computational Cost:** Training separate models for each cluster can be computationally expensive and less efficient.
+  - **Scalability:** Handling many separate models can be challenging in terms of scalability and resource management.
+  - **Information Loss:** There is no sharing of information across clusters, which may lead to suboptimal policies in clusters with similar dynamics.
+
+ 
 We will revise the manuscript to clarify these points and include a discussion on the trade-offs between generalized and cluster-specific policies. Thank you for raising this important aspect, which helps us provide a more comprehensive perspective on the strengths and limitations of our approach.
 
 
@@ -41,7 +69,8 @@ We will revise the manuscript to clarify these points and include a discussion o
 ### Clarity
 * In my opinion, the paper can be improved in terms of clarity. The introduction section is not clear. After reading the intro I still don’t understand the problem. There is no clear problem statement. Only after reading section 3, that the problem become clear. The authors can improve the clarity of the paper by discussing that traditional RL methods typically assume iid data which is not the case here.
 
-
+    - Thank you for your feedback on the clarity of our paper. We appreciate your suggestions and will revise the introduction section to clearly state the problem and emphasize that traditional RL methods typically assume i.i.d. data, which is not the case in our study. This will help readers understand the problem more clearly from the outset.
+      
 
 ## RE: Reviewer u1HY
 ### Soundness justification
@@ -263,21 +292,111 @@ Thank you again for your feedback, which has been invaluable in helping us impro
 ### Soundness justification
 
 * My biggest question focuses on the soundness of Theorem 1. In particular, one of the assumptions of Theorem 1 is that the environment is a Linear MDP. How does this accommodate the clustered structure in the data that is presented as a motivating example? It is not clear whether Theorem 1 implies the claimed benefits of GFQI. I would like additional clarification here.
+Thank you for providing the details. Based on your points and the formal statement of Theorem 1, here is a draft of the rebuttal to the reviewer's feedback:
+
+---
+
+
+Thank you for your thoughtful comments and for raising the question regarding the soundness of Theorem 1 and its implications for the clustered structure in the data. We appreciate the opportunity to clarify these points.
+
+**Regarding the Soundness of Theorem 1:**
+
+You correctly point out that Theorem 1 assumes the environment is a Linear MDP. This assumption is crucial for establishing the asymptotic properties of the estimator \(\widehat{\beta}\). However, it is important to note that the Linear MDP assumption does not preclude the presence of clustered data. In fact, the clustered structure is explicitly accounted for in the algorithm (GFQI) through the use of Generalized Estimating Equations (GEE), which allows us to model and handle the intra-cluster correlations.
+
+**Clarification on the Benefits of GFQI:**
+
+The efficiency claimed in Theorem 1 refers to the asymptotic variance of the estimator \(\widehat{\beta}\). Specifically, when the correlation matrix is correctly specified, GFQI achieves the minimal asymptotic variance among the class of estimators computed by solving (5). This is a significant improvement over the ordinary FQI, which uses an independence correlation structure and thus does not account for the intra-cluster correlations.
+
+To reiterate, Theorem 1 states that:
+
+1. The asymptotic distribution of \(\sqrt{MN}(\widehat{\beta} - \beta^*)\) is normal:
+   \[
+   \mathcal{N}(\bm{0}, W^{-1} \Sigma W^{-1\top}),
+   \]
+   where:
+   \[
+   W(\bm{\Phi}) = \frac{1}{M} \mathbb{E}\left[ \bm{\Phi}(\mathbf{A}, \mathbf{S}) \left\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\} \right],
+   \]
+   and \(\Sigma(\bm{\Phi}) = \frac{1}{M} \mathbb{E} \left( \bm{\Phi} \mathbf{V}^* \bm{\Phi}^\top \right)\).
+
+2. When the correlation structure of the TD errors is correctly specified, and the estimator \(\widehat{\Phi}^*(\mathbf{A}, \mathbf{S})\) converges to \(\Phi^*(\mathbf{A}, \mathbf{S})\) with a rate at least \(O(N^{-b} \log^{-1}(N))\) for some \(b > 0\), \(\widehat{\beta}\) achieves the minimal asymptotic variance:
+   \[
+   W(\Phi^*)^{-1}.
+   \]
+
+**Regret Bound:**
+
+Additionally, based on Theorem 1, we can derive the regret bound for the estimated optimal policy. The regret is given by:
+\[
+-\frac{1}{2} \mathrm{tr}(\mathrm{Var}(\widehat{\beta}) H) + O(N^{-3/2}),
+\]
+where \(H = \left. \frac{\partial^2 \mathcal{V}(\pi(\beta))}{\partial \beta \partial \beta^\top} \right|_{\beta = \beta^*}\) and \(\mathcal{V}(\pi(\beta)) = \sum_s V^{\pi(\beta)}(s) \rho(s)\), with \( \pi(\beta) \) derived by:
+\[
+\pi(\beta) = \arg \max_a \phi(a, s)^\top \beta.
+\]
+
+This regret bound further underscores the benefits of GFQI, as it shows that the estimation error of \(\beta\) directly translates into the regret of the resulting policy, and GFQI's ability to achieve the minimal asymptotic variance leads to a more efficient policy learning process.
+
+
+
+
 
 * Additionally, for both Theorem 1 and Theorem 2, it would be nice to see a discussion of how a maximally misspecified correlation matrix affects the result.
 
+
+Thank you for your insightful comments and for suggesting a discussion on the impact of a maximally misspecified correlation matrix on the results of Theorem 1 and Theorem 2. We appreciate this opportunity to provide further clarification.
+
+**Impact of Misspecified Correlation Matrix:**
+
+To address your request, we provide the exact expressions of the asymptotic variance of the estimated parameters and the regret bound, highlighting their relationship with the working covariance matrix.
+
+**Asymptotic Variance of the Estimated Parameters:**
+
+The asymptotic variance of the estimated parameters \(\widehat{\beta}\) is given by:
+\[
+W^{-1} \Sigma W^{-1\top},
+\]
+where:
+\[
+W(\bm{\Phi}) = \frac{1}{M} \mathbb{E}\left[ \bm{\Phi}(\mathbf{A}, \mathbf{S}) \left\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\} \right],
+\]
+and \(\Sigma(\bm{\Phi}) = \frac{1}{M} \mathbb{E} \left( \bm{\Phi} \mathbf{V}^* \bm{\Phi}^\top \right)\).
+
+Here, \(\bm{\Phi}\) can be expressed as:
+\[
+\bm{\Phi}^*(\mathbf{S}, \mathbf{A}) = \Big[\phi^*(A^{(1)}, S^{(1)}), \cdots, \phi^*(A^{(M)}, S^{(M)})\Big] \mathbf{V}^{-1},
+\]
+where \(\mathbf{V}\) is the working covariance matrix of the TD error. This matrix can be misspecified, meaning it may not accurately reflect the true underlying correlation structure.
+
+**Regret Bound:**
+
+The regret bound for the estimated optimal policy is given by:
+\[
+-\frac{1}{2} \mathrm{tr}(\mathrm{Var}(\widehat{\beta}) H) + O(N^{-3/2}),
+\]
+where \(H = \left. \frac{\partial^2 \mathcal{V}(\pi(\beta))}{\partial \beta \partial \beta^\top} \right|_{\beta = \beta^*}\) and \(\mathcal{V}(\pi(\beta)) = \sum_s V^{\pi(\beta)}(s) \rho(s)\), with \(\pi(\beta)\) derived by:
+\[
+\pi(\beta) = \arg \max_a \phi(a, s)^\top \beta.
+\]
+
+The robustness properties of Theorem 1 and Theorem 2 are established for a general working covariance matrix that is not necessarily correct 
+
+
+### Significance: somewhat significant (e.g., significant performance in some but not all experiments, missing a baseline)
+- We appreciate your comment and would like to clarify that we have indeed included the ordinary Fitted Q Iteration (FQI) as a baseline in our experiments and compared its performance with our proposed algorithm, GFQI.
+- In addition to FQI, we have also included other baseline algorithms such as Adapted GTD (AGTD), Conservative Q-Learning (CQL), Double Deep Q-Network (DDQN), and the behavior policy used in the Intern Health Study (IHS) to provide a comprehensive evaluation.
+- 
 ### Significance justification
 * If the covariance structure is well-specified, the results in Figure 5 make sense, though I am curious why GFQI does not get asymptotically better as the number of clusters increases. Additionally, the performance of GFQI is not consistently better under some conditions, which leads me to question when GFQI is most appropriate to use. I would appreciate additional discussion of this.
-    - [Jitao] increase the number of clusters to show the regret of GFQI can decrease to 0
     - We appreciate the reviewer’s insightful observation regarding the asymptotic behavior of GFQI as the number of clusters increases. Upon closer examination, we confirm that GFQI indeed exhibits improved performance with an increasing number of clusters. However, the results in Figure 5 might appear to suggest otherwise due to the limited range of clusters shown in the current plot. As the number of clusters continues to grow beyond the range displayed in Figure 5, the regret of GFQI continues to decrease, supporting its asymptotic improvement.
-    - To address this concern more explicitly, we *include* an extended plot in the revised manuscript that visualizes the behavior of GFQI with a significantly larger number of clusters. This plot will demonstrate that GFQI consistently achieves better performance as the sample size increases, particularly when the covariance structure is well-specified.
     - Additionally, regarding the observation that GFQI’s performance is not consistently better under all conditions, we note that the advantage of GFQI depends heavily on the intra-cluster correlation (𝜓) and the degree of misspecification of the covariance structure. GFQI provides substantial benefits when the intra-cluster correlation is strong or when correctly specified correlation structures allow for more efficient policy learning. In cases of weaker correlation or greater misspecification, the relative advantage of GFQI diminishes, which aligns with our theoretical findings.
+    - In summary, the significance of the advantage of the GFQI verses other baselines depends on the sample size, the strongness of the intra-cluster correlation, and the correctly specified correlation structure.
 
 ### Novelty Justification:
 * I believe that using GEE to improve the sample efficiency of FQI is a novel methodological approach. However, I am unclear of the performance of GFQI (the proposed approach), when the correlation structure is misspecified.
     - We appreciate the reviewer’s acknowledgment of the novelty of using GEE to improve the sample efficiency of FQI. Regarding the performance of GFQI under misspecified correlation structures, we acknowledge that this is a critical aspect to consider.
 
-    - To address this concern, we have added a figure in the revised manuscript that explicitly examines the performance of GFQI when the independence correlation structure is used as a misspecified working correlation matrix. This scenario effectively assumes no intra-cluster correlation, providing a clear comparison against scenarios with correctly specified working correlation structures.
+    - To address this concern, we have added a figure...
 
     - Our preliminary results show that GFQI retains its robustness under misspecification, aligning with the theoretical guarantee of asymptotic normality. However, as expected, its efficiency (e.g., variance reduction and regret minimization) is reduced compared to the case of a well-specified structure. We believe this additional analysis will provide greater clarity on the practical applicability and limitations of GFQI when the correlation structure is misspecified.
 
@@ -297,10 +416,27 @@ Thank you again for your feedback, which has been invaluable in helping us impro
     - Regarding the case of a single cluster, GFQI and FQI are likely to perform similarly in practice. While it is theoretically possible to model intra-cluster correlation within a single cluster using a working correlation matrix, the efficiency gains depend on the size of the cluster and the strength of the correlation. If the intra-cluster correlation is strong and the cluster size is relatively small, the correct working correlation matrix could provide some efficiency gains by decorrelating the data. However, in most cases, a single cluster offers limited scope for leveraging such structures, making the performance of GFQI and FQI appear similar. Additionally, as the cluster size grows, both methods converge to the same consistent estimates, further reducing the potential difference.
 
 
-   
+* It would be nice to clarify that Figures 3 and 4 define causal relationships (which are referred to as paths) between components of the MDP. It is still not clear to me whether a correlation (rather than a causation) also violates the independence assumption.
+
+Thank you for your feedback and for pointing out the need for clarification regarding the causal relationships and correlations in Figures 3 and 4. We appreciate the opportunity to address this point.
+
+**Clarification on Causal Relationships and Correlations**
+
+In Figures 3 and 4, we indeed define causal relationships (referred to as paths) between components of the Markov Decision Process (MDP). These paths illustrate the dependencies and transitions within the MDP framework.
+
+**Independence Assumption**
+
+The independence assumption in the standard MDP requires that the state-action-reward triplets be independent across different trajectories. This means that there should be no directed paths connecting these triplets across different trajectories.
+
+**Impact of Correlation**
+
+Correlation can indeed violate the independence assumption. If there is a correlation between the state-action-reward triplets across different trajectories, it implies a dependency that is not accounted for in the standard MDP framework. This correlation can arise due to various factors, such as shared environmental conditions, social interactions, or other common influences within clusters.
+
+
+
 * You don’t define many terms including regret, MLE, and DGP. Please define these terms early in the paper for reader clarity.
-    - done. add a notion section
-    - 
+    - Thank you for your feedback and for pointing out the need to define key terms and we will add a notation section at the beginning of the paper to introduce all the important notations.
+      
 * What is the convergence criteria?
     - Thank you for pointing out the need for clarification on the convergence criteria.
 
@@ -315,6 +451,6 @@ Thank you again for your feedback, which has been invaluable in helping us impro
 
     - For the concern regarding the linear relationship in GEE, we agree that linear models can sometimes be restrictive. However, GEE can naturally accommodate non-linear relationships through the use of appropriate link functions (e.g., logit, probit) and advanced modeling techniques such as basis expansions, splines, or other non-linear transformations. In our paper, we leverage basis functions to approximate the Q-function, which effectively extends the framework beyond a strictly linear structure.
 
-    - Regarding the assumption of linear combinations for the optimal Q-function, we would like to emphasize that our approach allows for significant flexibility. By approximating the Q-function as a linear combination of basis functions, the method can model complex relationships. Importantly, this approximation can capture any non-linear structure in the Q-function if the number of basis functions is allowed to grow sufficiently large. This ensures that our method remains highly flexible and theoretically robust even in scenarios with non-linear relationships.
+    - Regarding the assumption of linear combinations for the optimal Q-function, we would like to emphasize that our approach allows for significant flexibility. By approximating the Q-function as a linear combination of basis functions, the method can model complex relationships. Importantly, this approximation can capture any non-linear structure in the Q-function if the number of basis functions is allowed to grow sufficiently large. This ensures that our method remains highly flexible and theoretically robust even in scenarios with non-linear relationships. Besides, we can try other link function than the linear function such as modeling the Q function as $f(s,a,\beta)$. The corresponding properties of the Q function can be similarly derived under GEE's framework.
 
     - We will revise the manuscript to clarify these points and highlight the flexibility of our approach in handling non-linear structures. Thank you for bringing up this important perspective, which allows us to strengthen the clarity and positioning of our work.
