@@ -12,11 +12,11 @@ Thank you for your insightful feedback and for raising the important issue of ac
 To address the heterogeneity of clusters, we propose several strategies that can be employed within our framework:
 
 1. **Incorporating Cluster Characteristics in the State:**
-   - We can augment the state representation with cluster-specific characteristics such as university or major categories, as in our motivating example from the Intern Health Study (IHS). This allows the agent to learn policies that are more tailored to the specific dynamics and characteristics of individual clusters.
+   - We can augment the state representation with cluster-specific characteristics such as university or major categories, as in our motivating example from the Intern Health Study. This allows the agent to learn policies that are more tailored to the specific dynamics and characteristics of individual clusters.
    - If cluster characteristics are not explicitly available, we can add a one-hot vector for each subject to indicate their cluster membership. This provides a simple yet effective way to incorporate cluster-specific information into the state representation.
 
 2. **Transfer Reinforcement Learning:**
-   - Transfer Reinforcement Learning (RL) techniques can be used to leverage knowledge from one cluster to improve learning in another. This approach can help mitigate the challenges of heterogeneity by sharing information across clusters while still allowing for adaptation to individual cluster dynamics.
+   - Transfer Reinforcement Learning techniques can be used to leverage knowledge from one cluster to improve learning in another. This approach can help mitigate the challenges of heterogeneity by sharing information across clusters while still allowing for adaptation to individual cluster dynamics.
 
 **Bias-Variance Trade-off:**
 
@@ -102,7 +102,7 @@ $$
 with probability at least $1-O\left(N^{-1}\right)$. Here $L$ is the number of basis functions and $d$ is the dimension of the state space.
 
 We now begin the proof.
-Finally, to upper bound $\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^1(\mathbf{A}, \mathbf{S})\left(\beta^{(k) *}-\beta^{(k)}\right)\right|$, we define two intermediate quantities
+To upper bound $\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^1(\mathbf{A}, \mathbf{S})\left(\beta^{(k) *}-\beta^{(k)}\right)\right|$, we define two intermediate quantities
 
 $$
 \begin{array}{r}
@@ -151,7 +151,7 @@ $$
 \sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S})\left(\beta^{(k) *}-\beta^{(k)}\right)\right|=O\left(\frac{L \sqrt{(\epsilon N )^{-1} \log (N)}}{1-\gamma}\right)+O\left(\frac{L^{-1 / d}}{1-\gamma}\right),
 $$
 
-and hence $\sup _{\mathbf{A}, \mathbf{S}}\left|Q^{(k) *}(\mathbf{A}, \mathbf{S})-Q^{(k)}(\mathbf{A}, \mathbf{S})\right|$ is of the same order of magnitude. It follows from the error analysis in (2)  in the supplementary that
+and hence $\sup _{\mathbf{A}, \mathbf{S}}\left|Q^{(k) *}(\mathbf{A}, \mathbf{S})-Q^{(k)}(\mathbf{A}, \mathbf{S})\right|$ is of the same order of magnitude. It follows from the error analysis in the proof of Theorem 1 in the supplementary that
 
 $$
 \sup _{\mathbf{A}, \mathbf{S}}\left|Q^{*}(\mathbf{A}, \mathbf{S})-Q^{(k)}(\mathbf{A}, \mathbf{S})\right|=O\left(\frac{L \sqrt{(\epsilon N)^{-1} \log (N)}}{(1-\gamma)^2}\right)+O\left(\frac{L^{-1 / d}}{(1-\gamma)^2}\right)+O\left(\frac{\gamma^k}{1-\gamma}\right),
@@ -215,7 +215,7 @@ Thank you for this valuable feedback, which has helped us refine our presentatio
 
 Thank you for your helpful feedback regarding the clarity of the proposed method, and particularly for highlighting the need for more detail on the key assumptions and theoretical results.
 
-We agree that a more thorough explanation of the assumptions and the formal theoretical results is necessary to fully convey the foundation of the proposed method. In the revised manuscript, we will explicitly include these details to help readers better understand the theoretical framework behind our approach. Below is a summary of the key assumptions and the formal statements of Theorems 1 and 2:
+We agree that a more thorough explanation of the assumptions and the formal theoretical results is necessary to fully convey the foundation of the proposed method. Due to the page limit, we have move those parts to the supplementary. In the revised manuscript, we will explicitly include these details to help readers better understand the theoretical framework behind our approach. Below is a summary of the key assumptions and the formal statements of Theorems 1 and 2:
 
 ### Assumptions:
 
@@ -231,7 +231,25 @@ We agree that a more thorough explanation of the assumptions and the formal theo
    This assumption ensures that the Q-function and the environment dynamics can be represented by linear structures, which is central to deriving the properties of the GFQI estimator.
 
 2. **Stability**  
-   [The second assumption can be defined here. Add specific details about stability and any other assumptions here.]
+    The matrix
+    $$M^{-1}
+\lambda_{\min}\mathbb{E} \left[\Phi^\top(\mathbf{A}, \mathbf{S})\phi(\mathbf{A}, \mathbf{S})-\gamma \Phi^\top(\mathbf{A}, \mathbf{S})\phi(\pi^{*}(\mathbf{S}^\prime),\mathbf{S}^\prime)\right]
+    $$ is uniformly bounded away from zero.
+
+3. **Uniqueness**
+    $\pi^{*}$ is unique.
+
+4. **FQI iterations**
+    The maximum number of iterations $K$ in GFQI satisfies
+$\log(N)\ll K = O(N^{c^\prime})$ for any $c^\prime > 0$. 
+
+5. **Behavior policy**
+     The data is generated by a Markov policy. 
+
+6. **Value smoothness**
+    Let $\pi(\beta)$ be the greedy policy derived by $\phi(a,s)^\top\beta$. 
+Then the expected cumulative reward for $\pi(\beta)$ has third-order derivative w.r.t $\beta$. 
+
 
 ---
 
@@ -302,6 +320,20 @@ Thank you for your thoughtful comments and for raising the question regarding th
 **Regarding the Soundness of Theorem 1:**
 
 You correctly point out that Theorem 1 assumes the environment is a Linear MDP. This assumption is crucial for establishing the asymptotic properties of the estimator \(\widehat{\beta}\). However, it is important to note that the Linear MDP assumption does not preclude the presence of clustered data. In fact, the clustered structure is explicitly accounted for in the algorithm (GFQI) through the use of Generalized Estimating Equations (GEE), which allows us to model and handle the intra-cluster correlations.
+
+If the linear MDP assumption does not hold, we can relax it to the realiziability assumption and the completeness assumption:
+
+1. **Realizability**
+$Q^*(a,s)$ and $Q^{(k),*}(a,s)$ (defined in \eqref{eq:k+1 iteration expected target Q} in Supplement) at all iteration $k$ is linearly realizable in a known feature map $\phi: \mathcal{A}\times\mathcal{S}\rightarrow \mathbb{R}^{d}$ if there exists a vector $\beta^*$ such that for all $(a,s)\in \mathcal{A}\times\mathcal{S}$, $Q^*(a,s)=\phi^\top(a,s)\beta^*$.
+
+2. **Completeness**
+ $\forall f\in \mathcal{F}_L$, $\mathcal{T}f\in \mathcal{F}_L$ where $\mathcal{F}_L$ is the space spanned by linear sieves $\Phi_L^\top(A,S)\beta$ for $\beta \in [-1,1]^{L}$ and $\mathcal{T}$ is the Bellman operator:
+$$
+(\mathcal{T}f)(A,S) =R(A,S) +\gamma \mathbb{E}_{S'\sim P(S'|S,A)}(\max_{a'}f(a',S')). 
+$$
+And in this case, the optimal Q function is not guranteed to have a linear form and some modeling error is needed to be included in analyzing the properties of the GFQI estimtor. 
+
+
 
 **Clarification on the Benefits of GFQI:**
 
@@ -385,7 +417,8 @@ The robustness properties of Theorem 1 and Theorem 2 are established for a gener
 ### Significance: somewhat significant (e.g., significant performance in some but not all experiments, missing a baseline)
 - We appreciate your comment and would like to clarify that we have indeed included the ordinary Fitted Q Iteration (FQI) as a baseline in our experiments and compared its performance with our proposed algorithm, GFQI.
 - In addition to FQI, we have also included other baseline algorithms such as Adapted GTD (AGTD), Conservative Q-Learning (CQL), Double Deep Q-Network (DDQN), and the behavior policy used in the Intern Health Study (IHS) to provide a comprehensive evaluation.
-- 
+
+
 ### Significance justification
 * If the covariance structure is well-specified, the results in Figure 5 make sense, though I am curious why GFQI does not get asymptotically better as the number of clusters increases. Additionally, the performance of GFQI is not consistently better under some conditions, which leads me to question when GFQI is most appropriate to use. I would appreciate additional discussion of this.
     - We appreciate the reviewer’s insightful observation regarding the asymptotic behavior of GFQI as the number of clusters increases. Upon closer examination, we confirm that GFQI indeed exhibits improved performance with an increasing number of clusters. However, the results in Figure 5 might appear to suggest otherwise due to the limited range of clusters shown in the current plot. As the number of clusters continues to grow beyond the range displayed in Figure 5, the regret of GFQI continues to decrease, supporting its asymptotic improvement.
@@ -413,7 +446,9 @@ The robustness properties of Theorem 1 and Theorem 2 are established for a gener
 
     - This observation aligns with the theoretical results in Theorem 1, where the convergence rate for all GFQI estimators, regardless of the working correlation matrix, is of the order $O((MN)^{-1/2})$, where $N$ is the number of state-action-reward-next-state tuples in the dataset, which depends on the number of clusters. As for the distance between clusters, GEE assumes that different clusters are independent, and thus it does not directly model the distance or relationship between clusters.
 
-    - Regarding the case of a single cluster, GFQI and FQI are likely to perform similarly in practice. While it is theoretically possible to model intra-cluster correlation within a single cluster using a working correlation matrix, the efficiency gains depend on the size of the cluster and the strength of the correlation. If the intra-cluster correlation is strong and the cluster size is relatively small, the correct working correlation matrix could provide some efficiency gains by decorrelating the data. However, in most cases, a single cluster offers limited scope for leveraging such structures, making the performance of GFQI and FQI appear similar. Additionally, as the cluster size grows, both methods converge to the same consistent estimates, further reducing the potential difference.
+    - Regarding the case of a single cluster, GFQI can still gain better performance than FQI. The efficiency gains depend on the size of the cluster and the strength of the correlation. If the intra-cluster correlation is strong and the cluster size is relatively small, the correct working correlation matrix could provide some efficiency gains by decorrelating the data. As the cluster size grows, both methods converge to the same consistent estimates, further reducing the potential difference.
+    
+   
 
 
 * It would be nice to clarify that Figures 3 and 4 define causal relationships (which are referred to as paths) between components of the MDP. It is still not clear to me whether a correlation (rather than a causation) also violates the independence assumption.
@@ -443,6 +478,10 @@ Correlation can indeed violate the independence assumption. If there is a correl
     - The convergence criteria in our method are as follows: the algorithm is considered to have converged when the predicted responses from two consecutive fitted models have a relative difference smaller than $10^{-5}$, or when the maximum number of iterations (100) is reached. These criteria ensure both accuracy and computational feasibility during optimization.
 
     - We will include this detail in the revised manuscript to provide clarity on this aspect of the method.
+
+* Why was a uniform behavior policy used? This seems like an easier setting and a little unrealistic. 
+    - Thank you for your feedback and for questioning the choice of a uniform behavior policy.
+    - A uniform behavior policy ensures that the data is generated from a balanced distribution of actions, which can lead to more accurate estimation of the Q-function and optimal policy. This is particularly important in offline RL settings where the behavior policy is fixed and cannot be altered.
       
 
 ### Additional Comments:
@@ -451,6 +490,6 @@ Correlation can indeed violate the independence assumption. If there is a correl
 
     - For the concern regarding the linear relationship in GEE, we agree that linear models can sometimes be restrictive. However, GEE can naturally accommodate non-linear relationships through the use of appropriate link functions (e.g., logit, probit) and advanced modeling techniques such as basis expansions, splines, or other non-linear transformations. In our paper, we leverage basis functions to approximate the Q-function, which effectively extends the framework beyond a strictly linear structure.
 
-    - Regarding the assumption of linear combinations for the optimal Q-function, we would like to emphasize that our approach allows for significant flexibility. By approximating the Q-function as a linear combination of basis functions, the method can model complex relationships. Importantly, this approximation can capture any non-linear structure in the Q-function if the number of basis functions is allowed to grow sufficiently large. This ensures that our method remains highly flexible and theoretically robust even in scenarios with non-linear relationships. Besides, we can try other link function than the linear function such as modeling the Q function as $f(s,a,\beta)$. The corresponding properties of the Q function can be similarly derived under GEE's framework.
+    - Regarding the assumption of linear combinations for the optimal Q-function, we would like to emphasize that our approach allows for significant flexibility. By approximating the Q-function as a linear combination of basis functions, the method can model complex relationships. Importantly, this approximation can capture any non-linear structure in the Q-function if the number of basis functions is allowed to grow sufficiently large. This ensures that our method remains highly flexible and theoretically robust even in scenarios with non-linear relationships. Besides, we can try other link functions than the linear function such as modeling the Q function as $f(s,a,\beta)$. The corresponding properties of the Q function can be similarly derived under GEE's framework.
 
     - We will revise the manuscript to clarify these points and highlight the flexibility of our approach in handling non-linear structures. Thank you for bringing up this important perspective, which allows us to strengthen the clarity and positioning of our work.
