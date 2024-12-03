@@ -27,13 +27,7 @@ We will revise the manuscript to clarify these points and include a discussion o
 * The paper tackles the underexplored problem of learning optimal policies in environments where data exhibits intra-cluster correlations. Such settings are common in real-world applications like healthcare and education, yet traditional RL methods typically assume independent and iid data, overlooking these dependencies.
 
 
-    - Thank you for recognizing the non-conventional contributions of our work. We appreciate the acknowledgement of the novelty in integrating generalized estimating equations (GEE) into the reinforcement learning (RL) framework.
-
-    - As highlighted, this integration represents a significant step forward in bridging classical statistical methods for correlated data with modern RL techniques. By leveraging the strengths of GEE, our approach directly addresses the challenges posed by intra-cluster correlations, which are prevalent in many real-world applications such as healthcare, education, and social sciences. Traditional RL algorithms often assume data independence, which limits their applicability in these settings. GFQI fills this gap by providing a robust and efficient way to learn optimal policies in environments with clustered data.
-
-    - We also appreciate your recognition of the broader impact of tackling the problem of intra-cluster correlations in policy learning. By introducing a method that explicitly models these dependencies, our work opens new avenues for applying RL to practical problems where such correlations cannot be ignored. We will ensure these contributions are clearly emphasized in the revised manuscript to reflect their importance and relevance to both the statistical and RL communities.
-
-    - Thank you for the thoughtful feedback and for highlighting the significance of these contributions.
+    - Thank you for recognizing our contributions! We are largely encouraged by your assessment of our contributions! 
 
 
 
