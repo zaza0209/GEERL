@@ -44,9 +44,11 @@ We will revise the manuscript to clarify these points and include a discussion o
 
     - In our work, the proposed method focuses exclusively on addressing between-episode correlations using GEE, but still uses the MDP to model each individual trajectory. In that sense, **we did not handle within-episode correlations**. We acknowledge that this is a limitation of the current approach and an important direction for future work. We will clarify this point in the revised manuscript shall our paper be accepted. 
 
-    - However, we do not explicitly address within-episode correlations. The Markov Decision Process (MDP) assumption, which underpins our method, inherently assumes conditional independence between transitions within the same episode, given the current state-action pair. As a result, any potential within-episode correlation is not modeled in our framework.
-
-    - Finally, 
+    - Finally, we outline two potential approaches to handle within-episode correlations: 
+      * The first one is to use partially observed MDPs (POMDPs) to model the data, which is now non-Markov, due to the within-episode correlations. However, this is challenging as it remains unclear how to combine GEEs with traditional POMDP solutions.
+      * The second approach is to assume the within-episode correlations exist only among rewards, but not states, as in https://academic.oup.com/jrsssb/article/86/3/623/7511800. In that case, the states continues to satisfy the Markov assumption, enabling MDP-type solutions to consistently learn the optimal policy. To extend GFQI to handle this situation, we need to combine all the estimation equations over time, and specify a large working matrix $V$ (analogous to Equation (6) in our paper). This matrix, now of dimension $(MT) \times (MT)$ rather than the original $M \times M$, must be block upper-diagonal to satisfy to the Bellman equation and cannot simply be a covariance matrix due to the aggregation of estimating equations over time. It remains unclear what is the optimal $V$ under such a structural constraint.
+     
+ These approaches are beyond the scope of the current paper. We leave them for future research.
 
 
 * Regarding Theorem 1, the operator in of equation (5) is non-smooth. Does this pose any challenges for statistical inference? Are there any assumptions needed to address the non-regularity [1, 2]?
