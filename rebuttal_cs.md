@@ -55,7 +55,9 @@ We will revise the manuscript to clarify these points and include a discussion o
 
   This is another excellent comment. In response:
 
-  - First, it does pose challenges for statistical inference, particularly in nonregular cases where the optimal policy is not unique. This issue arises because the estimated optimal policy may not converge; instead, it might oscillate among multiple optimal policies. Such variability introduces additional uncertainties that are particularly challenging to quantify.
+  - First, it does pose challenges for statistical inference, particularly in nonregular cases where the optimal policy is not unique, also referred to as non-exceptional laws (see e.g., https://arxiv.org/abs/1603.07573). This issue arises because the estimated optimal policy may not converge; instead, it might oscillate among multiple optimal policies. Such variability introduces additional uncertainties that are particularly challenging to quantify.
+
+  - In addition to posing challenges for statistical inference, this issue also complicates the asymptotic behavior of the estimator. Specifically, the estimator may not be asymptotically normal (https://arxiv.org/pdf/1603.07573, https://arxiv.org/pdf/2001.04515). 
 
   - Here, similar to the work https://arxiv.org/pdf/1406.0764, we assume the optimal policy is unique to rule out non-regularity (see Assumption (A3) the supplementary material). 
 
