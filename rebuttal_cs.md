@@ -7,10 +7,12 @@
  
 This is an excellent comment. As you have discussed, the proposed GFQI focuses on learning a one-size-fits-all policy in our numerical study whereas the method you outlined learns cluster-specific policies. 
 
-1. **Accommodating Heterogeneity:** To address your comment, we first argue that the proposed GFQI can be adapted to learn cluster-specific policies as well, in order to accommodate the heterogeneities across clusters. Specifically, we propose two approaches below: the first is straightforward to implement, while the second requires further investigation, which we intend to pursue in future research.  
+1. **Accommodating Heterogeneity:** To address your comment, we first argue that the proposed GFQI can be adapted to learn cluster-specific policies as well, in order to accommodate the heterogeneities across clusters. Specifically, we propose two approaches below: the first one is straightforward to implement, while the second requires further investigation, which we intend to pursue in future research.  
 
-   - **Incorporating Cluster Characteristics in the State:** We can augment the state representation with cluster-specific characteristics such as university or major categories, as in our motivating example from the Intern Health Study. This allows the agent to learn policies that are more tailored to the specific dynamics and characteristics of individual clusters. If cluster characteristics are not explicitly available, we can add a one-hot vector for each subject to indicate their cluster membership. This provides a simple yet effective way to incorporate cluster-specific information into the state representation.
-   - **Transfer Reinforcement Learning:** Transfer Reinforcement Learning techniques can be used to leverage knowledge from one cluster to improve learning in another. This approach can help mitigate the challenges of heterogeneity by sharing information across clusters while still allowing for adaptation to individual cluster dynamics.
+   - **Incorporating Cluster Characteristics in the State:**
+     * The simplest approach is to augment the state with cluster-specific characteristics to learn policies that are tailored to individual clusters. In the motivating Intern Health Study, we these interns' universities or specialties as these characteristics.
+     * When no explicit cluster characteristics are available, we could use one-hot encoding, assuming different clusters have different parameters and redo the fitting. 
+   - **Transfer Learning:** The second approach is to use different parameters to  Transfer Reinforcement Learning techniques can be used to leverage knowledge from one cluster to improve learning in another. This approach can help mitigate the challenges of heterogeneity by sharing information across clusters while still allowing for adaptation to individual cluster dynamics.
 
 **Bias-Variance Trade-off:**
 
