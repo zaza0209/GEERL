@@ -11,8 +11,8 @@ This is an excellent comment. As you have discussed, the proposed GFQI focuses o
 
    - **Incorporating Cluster Characteristics in the State:**
      * The simplest approach is to augment the state with cluster-specific characteristics to learn policies that are tailored to individual clusters. In the motivating Intern Health Study, we these interns' universities or specialties as these characteristics.
-     * When no explicit cluster characteristics are available, we could use one-hot encoding, assuming different clusters have different parameters and redo the fitting. 
-   - **Transfer Learning:** The second approach is to use different parameters to  Transfer Reinforcement Learning techniques can be used to leverage knowledge from one cluster to improve learning in another. This approach can help mitigate the challenges of heterogeneity by sharing information across clusters while still allowing for adaptation to individual cluster dynamics.
+     * When explicit cluster characteristics are unavailable, one-hot encoding can be utilized to denote each intern's cluster membership, enabling the application of the proposed GFQI. Notice that this approach differs from the cluster-specific policies mentioned earlier, as GFQI considers the correlation structure. Thus, GFQI is expected to learn more effective policies, as evidenced from our simulations and theories.
+   - **Transfer Learning:** The second approach is to combine GFQI with existing transfer (reinforcement) learning approches to transfer knowledge from one cluster to another. This approach borrows information across clusters to improve learning while still allowing for adaptation to cluster-specific policies.
 
 **Bias-Variance Trade-off:**
 
