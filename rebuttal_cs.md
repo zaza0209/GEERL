@@ -14,30 +14,7 @@ This is an excellent comment. As you have discussed, the proposed GFQI focuses o
      * When explicit cluster characteristics are unavailable, one-hot encoding can be utilized to denote each intern's cluster membership, enabling the application of the proposed GFQI. Notice that this approach differs from the cluster-specific policies mentioned earlier, as GFQI considers the correlation structure. Thus, GFQI is expected to learn more effective policies, as evidenced from our simulations and theories.
    - **Transfer Learning:** The second approach is to combine GFQI with existing transfer (reinforcement) learning approches to transfer knowledge from one cluster to another. This approach borrows information across clusters to improve learning while still allowing for adaptation to cluster-specific policies.
 
-2. **Bias-Variance Trade-off:** Second, there is generally a bias variance trade-off between fitting a single common model and fitting separate models for each cluster. Here are the pros and cons of each approach:
-
-**Fitting a Single Common Model:**
-
-- **Pros:**
-  - **Information Sharing:** A single model can share information across different clusters, potentially leading to more robust and generalizable policies.
-  - **Computational Efficiency:** Training a single model is computationally more efficient than training separate models for each cluster.
-  - **Scalability:** A single model can be more scalable to large datasets with many clusters.
-
-- **Cons:**
-  - **Lack of Individual Adaptation:** A single model may lack the ability to fully adapt to the unique characteristics of each cluster, potentially limiting performance in highly heterogeneous settings.
-  - **Bias:** The model may introduce bias if the common dynamics do not accurately represent the specific dynamics of some clusters.
-
-**Fitting Separate Models:**
-
-- **Pros:**
-  - **Individual Adaptation:** Separate models can better adapt to the specific dynamics and characteristics of individual clusters, potentially improving performance in heterogeneous settings.
-  - **Flexibility:** Each model can be fine-tuned to the unique needs of its respective cluster, leading to more personalized policies.
-
-- **Cons:**
-  - **Computational Cost:** Training separate models for each cluster can be computationally expensive and less efficient.
-  - **Scalability:** Handling many separate models can be challenging in terms of scalability and resource management.
-  - **Information Loss:** There is no sharing of information across clusters, which may lead to suboptimal policies in clusters with similar dynamics.
-
+2. **Bias-Variance Trade-off:** Second, there is generally a bias variance trade-off between fitting a single common model and fitting separate models for each cluster. Learning a common policy reduces the variance of parameter estimates and is more sample efficient than learning separate policies for each cluster when all clusters are homogeneous. However, this approach can introduce potential biases in the presence of heterogeneous clusters.
  
 We will revise the manuscript to clarify these points and include a discussion on the trade-offs between generalized and cluster-specific policies. Many thanks for raising this critical point.
 
