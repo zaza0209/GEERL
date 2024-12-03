@@ -5,18 +5,12 @@
 ### Significance Justification:
 * If I understand correctly, in the numerical study, a single agent learns a generalized policy for each baseline algorithm, which can be applied across different teams or clusters. While training one model is computationally more efficient than training separate models for each cluster, this approach might limit the agent's ability to optimize performance for specific clusters with unique characteristics, as it aims for a one-size-fits-all policy. This appears to be a significant advantage of GFQI compared to the baseline approaches. Training a separate agent for each cluster could allow the learning process to better adapt to the specific dynamics and characteristics of individual clusters, potentially improving performance. Could the authors please clarify or provide additional insights on this aspect?
  
-Thank you for your insightful feedback and for raising the important issue of accommodating heterogeneity in the numerical study. We appreciate your thoughtful consideration of the trade-offs between training a single generalized policy versus separate models for each cluster.
+This is an excellent comment. As you have discussed, the proposed GFQI focuses on learning a one-size-fits-all policy in our numerical study whereas the method you outlined learns cluster-specific policies. 
 
-**Accommodating Heterogeneity:**
+1. **Accommodating Heterogeneity:** To address your comment, we first argue that the proposed GFQI can be adapted to learn cluster-specific policies as well, in order to accommodate the heterogeneities across clusters. Specifically, we propose two approaches below: the first is straightforward to implement, while the second requires further investigation, which we intend to pursue in future research.  
 
-To address the heterogeneity of clusters, we propose several strategies that can be employed within our framework:
-
-1. **Incorporating Cluster Characteristics in the State:**
-   - We can augment the state representation with cluster-specific characteristics such as university or major categories, as in our motivating example from the Intern Health Study. This allows the agent to learn policies that are more tailored to the specific dynamics and characteristics of individual clusters.
-   - If cluster characteristics are not explicitly available, we can add a one-hot vector for each subject to indicate their cluster membership. This provides a simple yet effective way to incorporate cluster-specific information into the state representation.
-
-2. **Transfer Reinforcement Learning:**
-   - Transfer Reinforcement Learning techniques can be used to leverage knowledge from one cluster to improve learning in another. This approach can help mitigate the challenges of heterogeneity by sharing information across clusters while still allowing for adaptation to individual cluster dynamics.
+   - **Incorporating Cluster Characteristics in the State:** We can augment the state representation with cluster-specific characteristics such as university or major categories, as in our motivating example from the Intern Health Study. This allows the agent to learn policies that are more tailored to the specific dynamics and characteristics of individual clusters. If cluster characteristics are not explicitly available, we can add a one-hot vector for each subject to indicate their cluster membership. This provides a simple yet effective way to incorporate cluster-specific information into the state representation.
+   - **Transfer Reinforcement Learning:** Transfer Reinforcement Learning techniques can be used to leverage knowledge from one cluster to improve learning in another. This approach can help mitigate the challenges of heterogeneity by sharing information across clusters while still allowing for adaptation to individual cluster dynamics.
 
 **Bias-Variance Trade-off:**
 
