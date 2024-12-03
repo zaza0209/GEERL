@@ -40,15 +40,13 @@ We will revise the manuscript to clarify these points and include a discussion o
 ## RE: Reviewer u1HY
 ### Soundness justification
 * The proposed method uses Generalized Estimating Equations (GEE) to handle intra-cluster correlations. However, the problem setting involves two types of correlations: within-episode correlations and between-episode correlations within a cluster. The paper does not specify how the method addresses within-episode correlations.
-    - Thank you for highlighting this important distinction between within-episode and between-episode correlations within a cluster.
+    - This is an excellent point. First, we would like to clarify that by employing the MDP model for each episode, there are **no inherently within-episode correlations**. This is due to the Markov assumption under the MDP model. Should within-episode correlations exist, the rewards and next states are correlated and thus dependent upon past rewards and states, even when conditioned on the current state-action pair, leading to the violtion of the Markov assumption.
 
-    - In our work, the proposed method focuses exclusively on addressing between-episode correlations within a cluster using Generalized Estimating Equations (GEE). These between-episode correlations arise naturally in clustered data due to shared characteristics or external factors that influence multiple episodes within the same cluster. By incorporating a working correlation matrix, our method models these dependencies, leading to improved efficiency in policy estimation.
+    - In our work, the proposed method focuses exclusively on addressing between-episode correlations using GEE, but still uses the MDP to model each trajectory. In that sense, we did not handle **within-episode correlations**. We acknowledge that this is a limitation of the current approach and an important direction for future work. We will clarify this point in the revised manuscript shall our paper be accepted. 
 
     - However, we do not explicitly address within-episode correlations. The Markov Decision Process (MDP) assumption, which underpins our method, inherently assumes conditional independence between transitions within the same episode, given the current state-action pair. As a result, any potential within-episode correlation is not modeled in our framework.
 
-    - We acknowledge this as a limitation of the current approach and an important direction for future work. Developing methods that can jointly model both within-episode and between-episode correlations would be an interesting extension to better capture complex dependency structures in reinforcement learning with clustered data.
-
-    - We will clarify this point in the revised manuscript to ensure transparency about the scope and limitations of our method. Thank you for bringing this to our attention.
+    - Finally, 
 
 
 * Regarding Theorem 1, the operator in of equation (5) is non-smooth. Does this pose any challenges for statistical inference? Are there any assumptions needed to address the non-regularity [1, 2]?
