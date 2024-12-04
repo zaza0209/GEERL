@@ -289,12 +289,17 @@ Thank you again for your feedback, which has been invaluable in helping us impro
 ### Soundness justification
 
 * My biggest question focuses on the soundness of Theorem 1. In particular, one of the assumptions of Theorem 1 is that the environment is a Linear MDP. How does this accommodate the clustered structure in the data that is presented as a motivating example? It is not clear whether Theorem 1 implies the claimed benefits of GFQI. I would like additional clarification here.
-Thank you for providing the details. Based on your points and the formal statement of Theorem 1, here is a draft of the rebuttal to the reviewer's feedback:
 
 ---
 
 
-Thank you for your thoughtful comments and for raising the question regarding the soundness of Theorem 1 and its implications for the clustered structure in the data. We appreciate the opportunity to clarify these points.
+Thank you for your thoughtful comments. We appreciate the opportunity to clarify these points. In summary: 
+
+- The linear MDP assumption is to simplify the procedure and the theoretical analysis. Meanwhile, the proposed GFQI can be easily extended to accommodate nonlinear environments. 
+- The use of linear models results in interpretable Q-function estimators and decision rules, which are particularly valuable in biomedical studies (including our motivating example) where interpretability is important.
+- Theorem 1 proves the efficiency of the estimator parameters in the Q-function estimator. In particular, it implies that the estimator computed by the proposed GFQI is more efficient compared to those by FQI or GTD-type policy learning algorithms. Such an efficiency in the parameter estimates further translates into a smaller regret, as demonstrated in Theorem 2.
+
+We next elaborate the first and the last points in more detail below. 
 
 **Regarding the Soundness of Theorem 1:**
 
