@@ -75,12 +75,12 @@ We will revise the manuscript to clarify these points and include a discussion o
 
 * Regarding Theorem 2, first it seems that the regret is not properly defined, but only appears in the proof of Theorem 2 in the appendix. The value functions have not been defined either. In addition, the type of regret being discussed is unclear. It seems the focus is on simple regret, not cumulative regret, but this should be explicitly stated. Whichever is being addressed, it is important to connect the theoretical results to existing literature. For example, if the variance of $\beta$ is plugged in, what is the regret? How does the regret scale with key factors such as the dimension of the state space, episode length, and number of episodes?
       - The regret of a given policy is defined as the difference between the expected gamma-discounted cumulative reward of the optimal policy and that policy. If the covariance matrix of the temporal difference error is pluged in, the regret is still $-\frac{1}{2}\mathrm{tr}(\mathrm{Var}(\widehat{\theta})H)+O(N^{-3/2})$ as in Theorem 2 we do not assume the correct covariance matrix is used. As $N$ is the total number of data tuples, the episode length and number of episodes affect the regret through $N$.
-      - If the dimension of the state space is allowed to diverge, we can prove that the regret is
+      - Under the linear MDP assumption, there is no approximation error of the optimal Q function. The regret bound is irrelavant of the dimension of the state but relevant of the number of the basis function.
+       We can prove that the regret is
   $$
-\sup_{\mathbf{A}, \mathbf{S}}|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) \widehat{\beta}-Q^{*}(\mathbf{A}, \mathbf{S})|=
-O\left(\frac{L^{-1/d}}{(1-\gamma)^2}\right)+O\left(\frac{L \sqrt{\log (MT)}}{(1-\gamma)^2 \sqrt{\epsilon MT} }\right)
+\sup_{\mathbf{A}, \mathbf{S}}|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) \widehat{\beta}-Q^{*}(\mathbf{A}, \mathbf{S})|= O\left(\frac{L \sqrt{\log (MT)}}{(1-\gamma)^2 \sqrt{\epsilon MT} }\right)
 $$
-with probability at least $1-O\left(N^{-1}\right)$. Here $L$ is the number of basis functions and $d$ is the dimension of the state space.
+with probability at least $1-O\left(N^{-1}\right)$. Here $L$ is the number of basis functions.
 
 We now begin the proof.
 To upper bound $\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^1(\mathbf{A}, \mathbf{S})\left(\beta^{(k) *}-\beta^{(k)}\right)\right|$, we define an intermediate quantity
