@@ -301,7 +301,10 @@ Thank you for your thoughtful comments. We appreciate the opportunity to clarify
 
 We next elaborate the first and the last points in more detail below. 
 
-**Regarding the Soundness of Theorem 1:**
+**GFQI under nonlinear environments**: It is important to note that neither GEE nor FQI requires a linearity assumption. As such, linearity is not a key assumption to the proposed GFQI and it can be naturally extended to handle nonlinear environments. Specfically, consider a nonlinear function class $F(s,a;\beta)$ indexed by parameter $\beta$. We assume the following realizability and Bellman completeness assumptions: 
+
+- **Realizability**: the optimal Q-function belongs to the nonlinear function class $F$.
+- **Completeness**: For any $f\in F$, 
 
 You correctly point out that Theorem 1 assumes the environment is a Linear MDP. This assumption is crucial for establishing the asymptotic properties of the estimator $\widehat{\beta}$. However, it is important to note that the Linear MDP assumption does not preclude the presence of clustered data. In fact, the clustered structure is explicitly accounted for in the algorithm (GFQI) through the use of Generalized Estimating Equations (GEE), which allows us to model and handle the intra-cluster correlations.
 
@@ -315,7 +318,7 @@ $Q^*(a,s)$ and $Q^{(k),*}(a,s)$ (defined in \eqref{eq:k+1 iteration expected tar
 $$
 (\mathcal{T}f)(A,S) =R(A,S) +\gamma \mathbb{E}_{S'\sim P(S'|S,A)}(\max_{a'}f(a',S')). 
 $$
-And in this case, the optimal Q function is not guranteed to have a linear form and some modeling error is needed to be included in analyzing the properties of the GFQI estimtor. 
+And in this case, the optimal Q function is not guranteed to have a linear form and some modeling error is needed to be included in analyzing the properties of the GFQI estimator. 
 
 
 
