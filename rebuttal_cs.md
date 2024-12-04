@@ -310,7 +310,7 @@ Notice that the realizability and completeness assumptions are widely imposed in
 
 $$\mathbf{\Phi}^*(\mathbf{A}, \mathbf{S}) = \Big[\phi^*(A^{(1)}, S^{(1)}), \cdots, \phi^*(A^{(M)}, S^{(M)})\Big]\mathbf{V}^{-1}$$,
 
-where
+where $\mathbf{V}$ is the covariance matrix of the cluster-wise TD error and $\phi^*(a,s)=\frac{\partial f^*(a,s;\beta)}{\partial \beta^*}-\gamma \mathbb{E} \frac{\partial f^*(\pi^*(S'),S';\beta)}{\partial \beta^*}|A=a,S=s$.  
 
 **Clarification on the Benefits of GFQI:**
 
