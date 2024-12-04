@@ -304,21 +304,9 @@ We next elaborate the first and the last points in more detail below.
 **GFQI under nonlinear environments**: It is important to note that neither GEE nor FQI requires a linearity assumption. As such, linearity is not a key assumption to the proposed GFQI and it can be naturally extended to handle nonlinear environments. Specfically, consider a nonlinear function class $F(s,a;\beta)$ indexed by parameter $\beta$. We assume the following realizability and Bellman completeness assumptions: 
 
 - **Realizability**: the optimal Q-function belongs to the nonlinear function class $F$.
-- **Completeness**: For any $f\in F$, 
+- **Completeness**: For any $f\in F$, $\mathcal{T} f\in F$ as well where $\mathcal{T}$ denotes the Bellman operator.
 
-You correctly point out that Theorem 1 assumes the environment is a Linear MDP. This assumption is crucial for establishing the asymptotic properties of the estimator $\widehat{\beta}$. However, it is important to note that the Linear MDP assumption does not preclude the presence of clustered data. In fact, the clustered structure is explicitly accounted for in the algorithm (GFQI) through the use of Generalized Estimating Equations (GEE), which allows us to model and handle the intra-cluster correlations.
-
-If the linear MDP assumption does not hold, we can relax it to the realiziability assumption and the completeness assumption:
-
-1. **Realizability**
-$Q^*(a,s)$ and $Q^{(k),*}(a,s)$ (defined in \eqref{eq:k+1 iteration expected target Q} in Supplement) at all iteration $k$ is linearly realizable in a known feature map $\phi: \mathcal{A}\times\mathcal{S}\rightarrow \mathbb{R}^{d}$ if there exists a vector $\beta^*$ such that for all $(a,s)\in \mathcal{A}\times\mathcal{S}$, $Q^*(a,s)=\phi^\top(a,s)\beta^*$.
-
-2. **Completeness**
- $\forall f\in \mathcal{F}_L$, $\mathcal{T}f\in \mathcal{F}_L$ where $\mathcal{F}_L$ is the space spanned by linear sieves $\Phi_L^\top(A,S)\beta$ for $\beta \in [-1,1]^{L}$ and $\mathcal{T}$ is the Bellman operator:
-$$
-(\mathcal{T}f)(A,S) =R(A,S) +\gamma \mathbb{E}_{S'\sim P(S'|S,A)}(\max_{a'}f(a',S')). 
-$$
-And in this case, the optimal Q function is not guranteed to have a linear form and some modeling error is needed to be included in analyzing the properties of the GFQI estimator. 
+Notice that the realizability and completeness assumptions are widely imposed in the RL literature. They can be further relaxed to allow approximation error to exist. Under the two assumptions, we use $F$ to parameterize the Q-function estimator at each FQI iteration. Equation (5) in our paper (with the linear function class replaced with $F$) remains valid to estimate the parameter $\beta^*$ involved in the optimal Q-function. Meanwhile, similar to Theorem 1, it can be shown that the optimal basis function $\Phi^{\*}$ is given by  
 
 
 
