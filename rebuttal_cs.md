@@ -308,9 +308,7 @@ We next elaborate the first and the last points in more detail below.
 
 Notice that the realizability and completeness assumptions are widely imposed in the RL literature. They can be further relaxed to allow approximation error to exist. Under the two assumptions, we use $F$ to parameterize the Q-function estimator at each FQI iteration. Equation (5) in our paper (with the linear function class replaced with $F$) remains valid to estimate the parameter $\beta^*$ involved in the optimal Q-function. Meanwhile, similar to Theorem 1, it can be shown that the optimal basis function $\mathbf{\Phi}^{\*}$ equals  
 
-\[
-  \mathbf{\Phi}^*(\mathbf{A}, \mathbf{S}) = \Big[\phi^*(A^{(1)}, S^{(1)}), \cdots, \phi^*(A^{(M)}, S^{(M)})\Big]\mathbf{V}^{-1},
-\]
+$$\mathbf{\Phi}^*(\mathbf{A}, \mathbf{S}) = \Big[\phi^*(A^{(1)}, S^{(1)}), \cdots, \phi^*(A^{(M)}, S^{(M)})\Big]\mathbf{V}^{-1}$$,
 
 where
 
