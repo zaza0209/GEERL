@@ -34,7 +34,8 @@ We will revise the manuscript to clarify these points and include a discussion o
 ### Clarity
 * In my opinion, the paper can be improved in terms of clarity. The introduction section is not clear. After reading the intro I still don’t understand the problem. There is no clear problem statement. Only after reading section 3, that the problem become clear. The authors can improve the clarity of the paper by discussing that traditional RL methods typically assume iid data which is not the case here.
 
-    - Thank you for your feedback on the clarity of our paper. We appreciate your suggestions and will revise the introduction section to clearly state the problem and emphasize that traditional RL methods typically assume i.i.d. data, which is not the case in our study. This will help readers understand the problem more clearly from the outset.
+    - Thank you for your feedback on the clarity of our paper. 
+    We mentioned that the existing RL algorithm relies on i.i.d. assumption in the first paragraph of the Challenge subsection of the introduction. We appreciate your suggestions and will revise the introduction section to clearly state the problem and emphasize that traditional RL methods typically assume i.i.d. data, which is not the case in our study. This will help readers understand the problem more clearly from the outset.
       
 
 ## RE: Reviewer u1HY
