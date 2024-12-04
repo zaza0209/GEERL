@@ -55,18 +55,26 @@ We will revise the manuscript to clarify these points and include a discussion o
 
   This is another excellent comment. In response:
 
-  - First, it does pose challenges for statistical inference, particularly in nonregular cases where the optimal policy is not unique, also referred to as non-exceptional laws (see e.g., https://arxiv.org/abs/1603.07573). This issue arises because the estimated optimal policy may not converge; instead, it might oscillate among multiple optimal policies. Such variability introduces additional uncertainties that are particularly challenging to quantify.
+  - First, it does pose challenges for statistical inference, particularly in nonregular cases where the optimal policy is not unique, also referred to as non-exceptional laws (see e.g., [1]). This issue arises because the estimated optimal policy may not converge; instead, it might oscillate among multiple optimal policies. Such variability introduces additional uncertainties that are particularly challenging to quantify.
 
-  - In addition to posing challenges for statistical inference, this issue also complicates the asymptotic behavior of the estimator. Specifically, the estimator may not be asymptotically normal (https://arxiv.org/pdf/1603.07573, https://pmc.ncbi.nlm.nih.gov/articles/PMC6953729/pdf/nihms-987499.pdf, https://arxiv.org/pdf/2001.04515). 
+  - In addition to posing challenges for statistical inference, this issue also complicates the asymptotic behavior of the estimator. Specifically, the estimator may not be asymptotically normal ([1], [2], [3]). 
 
-  - In this paper, we did not consider statistical inference. So, the policy learning procedure works regardless of the presence of non-regularities. However, for theoretical purposes, we assume a regular setting to establish the asymptotic normality of the estimator. In particular, similar to the work https://arxiv.org/pdf/1406.0764, we assume the optimal policy is unique to rule out non-regularity (see Assumption (A3) the supplementary material).
+  - In this paper, we did not consider statistical inference. So, the policy learning procedure works regardless of the presence of non-regularities. However, for theoretical purposes, we assume a regular setting to establish the asymptotic normality of the estimator. In particular, similar to the work [4], we assume the optimal policy is unique to rule out non-regularity (see Assumption (A3) the supplementary material).
 
-  - Alternative to assuming a regular setting, several approaches are available for statistical inference in non-regular settings, including the simple sample-splitting approach, the double-boostrap approach by https://pmc.ncbi.nlm.nih.gov/articles/PMC4265005/, the penalization-based method developed by https://arxiv.org/pdf/1108.5338, the hard-thresholding approach in [1], the importance sampling method in [2], the one-step method developed in https://arxiv.org/pdf/1603.07573 and the subagging approach developed in https://jmlr.org/papers/volume21/20-066/20-066.pdf. We will discuss this in detail shall our paper be accepted. 
+  - Alternative to assuming a regular setting, several approaches are available for statistical inference in non-regular settings, including the simple sample-splitting approach, the double-boostrap approach by [5], the penalization-based method developed by [6], the hard-thresholding approach in [1], the importance sampling method in [2], the one-step method developed in [1] and the subagging approach developed in [7]. We will discuss this in detail shall our paper be accepted. 
+
+[1] Luedtke, Alexander R., and Mark J. Van Der Laan. "Statistical inference for the mean outcome under a possibly non-unique optimal treatment strategy." Annals of statistics 44.2 (2016): 713. https://arxiv.org/abs/1603.07573
+[2] Zhu, Wensheng, Donglin Zeng, and Rui Song. "Proper inference for value function in high-dimensional Q-learning for dynamic treatment regimes." Journal of the American Statistical Association 114.527 (2019): 1404-1417. https://pmc.ncbi.nlm.nih.gov/articles/PMC6953729/pdf/nihms-987499.pdf
+[3] Shi, Chengchun, et al. "Statistical inference of the value function for reinforcement learning in infinite-horizon settings." Journal of the Royal Statistical Society Series B: Statistical Methodology 84.3 (2022): 765-793. https://arxiv.org/pdf/2001.04515
+[4] Ertefaie, Ashkan. "Constructing dynamic treatment regimes in infinite-horizon settings." arXiv preprint arXiv:1406.0764 (2014). https://arxiv.org/pdf/1406.0764
+[5] Chakraborty, Bibhas, Eric B. Laber, and Ying-Qi Zhao. "Inference about the expected performance of a data-driven dynamic treatment regime." Clinical Trials 11.4 (2014): 408-417. https://pmc.ncbi.nlm.nih.gov/articles/PMC4265005/
+[6] Song, Rui, et al. "Penalized q-learning for dynamic treatment regimens." Statistica Sinica 25.3 (2015): 901.https://arxiv.org/pdf/1108.5338
+[7] Shi, Chengchun, Wenbin Lu, and Rui Song. "Breaking the Curse of Nonregularity with Subagging---Inference of the Mean Outcome under Optimal Treatment Regimes." Journal of Machine Learning Research 21.176 (2020): 1-67. https://jmlr.org/papers/volume21/20-066/20-066.pdf
 
 
 * Regarding Theorem 2, first it seems that the regret is not properly defined, but only appears in the proof of Theorem 2 in the appendix. The value functions have not been defined either. In addition, the type of regret being discussed is unclear. It seems the focus is on simple regret, not cumulative regret, but this should be explicitly stated. Whichever is being addressed, it is important to connect the theoretical results to existing literature. For example, if the variance of $\beta$ is plugged in, what is the regret? How does the regret scale with key factors such as the dimension of the state space, episode length, and number of episodes?
-      - If the covariance matrix of the temporal difference error is pluged in, the regret is still $-\frac{1}{2}\mathrm{tr}(\mathrm{Var}(\widehat{\theta})H)+O(N^{-3/2})$ as in Theorem 2 we do not assume the correct covariance matrix is used.
-      - we can prove that the regret is
+      - The regret of a given policy is defined as the difference between the expected gamma-discounted cumulative reward of the optimal policy and that policy. If the covariance matrix of the temporal difference error is pluged in, the regret is still $-\frac{1}{2}\mathrm{tr}(\mathrm{Var}(\widehat{\theta})H)+O(N^{-3/2})$ as in Theorem 2 we do not assume the correct covariance matrix is used. As $N$ is the total number of data tuples, the episode length and number of episodes affect the regret through $N$.
+      - If the dimension of the state space is allowed to diverge, we can prove that the regret is
   $$
 \sup_{\mathbf{A}, \mathbf{S}}|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) \widehat{\beta}-Q^{*}(\mathbf{A}, \mathbf{S})|=
 O\left(\frac{L^{-1/d}}{(1-\gamma)^2}\right)+O\left(\frac{L \sqrt{\log (MT)}}{(1-\gamma)^2 \sqrt{\epsilon MT} }\right)
@@ -135,22 +143,24 @@ with probability at least $1-O\left(N^{-1}\right)$. This establishes the rate of
 
 ### Novelty Justification:
 * This work applies GEE to the estimation of Q-functions. This appears to be a relatively straightforward combination of the widely used methods GEE and FQI. While there may be additional technical challenges involved, these challenges are not clearly discussed in the paper.
+ 
 
-Thank you for the observation regarding the combination of GEE and FQI in our work. We acknowledge that these challenges were not sufficiently highlighted in the original manuscript, and we appreciate the opportunity to elaborate further.
+Thank you for your valuable feedback. We appreciate your recognition of the straightforward combination of GEE and FQI in our work. However, we would like to clarify that while the combination of these methods may appear straightforward at a high level, the integration of GEE into the RL framework presents several unique and non-trivial challenges that are not immediately apparent.
 
-1. **Adapting GEE for Temporal Dependencies:**
-   - Traditional GEE frameworks are designed for longitudinal or clustered data with independent observations across clusters but do not natively account for temporal dependencies within reinforcement learning trajectories. Adapting GEE to estimate Q-functions requires careful handling of these temporal structures, particularly in the computation of temporal difference (TD) errors and the construction of the working correlation matrix.
+- As highlighted by another reviewer, the integration of GEE, a classical statistical tool for longitudinal and clustered data, into the RL framework is unconventional. 
+The novelty lies not just in the combination of methods, but in the novel application of GEE to handle intra-cluster correlations within the RL framework.
 
-2. **Optimizing Basis Functions for Efficiency:**
-   - One of the key technical challenges lies in identifying an optimal basis function within the GEE framework that minimizes the variance of the Q-function estimator. This involves iteratively solving the Bellman optimality equation while updating the working correlation matrix to model the intra-cluster correlations effectively. Balancing computational efficiency with statistical robustness in this iterative process is non-trivial.
+- One of the key technical challenges lies in identifying an optimal basis function within the GEE framework that minimizes the variance of the Q-function estimator. This involves iteratively solving the Bellman optimality equation while updating the working correlation matrix to model the intra-cluster correlations effectively. Balancing computational efficiency with statistical robustness in this iterative process is non-trivial.
 
-3. **Robustness Under Misspecified Correlation Structures:**
-   - Another challenge is ensuring the robustness of the GFQI estimator when the working correlation matrix is misspecified. While GEE provides theoretical guarantees of consistency, practical implementation requires careful modeling of the correlation structure to achieve efficiency gains, especially when intra-cluster correlations are complex or poorly understood.
+- Unlike typical GEE applications in static settings, our approach extends GEE to a dynamic setting where policies interact with an evolving environment. This extension necessitates deriving new theoretical results to ensure that the proposed estimator achieves consistency and efficiency, even under the complexities of reinforcement learning tasks.
 
-4. **Extension to Reinforcement Learning:**
-   - Unlike typical GEE applications in static settings, our approach extends GEE to a dynamic setting where policies interact with an evolving environment. This extension necessitates deriving new theoretical results to ensure that the proposed estimator achieves consistency and efficiency, even under the complexities of reinforcement learning tasks.
 
-We will revise the manuscript to explicitly discuss these technical challenges and how they were addressed in our work. Highlighting these points will provide a clearer understanding of the contributions and the innovations involved in adapting GEE for Q-function estimation in reinforcement learning. Thank you for pointing out this opportunity to improve the clarity and impact of our work.
+
+<!-- - Our work focuses on the under-researched issue of learning optimal policies in environments where data exhibits intra-cluster correlations. Such scenarios are prevalent in real-world applications such as healthcare and education, where traditional RL methods often assume independent and identically distributed (i.i.d.) data, thereby ignoring these dependencies. Our approach uniquely addresses this gap by employing GEE to model and manage these correlations.
+
+- The integration of GEE into RL involves significant technical complexities, including adapting GEE to accommodate the sequential nature of RL data, accurately estimating Q-functions in the presence of correlated data, and optimizing policies under these conditions. These challenges necessitate novel adaptations and modifications to the standard GEE and FQI frameworks.-->
+
+ 
 
 ### Clarity
 * The paper spends many pages explaining details of existing methods such as GEE, RL algorithms, and standard MDPs. Readers would benefit more from an explicit discussion of how the current work differs from previous work. This comparison is essential for understanding the novel aspects of the proposed method.
@@ -163,17 +173,15 @@ We agree that the paper devotes significant space to explaining existing methods
 #### Key Differences Between FQI and GFQI:
 1. **Handling of Intra-Cluster Correlations:**
    - FQI assumes that all data points are independent and identically distributed (i.i.d.), ignoring any dependencies between data points within the same cluster. This can lead to suboptimal policy estimates in settings where intra-cluster correlations are present.
-   - GFQI, on the other hand, incorporates Generalized Estimating Equations (GEE) to explicitly model and account for intra-cluster correlations via a working correlation matrix. This adjustment improves sample efficiency and ensures more accurate Q-function estimation in clustered data scenarios.
+   - GFQI, on the other hand, incorporates Generalized Estimating Equations (GEE) to explicitly model and account for intra-cluster correlations via a working correlation matrix. This adjustment improves sample efficiency and ensures more accurate Q-function estimation in clustered data scenarios. In addition, GFQI allows for flexible working correlation structures (e.g., exchangeable or other forms) to better capture the dependencies within clusters. This leads to more efficient parameter estimation when the correlation structure is appropriately specified.
 
-2. **Working Correlation Matrix:**
-   - FQI treats observations as independent, equivalent to using an independence working correlation matrix in GEE.
-   - GFQI allows for flexible working correlation structures (e.g., exchangeable or other forms) to better capture the dependencies within clusters. This leads to more efficient parameter estimation when the correlation structure is appropriately specified.
+ 
 
-3. **Theoretical Improvements:**
-   - GFQI achieves minimal asymptotic variance in its Q-function estimation when the working correlation matrix is correctly specified, as shown in our theoretical results (Theorem 1). FQI does not provide this advantage, as it does not model intra-cluster correlations.
+2. **Theoretical Improvements:**
+    GFQI achieves minimal asymptotic variance in its Q-function estimation when the working correlation matrix is correctly specified, as shown in our theoretical results (Theorem 1). FQI does not provide this advantage, as it does not model intra-cluster correlations.
 
-4. **Performance in Clustered Settings:**
-   - Empirically, GFQI significantly outperforms FQI in settings with strong intra-cluster correlations, as demonstrated in our numerical studies. This highlights its practical advantage in scenarios where traditional FQI struggles due to its independence assumption.
+3. **Empirical performance:**
+    Empirically, GFQI significantly outperforms FQI in settings with strong intra-cluster correlations, as demonstrated in our numerical studies. This highlights its practical advantage in scenarios where traditional FQI struggles due to its independence assumption.
 
 We will incorporate these points into the revised manuscript to emphasize the novel contributions of GFQI compared to FQI. By focusing more on these differences, we aim to provide readers with a clearer understanding of how our method advances the state of the art in reinforcement learning for clustered data.
 
