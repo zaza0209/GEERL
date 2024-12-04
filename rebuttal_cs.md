@@ -310,11 +310,9 @@ Notice that the realizability and completeness assumptions are widely imposed in
 
 $$\mathbf{\Phi}^*(\mathbf{A}, \mathbf{S}) = \Big[\phi^*(A^{(1)}, S^{(1)}), \cdots, \phi^*(A^{(M)}, S^{(M)})\Big]\mathbf{V}^{-1}$$,
 
-where $\mathbf{V}$ is the covariance matrix of the cluster-wise TD error and $\phi^*(a,s)=\frac{\partial f^*(a,s;\beta)}{\partial \beta^*}-\gamma \mathbb{E} \frac{\partial f^*(\pi^*(S'),S';\beta)}{\partial \beta^*}|A=a,S=s$.  
+where $\mathbf{V}$ is the covariance matrix of the cluster-wise TD error and $\phi^*(a,s)=\frac{\partial f^*(a,s;\beta)}{\partial \beta^*}-\gamma \mathbb{E} \Big[\frac{\partial f^*(\pi^*(S'),S';\beta)}{\partial \beta^*}|A=a,S=s\Big]$.  
 
-**Clarification on the Benefits of GFQI:**
-
-The efficiency claimed in Theorem 1 refers to the asymptotic variance of the estimator $\widehat{\beta}$. Specifically, when the correlation matrix is correctly specified, GFQI achieves the minimal asymptotic variance among the class of estimators computed by solving (5). This is a significant improvement over the ordinary FQI, which uses an independence correlation structure and thus does not account for the intra-cluster correlations.
+**Clarification on the Benefits of GFQI:** The efficiency claimed in Theorem 1 refers to the asymptotic variance of the estimator $\widehat{\beta}$. Specifically, when the correlation matrix is correctly specified, GFQI achieves the minimal asymptotic variance among the class of estimators computed by solving (5). This is a significant improvement over the ordinary FQI, which uses an independence correlation structure and thus does not account for the intra-cluster correlations.
 
 To reiterate, Theorem 1 states that:
 
