@@ -364,8 +364,10 @@ This regret bound further underscores the benefits of GFQI, as it shows that the
 * Additionally, for both Theorem 1 and Theorem 2, it would be nice to see a discussion of how a maximally misspecified correlation matrix affects the result.
 
 
-Thank you for your insightful comments and for suggesting a discussion on the impact of a maximally misspecified correlation matrix on the results of Theorem 1 and Theorem 2. We appreciate this opportunity to provide further clarification.
+    - Thank you for your insightful comments and for suggesting a discussion on the impact of a maximally misspecified correlation matrix on the results of Theorem 1 and Theorem 2. We appreciate this opportunity to provide further clarification.
+    - For estimator with correct correlation matrix, the asymptotic varianceis $W^{\* -1}$ where $W^{\*} =  \frac{1}{M} \mathbb{E}\left[ \mathbf{\Phi}^{\*}(\mathbf{A}, \mathbf{S}) \left\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\} \right]$. For any estimator obtained with misspecified correlation, the asymptotic variance is $W^{-1} \Sigma W^{-1\top}$ where $W$ depends on the $\mathbf{\Phi}$ which contains the misspecified correlation matrix. The difference between the two asymptotic variance would be $W^{\* -1} - W^{-1} \Sigma W^{-1\top}$. Similarly, the difference between the regret for correct and misspecified correlation structures would be proportional to $\mathrm{tr}(W^{\* -1} - W^{-1} \Sigma W^{-1\top})$ according to Theorem 2.
 
+<!--
 **Impact of Misspecified Correlation Matrix:**
 
 To address your request, we provide the exact expressions of the asymptotic variance of the estimated parameters and the regret bound, highlighting their relationship with the working covariance matrix.
@@ -400,7 +402,7 @@ where $H = \left. \frac{\partial^2 \mathcal{V}(\pi(\beta))}{\partial \beta \part
 \]
 
 The robustness properties of Theorem 1 and Theorem 2 are established for a general working covariance matrix that is not necessarily correct 
-
+-->
 
 ### Significance: somewhat significant (e.g., significant performance in some but not all experiments, missing a baseline)
 - We appreciate your comment and would like to clarify that we have indeed included the ordinary Fitted Q Iteration (FQI) as a baseline in our experiments and compared its performance with our proposed algorithm, GFQI.
