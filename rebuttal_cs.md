@@ -88,58 +88,65 @@ We will revise the manuscript to clarify these points and include a discussion o
 $$
 with probability at least $1-O\left(N^{-1}\right)$. Here $L$ is the number of basis functions.
 
-We now begin the proof.
-To upper bound $\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^1(\mathbf{A}, \mathbf{S})\left(\beta^{(k) *}-\beta^{(k)}\right)\right|$, we define an intermediate quantity
+To upper bound $\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^1(\mathbf{A}, \mathbf{S})\left(\beta^{(k) *}-\beta^{(k)}\right)\right|$, we define two intermediate quantity
 
 $$
-I_1 = \frac{\Sigma^{-1}}{MN} \sum_{i, t} \mathbf{\Phi}_{L} \left( A_{t}^{(i)}, S_{t}^{(i)} \right) \left\{ R_{t}^{(i)} + \gamma \max_{a^{\prime}} \mathbf{\Phi}_L^{\top} \left( a^{\prime}, S_{t+1}^{(i)} \right) \beta^{(k-1)} - \mathbf{\Phi}_L \left( A_{t}^{(i)}, S_{t}^{(i)} \right) \beta^{(k) *} \right\},
+I_1 = \frac{\Sigma^{-1}}{N} \sum_{i, t} \mathbf{\Phi}_{L} \left( A_{t}^{(i)}, S_{t}^{(i)} \right) \left\{ R_{t}^{(i)} + \gamma \max_{a^{\prime}} \mathbf{\Phi}_L^{\top} \left( a^{\prime}, S_{t+1}^{(i)} \right) \beta^{(k-1)} - \mathbf{\Phi}_L \left( A_{t}^{(i)}, S_{t}^{(i)} \right) \beta^{(k) *} \right\},
 $$
 
+$$
+I_2 = \mathbb{E}(I_1)
+$$
 
 It follows from (5) that
 
 $$
-\left\|\beta^{(k) *}-\beta^{(k)}-I_1\right\|_2=O\left(\frac{L(\epsilon N)^{-1} \log (N)}{(1-\gamma)^2}\right)+O\left(\frac{L^{1 / 2-p / d} \sqrt{(\epsilon N)^{-1} \log (N)}}{(1-\gamma)^2}\right),
+\left\|\beta^{(k) *}-\beta^{(k)}-I_1\right\|_2= O\left(\frac{L  \sqrt{N^{-1} \log (N)}}{(1-\gamma)^2}\right),
 $$
 
 with probability at least $1-O\left(N^{-1} \right)$.
-<!-- 
-Meanwhile, using similar arguments to bounding the $\ell_2$ norm in the RHS of (8) in the supplementary, we obtain with probability at least $1-O\left(N^{-1} \right)$ that
+
+
+Meanwhile, using similar arguments to bounding the $\ell_2$ norm in the RHS of (7) in the supplementary, we obtain with probability at least $1-O\left(N^{-1} \right)$ that
 
 $$
-\left\|I_1-I_2\right\|_2=O\left(\frac{\sqrt{L(\epsilon N)^{-1} \log (N)}}{1-\gamma}\right)
+\left\|I_1-I_2\right\|_2=O\left(\frac{\sqrt{L  N^{-1} \log (N)}}{1-\gamma}\right)
 $$
- -->
 
-We obtain that
+
+Combining these bound we obtain that
 
 $$
 \begin{aligned}
-\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S})\left(\beta^{(k) *}-\beta^{(k)}\right)\right| & \leq \sup _{\mathbf{A}, \mathbf{S}}\left\|\mathbf{\Phi}_L(\mathbf{A}, \mathbf{S})\right\|_2\left\|\beta^{(k) *}-\beta^{(k)}-I_1\right\|_2 +\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) I_2\right|\\
+\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S})\left(\beta^{(k) *}-\beta^{(k)}\right)\right| & \leq \sup _{\mathbf{A}, \mathbf{S}}\left\|\mathbf{\Phi}_L(\mathbf{A}, \mathbf{S})\right\|_2\left\|\beta^{(k) *}-\beta^{(k)}-I_1\right\|_2\\
+&+\sup_{\mathbf{A}, \mathbf{S}} \|\mathbf{\Phi}_L(\mathbf{A}, \mathbf{S})\|_2\|I_1-I_2\|_2 +\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) I_2\right|\\
 &=O\left(\frac{L \sqrt{(\epsilon N)^{-1} \log (N)}}{1-\gamma}\right)+\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) I_2\right|,
 \end{aligned}
 $$
 
 under the conditions on $L$ that $L$ is proportional to $N^{c_4}$ for some $0 < c_4 < 1/4$.
 
-Finally, we can show that $\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) I_1\right|=O\left((1-\gamma)^{-1} L^{-1/ d}\right)$ by employing the bias control techniques developed by Huang (2003) (see Lemma 5.1 and Theorem A. 1 therein), based on which we can show that the basis function $\phi_L$ satisfies
+Finally, we can show that $\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) I_2\right|=O\left((1-\gamma)^{-1} \right)$ by induction similar to the proof of (4) in the supplementary. 
+
+<!--
+by employing the bias control techniques developed by Huang (2003) (see Lemma 5.1 and Theorem A. 1 therein), based on which we can show that the basis function $\phi_L$ satisfies
 
 $$
 \left[\sup _{\mathbf{A}, \mathbf{S}}\left|h\left(A_t^{(i)}, S_t^{(i)}\right)\right|\right]^{-1} \sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) \frac{\Sigma^{-1}}{N} \sum_{i,t} \mathbb{E}\mathbf{\Phi}_L\left(A_t^{(i)}, S_t^{(i)}\right) h\left(A_t^{(i)}, S_t^{(i)}\right)\right|=O(1),
 $$
 
-where the big- $O$ term on the RHS is uniform in any nonzero function $h$.
+where the big- $O$ term on the RHS is uniform in any nonzero function $h$.-->
 
 Consequently, we have
 
 $$
-\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S})\left(\beta^{(k) *}-\beta^{(k)}\right)\right|=O\left(\frac{L \sqrt{(\epsilon N )^{-1} \log (N)}}{1-\gamma}\right)+O\left(\frac{L^{-1 / d}}{1-\gamma}\right),
+\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S})\left(\beta^{(k) *}-\beta^{(k)}\right)\right|=O\left(\frac{L \sqrt{ N ^{-1} \log (N)}}{1-\gamma}\right)+O\left(\frac{1}{1-\gamma}\right),
 $$
 
 and hence $\sup _{\mathbf{A}, \mathbf{S}}\left|Q^{(k) *}(\mathbf{A}, \mathbf{S})-Q^{(k)}(\mathbf{A}, \mathbf{S})\right|$ is of the same order of magnitude. It follows from the error analysis in the proof of Theorem 1 in the supplementary that
 
 $$
-\sup _{\mathbf{A}, \mathbf{S}}\left|Q^{*}(\mathbf{A}, \mathbf{S})-Q^{(k)}(\mathbf{A}, \mathbf{S})\right|=O\left(\frac{L \sqrt{(\epsilon N)^{-1} \log (N)}}{(1-\gamma)^2}\right)+O\left(\frac{L^{-1 / d}}{(1-\gamma)^2}\right)+O\left(\frac{\gamma^k}{1-\gamma}\right),
+\sup _{\mathbf{A}, \mathbf{S}}\left|Q^{*}(\mathbf{A}, \mathbf{S})-Q^{(k)}(\mathbf{A}, \mathbf{S})\right|=O\left(\frac{L \sqrt{N^{-1} \log (N)}}{(1-\gamma)^2}\right)+O\left(\frac{1}{(1-\gamma)^2}\right),
 $$
 
 with probability at least $1-O\left(N^{-1}\right)$. This establishes the rate of regret by noting that the number of FQI iterations much larger than $\log (N)$.
@@ -243,7 +250,7 @@ Then the expected cumulative reward for $\pi(\beta)$ has third-order derivative 
 **Formal Statement:**
 Suppose Assumptions 1 and 2 are satisfied. The estimator $\widehat{\beta}$, computed by Algorithm 1 (Optimal FQI), has the following properties:
 
-1. The asymptotic distribution of $\sqrt{MN}(\widehat{\beta} - \beta^{\*})$ is normal:
+1. The asymptotic distribution of $\sqrt{MN}(\widehat{\beta} - \beta^{*})$ is normal:
    \[
    \mathcal{N}(\mathbf{0}, W^{-1} \Sigma W^{-1\top}),
    \]
@@ -253,9 +260,9 @@ Suppose Assumptions 1 and 2 are satisfied. The estimator $\widehat{\beta}$, comp
    \]
    and $\Sigma(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E} \left( \mathbf{\Phi} \mathbf{V}^* \mathbf{\Phi}^\top \right)$.
 
-2. When the correlation structure of the TD errors is correctly specified, and the estimator $\widehat{\Phi}^*(\mathbf{A}, \mathbf{S})$ converges to $\Phi^{\*}(\mathbf{A}, \mathbf{S})$ with a rate at least $O(N^{-b} \log^{-1}(N))$ for some $b > 0$, $\widehat{\beta}$ achieves the minimal asymptotic variance:
+2. When the correlation structure of the TD errors is correctly specified, and the estimator $\widehat{\Phi}^*(\mathbf{A}, \mathbf{S})$ converges to $\Phi^*(\mathbf{A}, \mathbf{S})$ with a rate at least $O(N^{-b} \log^{-1}(N))$ for some $b > 0$, $\widehat{\beta}$ achieves the minimal asymptotic variance:
    \[
-   W(\Phi^{\*})^{-1}.
+   W(\Phi^*)^{-1}.
    \]
 
 ---
@@ -318,51 +325,32 @@ $$\mathbf{\Phi}^{\*}(\mathbf{A}, \mathbf{S}) = \Big[\phi^{\*}(A^{(1)}, S^{(1)}),
 
 where $\mathbf{V}$ is the covariance matrix of the cluster-wise TD error and $\phi^{\*}(a,s)=\frac{\partial f^{\*}(a,s;\beta)}{\partial \beta^{\*}}-\gamma \mathbb{E} \Big[\frac{\partial f^{\*}(\pi^{\*}(S'),S';\beta)}{\partial \beta^{\*}}|A=a,S=s\Big]$.  
 
-**Clarification on the Benefits of GFQI:** The efficiency claimed in Theorem 1 refers to the asymptotic variance of the estimator $\widehat{\beta}$. Specifically, when the correlation matrix is correctly specified, GFQI achieves the minimal asymptotic variance among the class of estimators computed by solving (5). Mathmatically, Theorem 1 states that
+**Clarification on the Benefits of GFQI:** The efficiency claimed in Theorem 1 refers to the asymptotic variance of the estimator $\widehat{\beta}$. Specifically, when the correlation matrix is correctly specified, GFQI achieves the minimal asymptotic variance among the class of estimators computed by solving (5). This is a significant improvement over the ordinary FQI, which uses an independence correlation structure and thus does not account for the intra-cluster correlations.
 
+To reiterate, Theorem 1 states that:
 
-1. The asymptotic distribution of $\sqrt{MN}(\widehat{\beta} - \beta^{\*})$ is normal:
-
-$$
+1. The asymptotic distribution of $\sqrt{MN}(\widehat{\beta} - \beta^*)$ is normal:
+   \[
    \mathcal{N}(\mathbf{0}, W^{-1} \Sigma W^{-1\top}),
-  $$
-  
+   \]
    where:
+   \[
+   W(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E}\left[ \mathbf{\Phi}(\mathbf{A}, \mathbf{S}) \left\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\} \right],
+   \]
+   and $\Sigma(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E} \left( \mathbf{\Phi} \mathbf{V}^* \mathbf{\Phi}^\top \right)$.
 
-   $$
-   W(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E}\left[ \mathbf{\Phi}(\mathbf{A}, \mathbf{S}) \left\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^{\*}(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\} \right],
-   $$
-   
-   and $\Sigma(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E} \left( \mathbf{\Phi} \mathbf{V}^{\*} \mathbf{\Phi}^\top \right)$.
+2. When the correlation structure of the TD errors is correctly specified, and the estimator $\widehat{\Phi}^*(\mathbf{A}, \mathbf{S})$ converges to $\Phi^*(\mathbf{A}, \mathbf{S})$ with a rate at least $O(N^{-b} \log^{-1}(N))$ for some $b > 0$, $\widehat{\beta}$ achieves the minimal asymptotic variance:
+   \[
+   W(\Phi^*)^{-1}.
+   \]
 
-<!--1. When the correlation structure of the TD errors is correctly specified, and the estimator $\widehat{\Phi}^{\*}(\mathbf{A}, \mathbf{S})$ converges to $\Phi^{\*}(\mathbf{A}, \mathbf{S})$ with a rate at least $O(N^{-b} \log^{-1}(N))$ for some $b > 0$, $\widehat{\beta}$ achieves the minimal asymptotic variance:
-
-$$
-   W(\Phi^{\*})^{-1}.
-   $$-->
-   The asymptotic variance of both FQI and GFQI can be derived from this theorem. For FQI, the asymptotic variance is 
-
-   $$
-W^{-1}(\mathbf{\Phi}(\mathbf{A}, \mathbf{S})) \Sigma W^{-1\top}(\mathbf{\Phi}(\mathbf{A}, \mathbf{S}))
-   $$
-
-   and for GFQI it is
-
-   $$
-W^{-1}(\mathbf{\Phi}^{\*}(\mathbf{A}, \mathbf{S}))
-   $$
-
-   which is proved to be the minimal one among the asymptotic variance of the class of estimator derived by (5) in the second statement of this theorem.
-   
-   
+**Regret Bound:**
 
 Additionally, based on Theorem 1, we can derive the regret bound for the estimated optimal policy. The regret is given by:
-
-$$
+\[
 -\frac{1}{2} \mathrm{tr}(\mathrm{Var}(\widehat{\beta}) H) + O(N^{-3/2}),
-$$
-
-where $H = \left. \frac{\partial^2 \mathcal{V}(\pi(\beta))}{\partial \beta \partial \beta^\top} \right|_{\beta = \beta^{\*}}$ and $\mathcal{V}(\pi(\beta)) = \sum_s V^{\pi(\beta)}(s) \rho(s)$, with $ \pi(\beta) $ derived by:
+\]
+where $H = \left. \frac{\partial^2 \mathcal{V}(\pi(\beta))}{\partial \beta \partial \beta^\top} \right|_{\beta = \beta^*}$ and $\mathcal{V}(\pi(\beta)) = \sum_s V^{\pi(\beta)}(s) \rho(s)$, with $ \pi(\beta) $ derived by:
 \[
 \pi(\beta) = \arg \max_a \phi(a, s)^\top \beta.
 \]
@@ -415,14 +403,9 @@ The robustness properties of Theorem 1 and Theorem 2 are established for a gener
 
 
 ### Significance: somewhat significant (e.g., significant performance in some but not all experiments, missing a baseline)
-- We appreciate your comment and would like to clarify that we have indeed included
- * the ordinary Fitted Q Iteration (FQI),
- * Adapted GTD (AGTD),
- * Conservative Q-Learning (CQL),
- * Double Deep Q-Network (DDQN), 
- * the behavior policy used in the Intern Health Study (IHS)
- as baselines in our experiments and compared its performance with our proposed algorithm, GFQI.
- 
+- We appreciate your comment and would like to clarify that we have indeed included the ordinary Fitted Q Iteration (FQI) as a baseline in our experiments and compared its performance with our proposed algorithm, GFQI.
+- In addition to FQI, we have also included other baseline algorithms such as Adapted GTD (AGTD), Conservative Q-Learning (CQL), Double Deep Q-Network (DDQN), and the behavior policy used in the Intern Health Study (IHS) to provide a comprehensive evaluation.
+
 
 ### Significance justification
 * If the covariance structure is well-specified, the results in Figure 5 make sense, though I am curious why GFQI does not get asymptotically better as the number of clusters increases. Additionally, the performance of GFQI is not consistently better under some conditions, which leads me to question when GFQI is most appropriate to use. I would appreciate additional discussion of this.
@@ -449,28 +432,28 @@ The robustness properties of Theorem 1 and Theorem 2 are established for a gener
 
     - The decreasing gap between FQI and GFQI as the number of clusters increases is primarily due to the properties of GEE. GFQI incorporates a working correlation matrix to account for intra-cluster correlations, providing efficiency gains over FQI (which corresponds to GEE with an independence working correlation matrix) when the intra-cluster correlation is relatively high compared to the sample size. However, as the number of clusters increases, the total sample size grows, and both FQI and GFQI converge to the same consistent estimates. This is because GEE’s consistency property ensures that, regardless of the working correlation matrix, the estimates converge to the true parameter values as the sample size increases. Hence, the performance gap diminishes as both methods converge.
 
-    <!--- This observation aligns with our theoretical results, where the convergence rate of the regret for all GFQI estimators, regardless of the working correlation matrix, is of the order $O((N)^{-1/2})$, where $N$ is the number of state-action-reward-next-state tuples in the dataset, which depends on the number of clusters. As for the distance between clusters, GEE assumes that different clusters are independent, and thus it does not directly model the distance or relationship between clusters.-->
-    - Align with our theories, the leading term of the regret for all GFQI estimators, regardless of the working correlation matrix, is $1/2 \mathrm{trac}(\mathrm{Var}(\widehat{\beta})H). The difference between FQI and GFQI lies in the different \mathrm{Var}(\widehat{\beta}. However, because $\mathrm{Var}(\widehat{\beta})$ is of an order of $O(N^{-1})$ for both estimators, the gap between them will decrease as the sample size increase.
+    - This observation aligns with the theoretical results in Theorem 1, where the convergence rate for all GFQI estimators, regardless of the working correlation matrix, is of the order $O((MN)^{-1/2})$, where $N$ is the number of state-action-reward-next-state tuples in the dataset, which depends on the number of clusters. As for the distance between clusters, GEE assumes that different clusters are independent, and thus it does not directly model the distance or relationship between clusters.
 
-    - Regarding the case of a single cluster, GFQI can still gain better performance than FQI. Similar to the previous conclustion, for cluster with relatively smaller episode length compared to the intra-cluster correlation, the efficiency gains of the GFQI is greater.
-      <!-- The efficiency gains depend on the size of the cluster and the strength of the correlation. If the intra-cluster correlation is strong and the cluster size is relatively small, the correct working correlation matrix could provide some efficiency gains by decorrelating the data. As the cluster size grows, both methods converge to the same consistent estimates, further reducing the potential difference.-->
+    - Regarding the case of a single cluster, GFQI can still gain better performance than FQI. The efficiency gains depend on the size of the cluster and the strength of the correlation. If the intra-cluster correlation is strong and the cluster size is relatively small, the correct working correlation matrix could provide some efficiency gains by decorrelating the data. As the cluster size grows, both methods converge to the same consistent estimates, further reducing the potential difference.
     
    
 
 
 * It would be nice to clarify that Figures 3 and 4 define causal relationships (which are referred to as paths) between components of the MDP. It is still not clear to me whether a correlation (rather than a causation) also violates the independence assumption.
 
- - Thank you for your feedback and we will clarify the causal relationships in the captions of Figures 3 and 4. We appreciate the opportunity to discuss the relation of correlation and independence.
- - Because in Figure 3 and 4 we define causal pathway, which in other word establish two directed graphical models where the independence can be read from these figures. For example, if there is a path linking two nodes, they are basically dependent [1].
- - The independence assumption in the standard MDP requires that the state-action-reward triplets be independent across different trajectories. This means that there should be no directed paths connecting these triplets across different trajectories.
- - If there is a correlation between the state-action-reward triplets across different trajectories, it implies a dependency that is not accounted for in the standard MDP framework. This correlation can arise due to various factors, such as shared environmental conditions, social interactions, or other common influences within clusters. 
+Thank you for your feedback and for pointing out the need for clarification regarding the causal relationships and correlations in Figures 3 and 4. We appreciate the opportunity to address this point.
 
- [1] https://www.stat.cmu.edu/~larry/=sml/DAGs.pdf
+**Clarification on Causal Relationships and Correlations**
 
- 
- 
+In Figures 3 and 4, we indeed define causal relationships (referred to as paths) between components of the Markov Decision Process (MDP). These paths illustrate the dependencies and transitions within the MDP framework.
 
- 
+**Independence Assumption**
+
+The independence assumption in the standard MDP requires that the state-action-reward triplets be independent across different trajectories. This means that there should be no directed paths connecting these triplets across different trajectories.
+
+**Impact of Correlation**
+
+Correlation can indeed violate the independence assumption. If there is a correlation between the state-action-reward triplets across different trajectories, it implies a dependency that is not accounted for in the standard MDP framework. This correlation can arise due to various factors, such as shared environmental conditions, social interactions, or other common influences within clusters.
 
 
 
@@ -478,11 +461,15 @@ The robustness properties of Theorem 1 and Theorem 2 are established for a gener
     - Thank you for your feedback and for pointing out the need to define key terms and we will add a notation section at the beginning of the paper to introduce all the important notations.
       
 * What is the convergence criteria?
-    - Thank you for pointing out the need for clarification on the convergence criteria.  The convergence criteria in our method are as follows: the algorithm is considered to have converged when the predicted responses from two consecutive fitted models have a relative difference smaller than $10^{-5}$, or when the maximum number of iterations (100) is reached. These criteria ensure both accuracy and computational feasibility during optimization.  We will include this detail in the revised manuscript to provide clarity on this aspect of the method.
+    - Thank you for pointing out the need for clarification on the convergence criteria.
+
+    - The convergence criteria in our method are as follows: the algorithm is considered to have converged when the predicted responses from two consecutive fitted models have a relative difference smaller than $10^{-5}$, or when the maximum number of iterations (100) is reached. These criteria ensure both accuracy and computational feasibility during optimization.
+
+    - We will include this detail in the revised manuscript to provide clarity on this aspect of the method.
 
 * Why was a uniform behavior policy used? This seems like an easier setting and a little unrealistic. 
-    - Thank you for your feedback and for questioning the choice of a uniform behavior policy. We use a uniform behavior policy because it is adopted in IHS. The IHS use a  uniform behavior policy for a balanced exploration which estimation of the causal effects and optimal policy.
-    <!-- Q-function and optimal policy. This is particularly important in offline RL settings where the behavior policy is fixed and cannot be altered.-->
+    - Thank you for your feedback and for questioning the choice of a uniform behavior policy.
+    - A uniform behavior policy ensures that the data is generated from a balanced distribution of actions, which can lead to more accurate estimation of the Q-function and optimal policy. This is particularly important in offline RL settings where the behavior policy is fixed and cannot be altered.
       
 
 ### Additional Comments:
@@ -491,7 +478,6 @@ The robustness properties of Theorem 1 and Theorem 2 are established for a gener
 
     - For the concern regarding the linear relationship in GEE, we agree that linear models can sometimes be restrictive. However, GEE can naturally accommodate non-linear relationships through the use of appropriate link functions (e.g., logit, probit) and advanced modeling techniques such as basis expansions, splines, or other non-linear transformations. In our paper, we leverage basis functions to approximate the Q-function, which effectively extends the framework beyond a strictly linear structure.
 
-    - We also want to clarified that our current proposal does not assume Y is linear in X. Instead, Y is linear in $\phi(X)$ for some basis function $\phi$. Notice that as the number of basis functions grows infinity using a linear combination of basis functions can well-approximate complex nonlinear functions as well. This ensures our method remains robust enven in nonlinear environments. Regarding the assumption of linear combinations for the optimal Q-function, we would like to emphasize that our approach allows for flexibility. By approximating the Q-function as a linear combination of basis functions, the method can model complex relationships. This approximation can capture most non-linear structure in the Q-function if the number of basis functions is allowed to grow sufficiently large. This ensures that our method remains highly flexible and theoretically robust even in scenarios with non-linear relationships.
-    <!--- Besides, we can try other link functions than the linear function such as modeling the Q function as $f(s,a,\beta)$. The corresponding properties of the Q function can be similarly derived under GEE's framework.-->
+    - Regarding the assumption of linear combinations for the optimal Q-function, we would like to emphasize that our approach allows for significant flexibility. By approximating the Q-function as a linear combination of basis functions, the method can model complex relationships. Importantly, this approximation can capture any non-linear structure in the Q-function if the number of basis functions is allowed to grow sufficiently large. This ensures that our method remains highly flexible and theoretically robust even in scenarios with non-linear relationships. Besides, we can try other link functions than the linear function such as modeling the Q function as $f(s,a,\beta)$. The corresponding properties of the Q function can be similarly derived under GEE's framework.
 
-    <!--- We will revise the manuscript to clarify these points and highlight the flexibility of our approach in handling non-linear structures. Thank you for bringing up this important perspective, which allows us to strengthen the clarity and positioning of our work.-->
+    - We will revise the manuscript to clarify these points and highlight the flexibility of our approach in handling non-linear structures. Thank you for bringing up this important perspective, which allows us to strengthen the clarity and positioning of our work.
