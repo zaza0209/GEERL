@@ -65,11 +65,17 @@ We will revise the manuscript to clarify these points and include a discussion o
   - Alternative to assuming a regular setting, several approaches are available for statistical inference in non-regular settings, including the simple sample-splitting approach, the double-boostrap approach by [5], the penalization-based method developed by [6], the hard-thresholding approach in [1], the importance sampling method in [2], the one-step method developed in [1] and the subagging approach developed in [7]. We will discuss this in detail shall our paper be accepted. 
 
 [1] Luedtke, Alexander R., and Mark J. Van Der Laan. "Statistical inference for the mean outcome under a possibly non-unique optimal treatment strategy." Annals of statistics 44.2 (2016): 713. https://arxiv.org/abs/1603.07573
+
 [2] Zhu, Wensheng, Donglin Zeng, and Rui Song. "Proper inference for value function in high-dimensional Q-learning for dynamic treatment regimes." Journal of the American Statistical Association 114.527 (2019): 1404-1417. https://pmc.ncbi.nlm.nih.gov/articles/PMC6953729/pdf/nihms-987499.pdf
+
 [3] Shi, Chengchun, et al. "Statistical inference of the value function for reinforcement learning in infinite-horizon settings." Journal of the Royal Statistical Society Series B: Statistical Methodology 84.3 (2022): 765-793. https://arxiv.org/pdf/2001.04515
+
 [4] Ertefaie, Ashkan. "Constructing dynamic treatment regimes in infinite-horizon settings." arXiv preprint arXiv:1406.0764 (2014). https://arxiv.org/pdf/1406.0764
+
 [5] Chakraborty, Bibhas, Eric B. Laber, and Ying-Qi Zhao. "Inference about the expected performance of a data-driven dynamic treatment regime." Clinical Trials 11.4 (2014): 408-417. https://pmc.ncbi.nlm.nih.gov/articles/PMC4265005/
+
 [6] Song, Rui, et al. "Penalized q-learning for dynamic treatment regimens." Statistica Sinica 25.3 (2015): 901.https://arxiv.org/pdf/1108.5338
+
 [7] Shi, Chengchun, Wenbin Lu, and Rui Song. "Breaking the Curse of Nonregularity with Subagging---Inference of the Mean Outcome under Optimal Treatment Regimes." Journal of Machine Learning Research 21.176 (2020): 1-67. https://jmlr.org/papers/volume21/20-066/20-066.pdf
 
 
@@ -237,7 +243,7 @@ Then the expected cumulative reward for $\pi(\beta)$ has third-order derivative 
 **Formal Statement:**
 Suppose Assumptions 1 and 2 are satisfied. The estimator $\widehat{\beta}$, computed by Algorithm 1 (Optimal FQI), has the following properties:
 
-1. The asymptotic distribution of $\sqrt{MN}(\widehat{\beta} - \beta^{*})$ is normal:
+1. The asymptotic distribution of $\sqrt{MN}(\widehat{\beta} - \beta^{\*})$ is normal:
    \[
    \mathcal{N}(\mathbf{0}, W^{-1} \Sigma W^{-1\top}),
    \]
@@ -247,9 +253,9 @@ Suppose Assumptions 1 and 2 are satisfied. The estimator $\widehat{\beta}$, comp
    \]
    and $\Sigma(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E} \left( \mathbf{\Phi} \mathbf{V}^* \mathbf{\Phi}^\top \right)$.
 
-2. When the correlation structure of the TD errors is correctly specified, and the estimator $\widehat{\Phi}^*(\mathbf{A}, \mathbf{S})$ converges to $\Phi^*(\mathbf{A}, \mathbf{S})$ with a rate at least $O(N^{-b} \log^{-1}(N))$ for some $b > 0$, $\widehat{\beta}$ achieves the minimal asymptotic variance:
+2. When the correlation structure of the TD errors is correctly specified, and the estimator $\widehat{\Phi}^*(\mathbf{A}, \mathbf{S})$ converges to $\Phi^{\*}(\mathbf{A}, \mathbf{S})$ with a rate at least $O(N^{-b} \log^{-1}(N))$ for some $b > 0$, $\widehat{\beta}$ achieves the minimal asymptotic variance:
    \[
-   W(\Phi^*)^{-1}.
+   W(\Phi^{\*})^{-1}.
    \]
 
 ---
@@ -308,36 +314,55 @@ We next elaborate the first and the last points in more detail below.
 
 Notice that the realizability and completeness assumptions are widely imposed in the RL literature. They can be further relaxed to allow approximation error to exist. Under the two assumptions, we use $F$ to parameterize the Q-function estimator at each FQI iteration. Equation (5) in our paper (with the linear function class replaced with $F$) remains valid to estimate the parameter $\beta^*$ involved in the optimal Q-function. Meanwhile, similar to Theorem 1, it can be shown that the optimal basis function $\mathbf{\Phi}^{\*}$ equals  
 
-$$\mathbf{\Phi}^*(\mathbf{A}, \mathbf{S}) = \Big[\phi^*(A^{(1)}, S^{(1)}), \cdots, \phi^*(A^{(M)}, S^{(M)})\Big]\mathbf{V}^{-1}$$,
+$$\mathbf{\Phi}^{\*}(\mathbf{A}, \mathbf{S}) = \Big[\phi^{\*}(A^{(1)}, S^{(1)}), \cdots, \phi^{\*}(A^{(M)}, S^{(M)})\Big]\mathbf{V}^{-1}$$,
 
-where $\mathbf{V}$ is the covariance matrix of the cluster-wise TD error and $\phi^*(a,s)=\frac{\partial f^*(a,s;\beta)}{\partial \beta^*}-\gamma \mathbb{E} \Big[\frac{\partial f^*(\pi^*(S'),S';\beta)}{\partial \beta^*}|A=a,S=s\Big]$.  
+where $\mathbf{V}$ is the covariance matrix of the cluster-wise TD error and $\phi^{\*}(a,s)=\frac{\partial f^{\*}(a,s;\beta)}{\partial \beta^{\*}}-\gamma \mathbb{E} \Big[\frac{\partial f^{\*}(\pi^{\*}(S'),S';\beta)}{\partial \beta^{\*}}|A=a,S=s\Big]$.  
 
-**Clarification on the Benefits of GFQI:** The efficiency claimed in Theorem 1 refers to the asymptotic variance of the estimator $\widehat{\beta}$. Specifically, when the correlation matrix is correctly specified, GFQI achieves the minimal asymptotic variance among the class of estimators computed by solving (5). This is a significant improvement over the ordinary FQI, which uses an independence correlation structure and thus does not account for the intra-cluster correlations.
+**Clarification on the Benefits of GFQI:** The efficiency claimed in Theorem 1 refers to the asymptotic variance of the estimator $\widehat{\beta}$. Specifically, when the correlation matrix is correctly specified, GFQI achieves the minimal asymptotic variance among the class of estimators computed by solving (5). Mathmatically, Theorem 1 states that
 
-To reiterate, Theorem 1 states that:
 
-1. The asymptotic distribution of $\sqrt{MN}(\widehat{\beta} - \beta^*)$ is normal:
-   \[
+1. The asymptotic distribution of $\sqrt{MN}(\widehat{\beta} - \beta^{\*})$ is normal:
+
+$$
    \mathcal{N}(\mathbf{0}, W^{-1} \Sigma W^{-1\top}),
-   \]
+  $$
+  
    where:
-   \[
-   W(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E}\left[ \mathbf{\Phi}(\mathbf{A}, \mathbf{S}) \left\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\} \right],
-   \]
-   and $\Sigma(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E} \left( \mathbf{\Phi} \mathbf{V}^* \mathbf{\Phi}^\top \right)$.
 
-2. When the correlation structure of the TD errors is correctly specified, and the estimator $\widehat{\Phi}^*(\mathbf{A}, \mathbf{S})$ converges to $\Phi^*(\mathbf{A}, \mathbf{S})$ with a rate at least $O(N^{-b} \log^{-1}(N))$ for some $b > 0$, $\widehat{\beta}$ achieves the minimal asymptotic variance:
-   \[
-   W(\Phi^*)^{-1}.
-   \]
+   $$
+   W(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E}\left[ \mathbf{\Phi}(\mathbf{A}, \mathbf{S}) \left\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^{\*}(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\} \right],
+   $$
+   
+   and $\Sigma(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E} \left( \mathbf{\Phi} \mathbf{V}^{\*} \mathbf{\Phi}^\top \right)$.
 
-**Regret Bound:**
+<!--1. When the correlation structure of the TD errors is correctly specified, and the estimator $\widehat{\Phi}^{\*}(\mathbf{A}, \mathbf{S})$ converges to $\Phi^{\*}(\mathbf{A}, \mathbf{S})$ with a rate at least $O(N^{-b} \log^{-1}(N))$ for some $b > 0$, $\widehat{\beta}$ achieves the minimal asymptotic variance:
+
+$$
+   W(\Phi^{\*})^{-1}.
+   $$-->
+   The asymptotic variance of both FQI and GFQI can be derived from this theorem. For FQI, the asymptotic variance is 
+
+   $$
+W^{-1}(\mathbf{\Phi}(\mathbf{A}, \mathbf{S})) \Sigma W^{-1\top}(\mathbf{\Phi}(\mathbf{A}, \mathbf{S}))
+   $$
+
+   and for GFQI it is
+
+   $$
+W^{-1}(\mathbf{\Phi}^{\*}(\mathbf{A}, \mathbf{S}))
+   $$
+
+   which is proved to be the minimal one among the asymptotic variance of the class of estimator derived by (5) in the second statement of this theorem.
+   
+   
 
 Additionally, based on Theorem 1, we can derive the regret bound for the estimated optimal policy. The regret is given by:
-\[
+
+$$
 -\frac{1}{2} \mathrm{tr}(\mathrm{Var}(\widehat{\beta}) H) + O(N^{-3/2}),
-\]
-where $H = \left. \frac{\partial^2 \mathcal{V}(\pi(\beta))}{\partial \beta \partial \beta^\top} \right|_{\beta = \beta^*}$ and $\mathcal{V}(\pi(\beta)) = \sum_s V^{\pi(\beta)}(s) \rho(s)$, with $ \pi(\beta) $ derived by:
+$$
+
+where $H = \left. \frac{\partial^2 \mathcal{V}(\pi(\beta))}{\partial \beta \partial \beta^\top} \right|_{\beta = \beta^{\*}}$ and $\mathcal{V}(\pi(\beta)) = \sum_s V^{\pi(\beta)}(s) \rho(s)$, with $ \pi(\beta) $ derived by:
 \[
 \pi(\beta) = \arg \max_a \phi(a, s)^\top \beta.
 \]
@@ -390,9 +415,14 @@ The robustness properties of Theorem 1 and Theorem 2 are established for a gener
 
 
 ### Significance: somewhat significant (e.g., significant performance in some but not all experiments, missing a baseline)
-- We appreciate your comment and would like to clarify that we have indeed included the ordinary Fitted Q Iteration (FQI) as a baseline in our experiments and compared its performance with our proposed algorithm, GFQI.
-- In addition to FQI, we have also included other baseline algorithms such as Adapted GTD (AGTD), Conservative Q-Learning (CQL), Double Deep Q-Network (DDQN), and the behavior policy used in the Intern Health Study (IHS) to provide a comprehensive evaluation.
-
+- We appreciate your comment and would like to clarify that we have indeed included
+ * the ordinary Fitted Q Iteration (FQI),
+ * Adapted GTD (AGTD),
+ * Conservative Q-Learning (CQL),
+ * Double Deep Q-Network (DDQN), 
+ * the behavior policy used in the Intern Health Study (IHS)
+ as baselines in our experiments and compared its performance with our proposed algorithm, GFQI.
+ 
 
 ### Significance justification
 * If the covariance structure is well-specified, the results in Figure 5 make sense, though I am curious why GFQI does not get asymptotically better as the number of clusters increases. Additionally, the performance of GFQI is not consistently better under some conditions, which leads me to question when GFQI is most appropriate to use. I would appreciate additional discussion of this.
@@ -419,28 +449,28 @@ The robustness properties of Theorem 1 and Theorem 2 are established for a gener
 
     - The decreasing gap between FQI and GFQI as the number of clusters increases is primarily due to the properties of GEE. GFQI incorporates a working correlation matrix to account for intra-cluster correlations, providing efficiency gains over FQI (which corresponds to GEE with an independence working correlation matrix) when the intra-cluster correlation is relatively high compared to the sample size. However, as the number of clusters increases, the total sample size grows, and both FQI and GFQI converge to the same consistent estimates. This is because GEE’s consistency property ensures that, regardless of the working correlation matrix, the estimates converge to the true parameter values as the sample size increases. Hence, the performance gap diminishes as both methods converge.
 
-    - This observation aligns with the theoretical results in Theorem 1, where the convergence rate for all GFQI estimators, regardless of the working correlation matrix, is of the order $O((MN)^{-1/2})$, where $N$ is the number of state-action-reward-next-state tuples in the dataset, which depends on the number of clusters. As for the distance between clusters, GEE assumes that different clusters are independent, and thus it does not directly model the distance or relationship between clusters.
+    <!--- This observation aligns with our theoretical results, where the convergence rate of the regret for all GFQI estimators, regardless of the working correlation matrix, is of the order $O((N)^{-1/2})$, where $N$ is the number of state-action-reward-next-state tuples in the dataset, which depends on the number of clusters. As for the distance between clusters, GEE assumes that different clusters are independent, and thus it does not directly model the distance or relationship between clusters.-->
+    - Align with our theories, the leading term of the regret for all GFQI estimators, regardless of the working correlation matrix, is $1/2 \mathrm{trac}(\mathrm{Var}(\widehat{\beta})H). The difference between FQI and GFQI lies in the different \mathrm{Var}(\widehat{\beta}. However, because $\mathrm{Var}(\widehat{\beta})$ is of an order of $O(N^{-1})$ for both estimators, the gap between them will decrease as the sample size increase.
 
-    - Regarding the case of a single cluster, GFQI can still gain better performance than FQI. The efficiency gains depend on the size of the cluster and the strength of the correlation. If the intra-cluster correlation is strong and the cluster size is relatively small, the correct working correlation matrix could provide some efficiency gains by decorrelating the data. As the cluster size grows, both methods converge to the same consistent estimates, further reducing the potential difference.
+    - Regarding the case of a single cluster, GFQI can still gain better performance than FQI. Similar to the previous conclustion, for cluster with relatively smaller episode length compared to the intra-cluster correlation, the efficiency gains of the GFQI is greater.
+      <!-- The efficiency gains depend on the size of the cluster and the strength of the correlation. If the intra-cluster correlation is strong and the cluster size is relatively small, the correct working correlation matrix could provide some efficiency gains by decorrelating the data. As the cluster size grows, both methods converge to the same consistent estimates, further reducing the potential difference.-->
     
    
 
 
 * It would be nice to clarify that Figures 3 and 4 define causal relationships (which are referred to as paths) between components of the MDP. It is still not clear to me whether a correlation (rather than a causation) also violates the independence assumption.
 
-Thank you for your feedback and for pointing out the need for clarification regarding the causal relationships and correlations in Figures 3 and 4. We appreciate the opportunity to address this point.
+ - Thank you for your feedback and we will clarify the causal relationships in the captions of Figures 3 and 4. We appreciate the opportunity to discuss the relation of correlation and independence.
+ - Because in Figure 3 and 4 we define causal pathway, which in other word establish two directed graphical models where the independence can be read from these figures. For example, if there is a path linking two nodes, they are basically dependent [1].
+ - The independence assumption in the standard MDP requires that the state-action-reward triplets be independent across different trajectories. This means that there should be no directed paths connecting these triplets across different trajectories.
+ - If there is a correlation between the state-action-reward triplets across different trajectories, it implies a dependency that is not accounted for in the standard MDP framework. This correlation can arise due to various factors, such as shared environmental conditions, social interactions, or other common influences within clusters. 
 
-**Clarification on Causal Relationships and Correlations**
+ [1] https://www.stat.cmu.edu/~larry/=sml/DAGs.pdf
 
-In Figures 3 and 4, we indeed define causal relationships (referred to as paths) between components of the Markov Decision Process (MDP). These paths illustrate the dependencies and transitions within the MDP framework.
+ 
+ 
 
-**Independence Assumption**
-
-The independence assumption in the standard MDP requires that the state-action-reward triplets be independent across different trajectories. This means that there should be no directed paths connecting these triplets across different trajectories.
-
-**Impact of Correlation**
-
-Correlation can indeed violate the independence assumption. If there is a correlation between the state-action-reward triplets across different trajectories, it implies a dependency that is not accounted for in the standard MDP framework. This correlation can arise due to various factors, such as shared environmental conditions, social interactions, or other common influences within clusters.
+ 
 
 
 
@@ -448,15 +478,11 @@ Correlation can indeed violate the independence assumption. If there is a correl
     - Thank you for your feedback and for pointing out the need to define key terms and we will add a notation section at the beginning of the paper to introduce all the important notations.
       
 * What is the convergence criteria?
-    - Thank you for pointing out the need for clarification on the convergence criteria.
-
-    - The convergence criteria in our method are as follows: the algorithm is considered to have converged when the predicted responses from two consecutive fitted models have a relative difference smaller than $10^{-5}$, or when the maximum number of iterations (100) is reached. These criteria ensure both accuracy and computational feasibility during optimization.
-
-    - We will include this detail in the revised manuscript to provide clarity on this aspect of the method.
+    - Thank you for pointing out the need for clarification on the convergence criteria.  The convergence criteria in our method are as follows: the algorithm is considered to have converged when the predicted responses from two consecutive fitted models have a relative difference smaller than $10^{-5}$, or when the maximum number of iterations (100) is reached. These criteria ensure both accuracy and computational feasibility during optimization.  We will include this detail in the revised manuscript to provide clarity on this aspect of the method.
 
 * Why was a uniform behavior policy used? This seems like an easier setting and a little unrealistic. 
-    - Thank you for your feedback and for questioning the choice of a uniform behavior policy.
-    - A uniform behavior policy ensures that the data is generated from a balanced distribution of actions, which can lead to more accurate estimation of the Q-function and optimal policy. This is particularly important in offline RL settings where the behavior policy is fixed and cannot be altered.
+    - Thank you for your feedback and for questioning the choice of a uniform behavior policy. We use a uniform behavior policy because it is adopted in IHS. The IHS use a  uniform behavior policy for a balanced exploration which estimation of the causal effects and optimal policy.
+    <!-- Q-function and optimal policy. This is particularly important in offline RL settings where the behavior policy is fixed and cannot be altered.-->
       
 
 ### Additional Comments:
@@ -465,6 +491,7 @@ Correlation can indeed violate the independence assumption. If there is a correl
 
     - For the concern regarding the linear relationship in GEE, we agree that linear models can sometimes be restrictive. However, GEE can naturally accommodate non-linear relationships through the use of appropriate link functions (e.g., logit, probit) and advanced modeling techniques such as basis expansions, splines, or other non-linear transformations. In our paper, we leverage basis functions to approximate the Q-function, which effectively extends the framework beyond a strictly linear structure.
 
-    - Regarding the assumption of linear combinations for the optimal Q-function, we would like to emphasize that our approach allows for significant flexibility. By approximating the Q-function as a linear combination of basis functions, the method can model complex relationships. Importantly, this approximation can capture any non-linear structure in the Q-function if the number of basis functions is allowed to grow sufficiently large. This ensures that our method remains highly flexible and theoretically robust even in scenarios with non-linear relationships. Besides, we can try other link functions than the linear function such as modeling the Q function as $f(s,a,\beta)$. The corresponding properties of the Q function can be similarly derived under GEE's framework.
+    - We also want to clarified that our current proposal does not assume Y is linear in X. Instead, Y is linear in $\phi(X)$ for some basis function $\phi$. Notice that as the number of basis functions grows infinity using a linear combination of basis functions can well-approximate complex nonlinear functions as well. This ensures our method remains robust enven in nonlinear environments. Regarding the assumption of linear combinations for the optimal Q-function, we would like to emphasize that our approach allows for flexibility. By approximating the Q-function as a linear combination of basis functions, the method can model complex relationships. This approximation can capture most non-linear structure in the Q-function if the number of basis functions is allowed to grow sufficiently large. This ensures that our method remains highly flexible and theoretically robust even in scenarios with non-linear relationships.
+    <!--- Besides, we can try other link functions than the linear function such as modeling the Q function as $f(s,a,\beta)$. The corresponding properties of the Q function can be similarly derived under GEE's framework.-->
 
-    - We will revise the manuscript to clarify these points and highlight the flexibility of our approach in handling non-linear structures. Thank you for bringing up this important perspective, which allows us to strengthen the clarity and positioning of our work.
+    <!--- We will revise the manuscript to clarify these points and highlight the flexibility of our approach in handling non-linear structures. Thank you for bringing up this important perspective, which allows us to strengthen the clarity and positioning of our work.-->
