@@ -411,9 +411,26 @@ The robustness properties of Theorem 1 and Theorem 2 are established for a gener
 
 ### Significance justification
 * If the covariance structure is well-specified, the results in Figure 5 make sense, though I am curious why GFQI does not get asymptotically better as the number of clusters increases. Additionally, the performance of GFQI is not consistently better under some conditions, which leads me to question when GFQI is most appropriate to use. I would appreciate additional discussion of this.
-    - We appreciate the reviewer’s insightful observation regarding the asymptotic behavior of GFQI as the number of clusters increases. Upon closer examination, we confirm that GFQI indeed exhibits improved performance with an increasing number of clusters. However, the results in Figure 5 might appear to suggest otherwise due to the limited range of clusters shown in the current plot. As the number of clusters continues to grow beyond the range displayed in Figure 5, the regret of GFQI continues to decrease, supporting its asymptotic improvement.
-    - Additionally, regarding the observation that GFQI’s performance is not consistently better under all conditions, we note that the advantage of GFQI depends heavily on the intra-cluster correlation (𝜓) and the degree of misspecification of the covariance structure. GFQI provides substantial benefits when the intra-cluster correlation is strong or when correctly specified correlation structures allow for more efficient policy learning. In cases of weaker correlation or greater misspecification, the relative advantage of GFQI diminishes, which aligns with our theoretical findings.
-    - In summary, the significance of the advantage of the GFQI verses other baselines depends on the sample size, the strongness of the intra-cluster correlation, and the correctly specified correlation structure.
+
+
+    - Thank you for the detailed feedback and for highlighting the need for further discussion on the performance trends of GFQI as shown in Figure 5.
+
+    - Referring to the first row of Figure 5, the overall trend indicates that the regret decreases as the number of clusters increases. This is consistent with the expectation that a larger sample size improves policy estimation and reduces regret. However, we acknowledge that this trend is not perfectly monotonic in some cases. For example, in the first panel, the regret slightly increases when the number of clusters changes from 20 to 25. This fluctuation may be due to randomness introduced by the random seed or an insufficient number of simulation repetitions. To address this, we conducted additional experiments with 30 clusters and observed that the regret decreases again at this level, confirming the general trend.
+
+    - The performance of GFQI is largely influenced by the strength of intra-cluster correlations, as shown in the panels with varying \(\psi\) in Figure 5. In most cases, GFQI demonstrates superior performance, and even in scenarios where it is not the best, its performance remains close to the optimal.
+
+        - **Low Intra-Cluster Correlation (\(\psi\) Small):**  
+  In cases of weak intra-cluster correlation, as seen in the first panel of Figure 5, GFQI often achieves the lowest regret, though the improvement over other methods is less pronounced. Occasionally, GFQI may not perform the best, but the regret remains comparable to the best-performing method, suggesting robustness.
+
+        - **High Intra-Cluster Correlation (\(\psi\) Large):**  
+  When the intra-cluster correlation is strong, as seen in the third and fourth panels of Figure 5, GFQI consistently achieves the lowest regret across all cases, with significant improvements over other methods. This demonstrates that GFQI is particularly beneficial in scenarios with high intra-cluster correlations, where modeling these dependencies is critical for optimal policy learning.
+
+    - In summary, GFQI is most appropriate for settings with moderate to strong intra-cluster correlations. In weakly correlated settings, while its advantages may be less pronounced, GFQI remains robust and performs comparably to the best alternatives. We will revise the manuscript to include these points and provide further clarity on the scenarios where GFQI is most effective. Thank you for bringing this to our attention.
+
+
+    <!--- We appreciate the reviewer’s insightful observation regarding the asymptotic behavior of GFQI as the number of clusters increases. Upon closer examination, we confirm that GFQI indeed exhibits improved performance with an increasing number of clusters. However, the results in Figure 5 might appear to suggest otherwise due to the limited range of clusters shown in the current plot. As the number of clusters continues to grow beyond the range displayed in Figure 5, the regret of GFQI continues to decrease, supporting its asymptotic improvement.
+    - Additionally, regarding the observation that GFQI’s performance is not consistently better under all conditions, we note that the advantage of GFQI depends heavily on the intra-cluster correlation (𝜓). GFQI provides substantial benefits when the intra-cluster correlation is strong or when correctly specified correlation structures allow for more efficient policy learning. In cases of weaker correlation or greater misspecification, the relative advantage of GFQI diminishes, which aligns with our theoretical findings.
+     In summary, the significance of the advantage of the GFQI verses other baselines depends on the sample size, the strongness of the intra-cluster correlation, and the correctly specified correlation structure.-->
 
 ### Novelty Justification:
 * I believe that using GEE to improve the sample efficiency of FQI is a novel methodological approach. However, I am unclear of the performance of GFQI (the proposed approach), when the correlation structure is misspecified.
@@ -436,7 +453,8 @@ The robustness properties of Theorem 1 and Theorem 2 are established for a gener
 
     - This observation aligns with the theoretical results in Theorem 1, where the convergence rate for all GFQI estimators, regardless of the working correlation matrix, is of the order $O((MN)^{-1/2})$, where $N$ is the number of state-action-reward-next-state tuples in the dataset, which depends on the number of clusters. As for the distance between clusters, GEE assumes that different clusters are independent, and thus it does not directly model the distance or relationship between clusters.
 
-    - Regarding the case of a single cluster, GFQI can still gain better performance than FQI. The efficiency gains depend on the size of the cluster and the strength of the correlation. If the intra-cluster correlation is strong and the cluster size is relatively small, the correct working correlation matrix could provide some efficiency gains by decorrelating the data. As the cluster size grows, both methods converge to the same consistent estimates, further reducing the potential difference.
+    - Regarding the case of a single cluster, GFQI can still gain better performance than FQI. The efficiency gains depend on the size of the cluster and the strength of the correlation. If the intra-cluster correlation is strong and the cluster size is relatively small, the correct working correlation matrix could provide some efficiency gains by decorrelating the data. 
+    <!-- As the cluster size grows, both methods converge to the same consistent estimates, further reducing the potential difference. -->
     
    
 
