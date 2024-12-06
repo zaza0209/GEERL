@@ -218,7 +218,7 @@ Thank you for this valuable feedback, which has helped us refine our presentatio
 
 Thank you for your helpful feedback regarding the clarity of the proposed method, and particularly for highlighting the need for more detail on the key assumptions and theoretical results.
 
-We agree that a more thorough explanation of the assumptions and the formal theoretical results is necessary to fully convey the foundation of the proposed method. Due to the page limit, we have move those parts to the supplementary. In the revised manuscript, we will explicitly include these details to help readers better understand the theoretical framework behind our approach. Below is a summary of the key assumptions and the formal statements of Theorems 1 and 2:
+Due to the page limit, we decided to move tho assumptions and formal theoretical statements to the Supplementary Materials. Shall our paper be accepted, we are more than happy to use the extra page to include these details in the main paper. Below is a summary of the key assumptions and the formal statements of Theorems 1 and 2 which we plan to include: 
 
 ### Assumptions:
 
@@ -303,9 +303,7 @@ $$
 
 ---
 
-We will include these assumptions and the formal statements of Theorems 1 and 2 in the revised manuscript to provide readers with a clearer understanding of the theoretical foundations that underlie our approach. These results provide important insights into the asymptotic behavior and efficiency of the GFQI estimator, and we hope this additional detail will help readers better appreciate the rigor of our method.
-
-Thank you again for your feedback, which has been invaluable in helping us improve the clarity and depth of our presentation.
+We hope these details can address your concerns. Thank you again for your feedback, which has been invaluable in helping us improve the clarity and depth of our presentation.
 
 
 * A description of the real data used would provide helpful context, including the number of users, the number of clusters, and the duration of the study.
