@@ -172,15 +172,15 @@ with probability at least $1-O\left(N^{-1}\right)$. This establishes the rate of
 * This work applies GEE to the estimation of Q-functions. This appears to be a relatively straightforward combination of the widely used methods GEE and FQI. While there may be additional technical challenges involved, these challenges are not clearly discussed in the paper.
  
 
-Thank you for your valuable feedback. We appreciate your recognition of the straightforward combination of GEE and FQI in our work. However, we would like to clarify that while the combination of these methods may appear straightforward at a high level, the integration of GEE into the RL framework presents several unique and non-trivial challenges that are not immediately apparent.
+- First, as highlighted by Reviewer u8Kq, the proposed methodology is novel in the integration of GEE -- a classical statistical tool for longitudinal and clustered data -- to handle intra-cluster correlations in RL.
 
-- As highlighted by another reviewer, the integration of GEE, a classical statistical tool for longitudinal and clustered data, into the RL framework is unconventional. 
-The novelty lies not just in the combination of methods, but in the novel application of GEE to handle intra-cluster correlations within the RL framework.
+- Second, we would like to clarify the technical challenges. The major challenge lies in identifying an optimal basis function that minimizes the mean squared error or variance of the Q-function estimator. This task is particularly challenging because:
 
-- One of the key technical challenges lies in identifying an optimal basis function within the GEE framework that minimizes the variance of the Q-function estimator. This involves iteratively solving the Bellman optimality equation while updating the working correlation matrix to model the intra-cluster correlations effectively. Balancing computational efficiency with statistical robustness in this iterative process is non-trivial.
+  * In RL, most works derive upper error bounds on the Q-function estimator, with less focus on its (asymptotic) variance -- not to mention how to identify the basis function that minimizes the variance. There a few expections that study the asymptotic variance, (mention the GTD paper, https://arxiv.org/abs/2001.04515), however, they only considered policy evaluation where the Q-function is estimated from a single set of estimating equation. In contrast, we consider policy learning, which involves iteratively solving a sequence of GEEs. Hence, the error accumulated by the iterative process should be carefully taken into consideration.
 
-- Unlike typical GEE applications in static settings, our approach extends GEE to a dynamic setting where policies interact with an evolving environment. This extension necessitates deriving new theoretical results to ensure that the proposed estimator achieves consistency and efficiency, even under the complexities of reinforcement learning tasks.
+  * Similarly, in the GEE literature, the problem is simpler as the GEE is typically solved once. It does not account for the error accumulation over multiple iterations.
 
+  We are more than happy to include these discussions to the paper shall it be accepted. 
 
 
 <!-- - Our work focuses on the under-researched issue of learning optimal policies in environments where data exhibits intra-cluster correlations. Such scenarios are prevalent in real-world applications such as healthcare and education, where traditional RL methods often assume independent and identically distributed (i.i.d.) data, thereby ignoring these dependencies. Our approach uniquely addresses this gap by employing GEE to model and manage these correlations.
