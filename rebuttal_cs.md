@@ -91,7 +91,7 @@ with probability at least $1-O\left(N^{-1}\right)$. Here $L$ is the number of ba
 To upper bound $\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^1(\mathbf{A}, \mathbf{S})\left(\beta^{(k) *}-\beta^{(k)}\right)\right|$, we define two intermediate quantity
 
 $$
-I_1 = \frac{\Sigma^{-1}}{N} \sum_{i, t} \mathbf{\Phi}_{L} \left( A_{t}^{(i)}, S_{t}^{(i)} \right) \left\{ R_{t}^{(i)} + \gamma \max_{a^{\prime}} \mathbf{\Phi}_L^{\top} \left( a^{\prime}, S_{t+1}^{(i)} \right) \beta^{(k-1)} - \mathbf{\Phi}_L \left( A_{t}^{(i)}, S_{t}^{(i)} \right) \beta^{(k) *} \right\},
+I_1 = \frac{\Sigma^{-1}}{N} \sum_{i, t} \mathbf{\Phi}_L  \left\( A_t^{(i)}, S_t^{(i)} \right\) \\{ R_t^{(i)} + \gamma  \max\_{a^{\prime}} \mathbf{\Phi}_L^{\top}  ( a^{\prime}, S\_{t+1}^{(i)} ) \beta^{(k-1)} - \mathbf{\Phi}_L ( A_t^{(i)}, S_t^{(i)}  ) \beta^{(k) \*}\\}
 $$
 
 $$
@@ -116,13 +116,24 @@ $$
 
 Combining these bound we obtain that
 
+
 $$
-\begin{aligned}
-\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S})\left(\beta^{(k) *}-\beta^{(k)}\right)\right| & \leq \sup _{\mathbf{A}, \mathbf{S}}\left\|\mathbf{\Phi}_L(\mathbf{A}, \mathbf{S})\right\|_2\left\|\beta^{(k) *}-\beta^{(k)}-I_1\right\|_2\\
-&+\sup_{\mathbf{A}, \mathbf{S}} \|\mathbf{\Phi}_L(\mathbf{A}, \mathbf{S})\|_2\|I_1-I_2\|_2 +\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) I_2\right|\\
-&=O\left(\frac{L \sqrt{(\epsilon N)^{-1} \log (N)}}{1-\gamma}\right)+\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) I_2\right|,
-\end{aligned}
+\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S})\left(\beta^{(k) \*}-\beta^{(k)}\right)\right|
 $$
+
+$$
+\leq \sup_{\mathbf{A}, \mathbf{S}}\left\|\mathbf{\Phi}_L(\mathbf{A}, \mathbf{S})\right\|_2  \left\|\beta^{(k) \*}-\beta^{(k)} - I_1 \right\| 
+$$
+
+$$
+\+ \sup_{\mathbf{A}, \mathbf{S}}\|\mathbf{\Phi}_L(\mathbf{A}, \mathbf{S})\|_2\|I_1-I_1\|_2 +\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) I_2\right|
+$$
+
+$$
+=O\left(\frac{L \sqrt{(\epsilon N)^{-1} \log (N)}}{1-\gamma}\right)+\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) I_2\right|,
+$$
+
+
 
 under the conditions on $L$ that $L$ is proportional to $N^{c_4}$ for some $0 < c_4 < 1/4$.
 
@@ -213,13 +224,17 @@ We agree that a more thorough explanation of the assumptions and the formal theo
 
 1. **Realizability**  
    We assume the environment follows a linear Markov Decision Process (MDP) [Xie et al., 2023]. Both the reward function and the transition dynamics are linear in a known feature map $\phi(s,a)$, i.e.,
-   \[
+   
+   $$
    \mathcal{T}(s' | a, s) = \phi(a, s)^\top \mu(s'),
-   \]
+   $$
+
    and
-   \[
+   
+   $$
    \mathcal{R}(a, s) = \phi(a, s)^\top \omega.
-   \]
+   $$
+
    This assumption ensures that the Q-function and the environment dynamics can be represented by linear structures, which is central to deriving the properties of the GFQI estimator.
 
 2. **Stability**  
@@ -250,14 +265,18 @@ Then the expected cumulative reward for $\pi(\beta)$ has third-order derivative 
 **Formal Statement:**
 Suppose Assumptions 1 and 2 are satisfied. The estimator $\widehat{\beta}$, computed by Algorithm 1 (Optimal FQI), has the following properties:
 
-1. The asymptotic distribution of $\sqrt{MN}(\widehat{\beta} - \beta^{*})$ is normal:
-   \[
+1. The asymptotic distribution of $\sqrt{MN}(\widehat{\beta} - \beta^{\*})$ is normal:
+   
+   $$
    \mathcal{N}(\mathbf{0}, W^{-1} \Sigma W^{-1\top}),
-   \]
+   $$
+
    where:
-   \[
-   W(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E}\left[ \mathbf{\Phi}(\mathbf{A}, \mathbf{S}) \left\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\} \right],
-   \]
+   
+     $$
+   W(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E}\left\[ \mathbf{\Phi}(\mathbf{A}, \mathbf{S}) \left\\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\\} \right\],
+   $$
+
    and $\Sigma(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E} \left( \mathbf{\Phi} \mathbf{V}^* \mathbf{\Phi}^\top \right)$.
 
 2. When the correlation structure of the TD errors is correctly specified, and the estimator $\widehat{\Phi}^*(\mathbf{A}, \mathbf{S})$ converges to $\Phi^*(\mathbf{A}, \mathbf{S})$ with a rate at least $O(N^{-b} \log^{-1}(N))$ for some $b > 0$, $\widehat{\beta}$ achieves the minimal asymptotic variance:
@@ -271,13 +290,16 @@ Suppose Assumptions 1 and 2 are satisfied. The estimator $\widehat{\beta}$, comp
 
 **Formal Statement:**
 Suppose Assumptions 1 and 3 are satisfied. The regret of the estimated optimal policy is given by:
-\[
+
+$$
 -\frac{1}{2} \mathrm{tr}(\mathrm{Var}(\widehat{\beta}) H) + O(N^{-3/2}),
-\]
+$$
+
 where $H = \left. \frac{\partial^2 \mathcal{V}(\pi(\beta))}{\partial \beta \partial \beta^\top} \right|_{\beta = \beta^*}$ and $\mathcal{V}(\pi(\beta)) = \sum_s V^{\pi(\beta)}(s) \rho(s)$, with $ \pi(\beta) $ derived by:
-\[
+
+$$
 \pi(\beta) = \arg \max_a \phi(a, s)^\top \beta.
-\]
+$$
 
 ---
 
