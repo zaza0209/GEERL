@@ -470,11 +470,14 @@ The robustness properties of Theorem 1 and Theorem 2 are established for a gener
 
   
 * In Figure 2, why does the delta between FQI/GFQI get smaller as the number of clusters increase? Is it because with a larger number of clusters, there is more shared structure between clusters that an algorithm can capitalize on? Is the distance between the clusters a factor here? Also is is the performance of GFQI similar to FQI if there is 1 cluster?
-    - Thank you for the insightful questions regarding the trends observed in Figure 2.
 
-    - The decreasing gap between FQI and GFQI as the number of clusters increases is primarily due to the properties of GEE. GFQI incorporates a working correlation matrix to account for intra-cluster correlations, providing efficiency gains over FQI (which corresponds to GEE with an independence working correlation matrix) when the intra-cluster correlation is relatively high compared to the sample size. However, as the number of clusters increases, the total sample size grows, and both FQI and GFQI converge to the same consistent estimates. This is because GEE’s consistency property ensures that, regardless of the working correlation matrix, the estimates converge to the true parameter values as the sample size increases. Hence, the performance gap diminishes as both methods converge.
+    - The decrease of delta with the number of clusters is expected. To elaborate, consider the case where the number of clusters increases to infinity. In that case, the total sample size grows to infinity, causing both FQI and GFQI to converge towards the same consistent estimator. Consequently, this leads to the gap between them decaying to zero. 
 
-    - This observation aligns with the theoretical results in Theorem 1, where the convergence rate for all GFQI estimators, regardless of the working correlation matrix, is of the order $O((MN)^{-1/2})$, where $N$ is the number of state-action-reward-next-state tuples in the dataset, which depends on the number of clusters. As for the distance between clusters, GEE assumes that different clusters are independent, and thus it does not directly model the distance or relationship between clusters.
+    - This observation also aligns with the theoretical results in Theorem 1, where the convergence rate for all (G)FQI estimators, regardless of the working correlation matrix, is of the order $O((MN)^{-1/2})$, where $N$ is the number of state-action-reward-next-state tuples in the dataset, which depends on the number of clusters.
+ 
+    - However, it is important to note that the constants proportional to these rates differ between the two methods. GFQI has a smaller constant. Therefore, although both methods converge to zero, GFQI does so at a faster rate. This makes our GFQI particularly valuable in finite-sample scenarios, which are common in biomedical studies.
+  
+    - As for the distance between clusters, GEE assumes that different clusters are independent, and thus it does not directly model the distance or relationship between clusters.
 
     - Regarding the case of a single cluster, GFQI can still gain better performance than FQI. The efficiency gains depend on the size of the cluster and the strength of the correlation. If the intra-cluster correlation is strong and the cluster size is relatively small, the correct working correlation matrix could provide some efficiency gains by decorrelating the data. 
     <!-- As the cluster size grows, both methods converge to the same consistent estimates, further reducing the potential difference. -->
