@@ -60,7 +60,7 @@ We will revise the manuscript to clarify these points and include a discussion o
 
   - In addition to posing challenges for statistical inference, this issue also complicates the asymptotic behavior of the estimator. Specifically, the estimator may not be asymptotically normal ([1], [2], [3]). 
 
-  - In this paper, we did not consider statistical inference. So, the policy learning procedure works regardless of the presence of non-regularities. However, for theoretical purposes, we assume a regular setting to establish the asymptotic normality of the estimator. In particular, similar to the work [4], we assume the optimal policy is unique to rule out non-regularity (see Assumption (A3) the supplementary material).
+  - In this paper, we did not consider statistical inference. So, the policy learning procedure works regardless of the presence of non-regularities. However, for theoretical purposes, we assume a regular setting to establish the asymptotic normality of the estimator. In particular, similar to the work [4], we assume the optimal policy is unique to rule out non-regularity (see Assumption (A3) in the supplementary material).
 
   - Alternative to assuming a regular setting, several approaches are available for statistical inference in non-regular settings, including the simple sample-splitting approach, the double-boostrap approach by [5], the penalization-based method developed by [6], the hard-thresholding approach in [1], the importance sampling method in [2], the one-step method developed in [1] and the subagging approach developed in [7]. We will discuss this in detail shall our paper be accepted. 
 
