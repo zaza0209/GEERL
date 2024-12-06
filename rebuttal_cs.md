@@ -193,9 +193,7 @@ with probability at least $1-O\left(N^{-1}\right)$. This establishes the rate of
 * The paper spends many pages explaining details of existing methods such as GEE, RL algorithms, and standard MDPs. Readers would benefit more from an explicit discussion of how the current work differs from previous work. This comparison is essential for understanding the novel aspects of the proposed method.
 
 
-Thank you for your thoughtful feedback regarding the balance between background explanation and discussion of the novel aspects of our work.
-
-We agree that the paper devotes significant space to explaining existing methods such as GEE, RL algorithms, and standard MDPs. While these details were included to ensure accessibility for a broad audience, we recognize the importance of focusing on the unique contributions of our work. In the revised manuscript, we will streamline the background sections by removing redundant material and instead allocate more space to explicitly discuss how the proposed Generalized Fitted Q-Iteration (GFQI) differs from Fitted Q-Iteration (FQI).
+Thank you for pointing this out. We agree that our paper devotes a lot of space to explaining existing methods such as GEE, RL algorithms, and standard MDPs. While these details were included to ensure accessibility for a broad audience, we recognize the importance of focusing on the unique contributions of our work. Shall our paper be accepted, we plan to streamline the background sections by removing redundant materials and use the extra page to explicitly discuss how the proposed GFQI differs from FQI. We summarize the key differences below and will include the related discussions as mentioned. 
 
 #### Key Differences Between FQI and GFQI:
 1. **Handling of Intra-Cluster Correlations:**
