@@ -347,13 +347,16 @@ To reiterate, Theorem 1 states that:
 **Regret Bound:**
 
 Additionally, based on Theorem 1, we can derive the regret bound for the estimated optimal policy. The regret is given by:
-\[
+
+$$
 -\frac{1}{2} \mathrm{tr}(\mathrm{Var}(\widehat{\beta}) H) + O(N^{-3/2}),
-\]
+$$
+
 where $H = \left. \frac{\partial^2 \mathcal{V}(\pi(\beta))}{\partial \beta \partial \beta^\top} \right|_{\beta = \beta^*}$ and $\mathcal{V}(\pi(\beta)) = \sum_s V^{\pi(\beta)}(s) \rho(s)$, with $ \pi(\beta) $ derived by:
-\[
+
+$$
 \pi(\beta) = \arg \max_a \phi(a, s)^\top \beta.
-\]
+$$
 
 This regret bound further underscores the benefits of GFQI, as it shows that the estimation error of $\beta$ directly translates into the regret of the resulting policy, and GFQI's ability to achieve the minimal asymptotic variance leads to a more efficient policy learning process.
 
@@ -469,12 +472,13 @@ In Figures 3 and 4, we indeed define causal relationships (referred to as paths)
 
 **Independence Assumption**
 
-The independence assumption in the standard MDP requires that the state-action-reward triplets be independent across different trajectories. This means that there should be no directed paths connecting these triplets across different trajectories.
+The independence assumption in the standard MDP requires that the state-action-reward triplets be independent across different trajectories. This means that there should be no directed paths connecting these triplets across different trajectories. [1]
 
 **Impact of Correlation**
 
 Correlation can indeed violate the independence assumption. If there is a correlation between the state-action-reward triplets across different trajectories, it implies a dependency that is not accounted for in the standard MDP framework. This correlation can arise due to various factors, such as shared environmental conditions, social interactions, or other common influences within clusters.
 
+[1]. https://www.stat.cmu.edu/~larry/=sml/DAGs.pdf
 
 
 * You don’t define many terms including regret, MLE, and DGP. Please define these terms early in the paper for reader clarity.
