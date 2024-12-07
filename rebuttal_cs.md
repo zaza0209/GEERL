@@ -82,8 +82,20 @@ We will revise the manuscript to clarify these points and include a discussion o
 
 
 * Regarding Theorem 2, first it seems that the regret is not properly defined, but only appears in the proof of Theorem 2 in the appendix. The value functions have not been defined either. In addition, the type of regret being discussed is unclear. It seems the focus is on simple regret, not cumulative regret, but this should be explicitly stated. Whichever is being addressed, it is important to connect the theoretical results to existing literature. For example, if the variance of $\beta$ is plugged in, what is the regret? How does the regret scale with key factors such as the dimension of the state space, episode length, and number of episodes?
-      - The regret of a given policy is defined as the difference between the expected gamma-discounted cumulative reward of the optimal policy and that policy. If the covariance matrix of the temporal difference error is pluged in, the regret is still $-\frac{1}{2}\mathrm{tr}(\mathrm{Var}(\widehat{\theta})H)+O(N^{-3/2})$ as in Theorem 2 we do not assume the correct covariance matrix is used. As $N$ is the total number of data tuples, the episode length and number of episodes affect the regret through $N$.
-      - Under the linear MDP assumption, there is no approximation error of the optimal Q function. The regret bound is irrelavant of the dimension of the state but relevant of the number of the basis function.
+
+
+    - Thank you for your insightful feedback on Theorem 2 and the clarity of regret and value function definitions.
+
+    - First, we would like to clarify that the regret discussed in our paper is not the cumulative regret commonly used in online settings, which measures the cumulative sub-optimality from the initial time step to the end of an episode. Instead, our focus is on the offline setting, where regret is defined as the sub-optimality gap in the expected $\gamma$-discounted cumulative reward under the learned policy compared to the optimal policy. This type of regret corresponds to the sub-optimality gap in policy performance, which is closely related to simple regret in reinforcement learning literature.
+
+    - We initially omitted these definitions in the main text to make the paper less technical to improve the flow, but we are more than happy to use the extra page to formally define the regret & value function in the main text to avoid confusion，shall paper be accepted.
+
+
+    <!-- - The regret of a given policy is defined as the difference between the expected gamma-discounted cumulative reward of the optimal policy and that policy.-->
+    
+    - If the covariance matrix of the temporal difference error is pluged in, the regret is still $-\frac{1}{2}\mathrm{tr}(\mathrm{Var}(\widehat{\theta})H)+O(N^{-3/2})$ as in Theorem 2 we do not assume the correct covariance matrix is used. As $N$ is the total number of data tuples, the episode length and number of episodes affect the regret through $N$.
+
+    - Under the linear MDP assumption, there is no approximation error of the optimal Q function. The regret bound is irrelavant of the dimension of the state but relevant of the number of the basis function.
        We can prove that the regret is
   $$
 \sup_{\mathbf{A}, \mathbf{S}}|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) \widehat{\beta}-Q^{*}(\mathbf{A}, \mathbf{S})|= O\left(\frac{L \sqrt{\log (MT)}}{(1-\gamma)^2 \sqrt{\epsilon MT} }\right)
@@ -195,22 +207,29 @@ with probability at least $1-O\left(N^{-1}\right)$. This establishes the rate of
 
 Thank you for pointing this out. We agree that our paper devotes a lot of space to explaining existing methods such as GEE, RL algorithms, and standard MDPs. While these details were included to ensure accessibility for a broad audience, we recognize the importance of focusing on the unique contributions of our work. Shall our paper be accepted, we plan to streamline the background sections by removing redundant materials and use the extra page to explicitly discuss how the proposed GFQI differs from FQI. We summarize the key differences below and will include the related discussions as mentioned. 
 
-#### Key Differences Between FQI and GFQI:
+
+#### Key Differences Between FQI, AGTD and GFQI:
+We will highlight the differences between GFQI and two closely related methods: FQI and GTD. While both of these methods are already discussed in Section 4, we recognize the importance of explicitly emphasizing the unique contributions of GFQI.
+
 1. **Handling of Intra-Cluster Correlations:**
-   - FQI assumes that all data points are independent and identically distributed (i.i.d.), ignoring any dependencies between data points within the same cluster. This can lead to suboptimal policy estimates in settings where intra-cluster correlations are present.
-   - GFQI, on the other hand, incorporates Generalized Estimating Equations (GEE) to explicitly model and account for intra-cluster correlations via a working correlation matrix. This adjustment improves sample efficiency and ensures more accurate Q-function estimation in clustered data scenarios. In addition, GFQI allows for flexible working correlation structures (e.g., exchangeable or other forms) to better capture the dependencies within clusters. This leads to more efficient parameter estimation when the correlation structure is appropriately specified.
+    - The primary difference lies in how the two methods handle data dependencies. FQI assumes that all observations are i.i.d., which ignores intra-cluster correlations commonly present in clustered data. In contrast, GFQI incorporates Generalized Estimating Equations (GEE) to explicitly model and account for these correlations via a working correlation matrix. This enables GFQI to achieve more efficient Q-function estimation and reduced regret in settings with clustered data.
+
+    - AGTD is designed for policy evaluation, aiming to estimate the value function for a fixed policy. Our work focuses on the more complex problem of policy learning, where the goal is to learn an optimal policy that maximizes cumulative reward. Even if AGTD were extended to policy learning (as discussed in Section 4, Algorithm 2), it still fundamentally differs from GFQI because it does not handle intra-cluster correlations. Unlike GFQI, AGTD treats all observations as independent and does not leverage the dependency structure within clusters to improve efficiency.
+    
+   <!-- - FQI assumes that all data points are i.i.d., ignoring any dependencies between data points within the same cluster. This can lead to suboptimal policy estimates in settings where intra-cluster correlations are present.
+   - GFQI, on the other hand, incorporates Generalized Estimating Equations (GEE) to explicitly model and account for intra-cluster correlations via a working correlation matrix. This adjustment improves sample efficiency and ensures more accurate Q-function estimation in clustered data scenarios. In addition, GFQI allows for flexible working correlation structures (e.g., exchangeable or other forms) to better capture the dependencies within clusters. This leads to more efficient parameter estimation when the correlation structure is appropriately specified.-->
 
  
 
 2. **Theoretical Improvements:**
-    GFQI achieves minimal asymptotic variance in its Q-function estimation when the working correlation matrix is correctly specified, as shown in our theoretical results (Theorem 1). FQI does not provide this advantage, as it does not model intra-cluster correlations.
+    GFQI achieves minimal asymptotic variance and regret in its Q-function estimation when the working correlation matrix is correctly specified, as shown in our theoretical results (Theorem 1). FQI and AGTD does not provide this advantage, as it does not model intra-cluster correlations.
 
 3. **Empirical performance:**
-    Empirically, GFQI significantly outperforms FQI in settings with strong intra-cluster correlations, as demonstrated in our numerical studies. This highlights its practical advantage in scenarios where traditional FQI struggles due to its independence assumption.
+    Empirically, GFQI significantly outperforms FQI in settings with strong intra-cluster correlations or small sample size, as demonstrated in our numerical studies. This highlights its practical advantage in scenarios where traditional FQI struggles due to its independence assumption.
 
-We will incorporate these points into the revised manuscript to emphasize the novel contributions of GFQI compared to FQI. By focusing more on these differences, we aim to provide readers with a clearer understanding of how our method advances the state of the art in reinforcement learning for clustered data.
+We will incorporate these points into the revised manuscript to emphasize the novel contributions of GFQI compared to FQI. 
 
-Thank you for this valuable feedback, which has helped us refine our presentation and better highlight the contributions of our work.
+Thank you for this valuable feedback.
 
 
 * In contrast, the proposed method is discussed in less detail. For example, key assumptions and theoretical results are omitted from the main paper, making it difficult for readers to grasp the foundation of the proposed method. Without details of Theorem 1, it is hard to understand why the optimal $\Phi$ has the given form on page 6.
@@ -314,8 +333,14 @@ We hope these details can address your concerns. Thank you again for your feedba
 
     In model II on page 4, $m$ seems to represent the total number of subjects in a cluster, being an observed value of $M$ and taking values from 1 to infinity. However, in the next paragraph, $m$ is used as the index of each trajectory in a cluster, taking values from 1 to $M$. If this understanding is correct, using distinct notations for these cases would reduce ambiguity.
     In the simulation study, the number of decision times per week is unclear. It seems that there is an action for each day $t$, so there are 7 actions in a week. However, the horizon is defined as the number of weeks $T$.
-    
-    - we have corrected the notations.
+
+    - Thank you for pointing out the ambiguity regarding the notation in Model II on page 4 and the number of decision times in the simulation study. 
+
+    - You are correct in your understanding that in Model II, $ m $ is used in two different contexts: initially, it represents the total number of subjects in a cluster, which is an observed value of $M $, and then it is used as the index of each trajectory within a cluster, taking values from 1 to $M$. To avoid this confusion, we will revise the manuscript to use distinct notations for these two cases. Specifically, we will use $M$ to denote the total number of subjects in a cluster, and $m$ will continue to represent the index of each trajectory within the cluster.
+
+    - Regarding the number of decision times per week, we acknowledge the confusion. You are correct that there is one action per day, so the number of actions in a week is 7. The horizon $T $ in the simulation is defined as the number of weeks, and we will clarify this point in the revised manuscript to ensure consistency and avoid any ambiguity.
+
+    - Thank you again for your attention to these details. We will make the necessary revisions to improve the clarity of the manuscript. 
 
 ## RE: Reviewer MTVu
 
@@ -428,15 +453,20 @@ The robustness properties of Theorem 1 and Theorem 2 are established for a gener
 -->
 
 ### Significance: somewhat significant (e.g., significant performance in some but not all experiments, missing a baseline)
-- We appreciate your comment and would like to clarify that we have indeed included the ordinary Fitted Q Iteration (FQI) as a baseline in our experiments and compared its performance with our proposed algorithm, GFQI.
-- In addition to FQI, we have also included other baseline algorithms such as Adapted GTD (AGTD), Conservative Q-Learning (CQL), Double Deep Q-Network (DDQN), and the behavior policy used in the Intern Health Study (IHS) to provide a comprehensive evaluation.
+- We appreciate your comment and would like to clarify that we have indeed included
+    - the ordinary Fitted Q Iteration.
+    - Adapted GTD (AGTD), 
+    - Conservative Q-Learning (CQL), 
+    - Double Deep Q-Network (DDQN), and 
+    - the behavior policy used in the Intern Health Study (IHS)
+    to provide a comprehensive evaluation.
 
 
 ### Significance justification
 * If the covariance structure is well-specified, the results in Figure 5 make sense, though I am curious why GFQI does not get asymptotically better as the number of clusters increases. Additionally, the performance of GFQI is not consistently better under some conditions, which leads me to question when GFQI is most appropriate to use. I would appreciate additional discussion of this.
 
 
-Thank you for the detailed feedback. In response: 
+    Thank you for the detailed feedback. In response: 
 
     - First, we would like to clarify that GFQI **does** get asymptotically better in general as the number of clusters increases. Referring to the first row of Figure 5, the overall trend indicates that the regret decreases as the number of clusters increases. However, we acknowledge that this trend is not perfectly monotonic in some cases. For example, in the first panel, the regret slightly increases when the number of clusters changes from 20 to 25. This fluctuation may be due to randomness introduced by the random seed or an insufficient number of simulation repetitions. To address this, we conducted additional experiments with 30 clusters and observed that the regret decreases again, confirming GFQI's consistency.
 
@@ -448,7 +478,7 @@ Thank you for the detailed feedback. In response:
         - **High Intra-Cluster Correlation (\(\psi\) Large):**  
   When the intra-cluster correlation is strong, as seen in the third and fourth panels of Figure 5, GFQI consistently achieves the lowest regret across all cases, with significant improvements over other methods. This demonstrates that GFQI is particularly beneficial in scenarios with high intra-cluster correlations, where modeling these dependencies is critical for optimal policy learning.
 
-In summary, GFQI is most appropriate for settings with moderate to strong intra-cluster correlations. In weakly correlated settings, while its advantages may be less pronounced, GFQI remains robust and performs comparably to the best alternatives. We will revise the manuscript to include these discussions and provide further clarity on the scenarios where GFQI is most effective. Thank you for bringing this to our attention.
+    In summary, GFQI is most appropriate for settings with moderate to strong intra-cluster correlations. In weakly correlated settings, while its advantages may be less pronounced, GFQI remains robust and performs comparably to the best alternatives. We will revise the manuscript to include these discussions and provide further clarity on the scenarios where GFQI is most effective. Thank you for bringing this to our attention.
 
 
     <!--- We appreciate the reviewer’s insightful observation regarding the asymptotic behavior of GFQI as the number of clusters increases. Upon closer examination, we confirm that GFQI indeed exhibits improved performance with an increasing number of clusters. However, the results in Figure 5 might appear to suggest otherwise due to the limited range of clusters shown in the current plot. As the number of clusters continues to grow beyond the range displayed in Figure 5, the regret of GFQI continues to decrease, supporting its asymptotic improvement.
