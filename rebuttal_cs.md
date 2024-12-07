@@ -22,7 +22,7 @@ We will revise the manuscript to clarify these points and include a discussion o
 
 
 ### Non-conventional Contributions:
-* The integration of generalized estimating equations (GEE), a classical statistical tool for longitudinal and clustered data, into the reinforcement learning (RL) framework is unconventional. This approach bridges the gap between statistical methods for correlated data and modern RL techniques, addressing a unique set of challenges rarely explored in RL literature.
+* The integration of GEE, a classical statistical tool for longitudinal and clustered data, into the RL framework is unconventional. This approach bridges the gap between statistical methods for correlated data and modern RL techniques, addressing a unique set of challenges rarely explored in RL literature.
 
 * The paper tackles the underexplored problem of learning optimal policies in environments where data exhibits intra-cluster correlations. Such settings are common in real-world applications like healthcare and education, yet traditional RL methods typically assume independent and iid data, overlooking these dependencies.
 
@@ -70,7 +70,7 @@ We will revise the manuscript to clarify these points and include a discussion o
 
 [2] Zhu, Wensheng, Donglin Zeng, and Rui Song. "Proper inference for value function in high-dimensional Q-learning for dynamic treatment regimes." Journal of the American Statistical Association 114.527 (2019): 1404-1417. https://pmc.ncbi.nlm.nih.gov/articles/PMC6953729/pdf/nihms-987499.pdf
 
-[3] Shi, Chengchun, et al. "Statistical inference of the value function for reinforcement learning in infinite-horizon settings." Journal of the Royal Statistical Society Series B: Statistical Methodology 84.3 (2022): 765-793. https://arxiv.org/pdf/2001.04515
+[3] Shi, Chengchun, et al. "Statistical inference of the value function for RL in infinite-horizon settings." Journal of the Royal Statistical Society Series B: Statistical Methodology 84.3 (2022): 765-793. https://arxiv.org/pdf/2001.04515
 
 [4] Ertefaie, Ashkan. "Constructing dynamic treatment regimes in infinite-horizon settings." arXiv preprint arXiv:1406.0764 (2014). https://arxiv.org/pdf/1406.0764
 
@@ -84,22 +84,20 @@ We will revise the manuscript to clarify these points and include a discussion o
 * Regarding Theorem 2, first it seems that the regret is not properly defined, but only appears in the proof of Theorem 2 in the appendix. The value functions have not been defined either. In addition, the type of regret being discussed is unclear. It seems the focus is on simple regret, not cumulative regret, but this should be explicitly stated. Whichever is being addressed, it is important to connect the theoretical results to existing literature. For example, if the variance of $\beta$ is plugged in, what is the regret? How does the regret scale with key factors such as the dimension of the state space, episode length, and number of episodes?
 
 
-    - Thank you for your insightful feedback on Theorem 2 and the clarity of regret and value function definitions.
 
-    - First, we would like to clarify that the regret discussed in our paper is not the cumulative regret commonly used in online settings, which measures the cumulative sub-optimality from the initial time step to the end of an episode. Instead, our focus is on the offline setting, where regret is defined as the sub-optimality gap in the expected $\gamma$-discounted cumulative reward under the learned policy compared to the optimal policy. This type of regret corresponds to the sub-optimality gap in policy performance, which is closely related to simple regret in reinforcement learning literature.
+    - First, we would like to clarify that the regret discussed in our paper is not the cumulative regret commonly used in online settings, which measures the cumulative sub-optimality from the initial time step to the end of an episode. Instead, our focus is on the offline setting, where regret is defined as the sub-optimality gap in the expected $\gamma$-discounted cumulative reward under the learned policy compared to the optimal policy. This type of regret corresponds to the sub-optimality gap in policy performance, which is closely related to simple regret in RL literature.
 
     - We initially omitted these definitions in the main text to make the paper less technical to improve the flow, but we are more than happy to use the extra page to formally define the regret & value function in the main text to avoid confusion，shall paper be accepted.
-
-
-    <!-- - The regret of a given policy is defined as the difference between the expected gamma-discounted cumulative reward of the optimal policy and that policy.-->
+ 
     
     - If the covariance matrix of the temporal difference error is pluged in, the regret is still $-\frac{1}{2}\mathrm{tr}(\mathrm{Var}(\widehat{\theta})H)+O(N^{-3/2})$ as in Theorem 2 we do not assume the correct covariance matrix is used. As $N$ is the total number of data tuples, the episode length and number of episodes affect the regret through $N$.
 
-    - Under the linear MDP assumption, there is no approximation error of the optimal Q function. The regret bound is irrelavant of the dimension of the state but relevant of the number of the basis function.
-       We can prove that the regret is
-  $$
-\sup_{\mathbf{A}, \mathbf{S}}|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) \widehat{\beta}-Q^{*}(\mathbf{A}, \mathbf{S})|= O\left(\frac{L \sqrt{\log (MT)}}{(1-\gamma)^2 \sqrt{\epsilon MT} }\right)
-$$
+    - Under the linear MDP assumption, there is no approximation error of the optimal Q function. The regret bound is irrelavant of the dimension of the state but relevant of the number of the basis function. We can prove that the regret is
+
+        $$
+        \sup_{\mathbf{A}, \mathbf{S}}|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) \widehat{\beta}-Q^{*}(\mathbf{A}, \mathbf{S})|= O\left(\frac{L \sqrt{\log (MT)}}{(1-\gamma)^2 \sqrt{\epsilon MT} }\right)
+        $$
+
 with probability at least $1-O\left(N^{-1}\right)$. Here $L$ is the number of basis functions.
 
 To upper bound $\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^1(\mathbf{A}, \mathbf{S})\left(\beta^{(k) *}-\beta^{(k)}\right)\right|$, we define two intermediate quantity
@@ -331,7 +329,7 @@ We hope these details can address your concerns. Thank you again for your feedba
 * The motivation for the methodology would be stronger if the authors discussed the strength of within-cluster correlation in the real data and the generality of clustered data problems.
     - Thank you for the suggestions. Our real-data analysis revealed modest within-cluster correlations: $0.05$ for step count, $0.02$ for sleep duration, and $0.05$ for mood score. 
   
-    - Clustered data structures are particularly prevalent in personalized healthcare settings. When developing reinforcement learning systems for medical treatment recommendations, data collection naturally follows hierarchical patterns. For instance, patient data is often collected across multiple hospitals. Individuals within the same hospital may share some characteristics such as race, ethnicity, social-economic status, therefore showing correlation with the same hospital. Another example is our real-data exmaple, where intern's data are collected from multiple medical insititutions. The correlation may due to several factors, including the shared curricula and training, social and peer interactions, and geographic location, resulting in correlations among clusters. The clustering issue is also common when collecting data from social network, where user behavior and interactions naturally form interconnected groups. Social media platforms, for example, exhibit clustering based on friend networks, shared interests, and geographic proximity.
+    - Clustered data structures are particularly prevalent in personalized healthcare settings. When developing RL systems for medical treatment recommendations, data collection naturally follows hierarchical patterns. For instance, patient data is often collected across multiple hospitals. Individuals within the same hospital may share some characteristics such as race, ethnicity, social-economic status, therefore showing correlation with the same hospital. Another example is our real-data exmaple, where intern's data are collected from multiple medical insititutions. The correlation may due to several factors, including the shared curricula and training, social and peer interactions, and geographic location, resulting in correlations among clusters. The clustering issue is also common when collecting data from social network, where user behavior and interactions naturally form interconnected groups. Social media platforms, for example, exhibit clustering based on friend networks, shared interests, and geographic proximity.
 
 * Additionally, I have some questions about the notations:
 
@@ -379,19 +377,24 @@ where $\mathbf{V}$ is the covariance matrix of the cluster-wise TD error and $\p
 To reiterate, Theorem 1 states that:
 
 1. The asymptotic distribution of $\sqrt{MN}(\widehat{\beta} - \beta^*)$ is normal:
-   \[
+   
+   $$
    \mathcal{N}(\mathbf{0}, W^{-1} \Sigma W^{-1\top}),
-   \]
+   $$
+
    where:
-   \[
-   W(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E}\left[ \mathbf{\Phi}(\mathbf{A}, \mathbf{S}) \left\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\} \right],
-   \]
+   
+   $$
+   W(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E}\left\[ \mathbf{\Phi}(\mathbf{A}, \mathbf{S}) \left\\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\\} \right\],
+   $$
+
    and $\Sigma(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E} \left( \mathbf{\Phi} \mathbf{V}^* \mathbf{\Phi}^\top \right)$.
 
 2. When the correlation structure of the TD errors is correctly specified, and the estimator $\widehat{\Phi}^*(\mathbf{A}, \mathbf{S})$ converges to $\Phi^*(\mathbf{A}, \mathbf{S})$ with a rate at least $O(N^{-b} \log^{-1}(N))$ for some $b > 0$, $\widehat{\beta}$ achieves the minimal asymptotic variance:
-   \[
+   
+   $$
    W(\Phi^*)^{-1}.
-   \]
+   $$
 
 **Regret Bound:**
 
@@ -417,7 +420,7 @@ This regret bound further underscores the benefits of GFQI, as it shows that the
 
 
     - Thank you for your insightful comments and for suggesting a discussion on the impact of a maximally misspecified correlation matrix on the results of Theorem 1 and Theorem 2. We appreciate this opportunity to provide further clarification.
-    - For estimator with correct correlation matrix, the asymptotic varianceis $W^{\* -1}$ where $W^{\*} =  \frac{1}{M} \mathbb{E}\left[ \mathbf{\Phi}^{\*}(\mathbf{A}, \mathbf{S}) \left\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\} \right]$. For any estimator obtained with misspecified correlation, the asymptotic variance is $W^{-1} \Sigma W^{-1\top}$ where $W$ depends on the $\mathbf{\Phi}$ which contains the misspecified correlation matrix. The difference between the two asymptotic variance would be $W^{\* -1} - W^{-1} \Sigma W^{-1\top}$. Similarly, the difference between the regret for correct and misspecified correlation structures would be proportional to $\mathrm{tr}(W^{\* -1} - W^{-1} \Sigma W^{-1\top})$ according to Theorem 2.
+    - For estimator with correct correlation matrix, the asymptotic varianceis $W^{\* -1}$ where $W^*=  \frac{1}{M} \mathbb{E}\left\[ \mathbf{\Phi}^{\*}(\mathbf{A}, \mathbf{S}) \left\\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\\} \right\]$. For any estimator obtained with misspecified correlation, the asymptotic variance is $W^{-1} \Sigma W^{-1\top}$ where $W$ depends on the $\mathbf{\Phi}$ which contains the misspecified correlation matrix. The difference between the two asymptotic variance would be $W^{\* -1} - W^{-1} \Sigma W^{-1\top}$. Similarly, the difference between the regret for correct and misspecified correlation structures would be proportional to $\mathrm{tr}(W^{\* -1} - W^{-1} \Sigma W^{-1\top})$ according to Theorem 2.
 
 <!--
 **Impact of Misspecified Correlation Matrix:**
@@ -543,15 +546,12 @@ Correlation can indeed violate the independence assumption. If there is a correl
     - Thank you for your feedback and for pointing out the need to define key terms and we will add a notation section at the beginning of the paper to introduce all the important notations.
       
 * What is the convergence criteria?
-    - Thank you for pointing out the need for clarification on the convergence criteria.
-
     - The convergence criteria in our method are as follows: the algorithm is considered to have converged when the predicted responses from two consecutive fitted models have a relative difference smaller than $10^{-5}$, or when the maximum number of iterations (100) is reached. These criteria ensure both accuracy and computational feasibility during optimization.
 
     - We will include this detail in the revised manuscript to provide clarity on this aspect of the method.
 
 * Why was a uniform behavior policy used? This seems like an easier setting and a little unrealistic. 
-    - Thank you for your feedback and for questioning the choice of a uniform behavior policy.
-    - A uniform behavior policy ensures that the data is generated from a balanced distribution of actions, which can lead to more accurate estimation of the Q-function and optimal policy. This is particularly important in offline RL settings where the behavior policy is fixed and cannot be altered.
+    - We use the uniform behavior policy because it is indeed used in the IHS. A uniform behavior policy ensures that the data is generated from a balanced distribution of actions, which can lead to more accurate estimation of the Q-function and optimal policy. This is particularly important in offline RL settings where the behavior policy is fixed and cannot be altered.
       
 
 ### Additional Comments:
