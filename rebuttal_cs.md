@@ -178,6 +178,14 @@ with probability at least $1-O\left(N^{-1}\right)$. This establishes the rate of
 ### Significance Justification:
 * The empirical results are reasonable, showing that the proposed algorithm outperforms baselines as within-cluster correlation increases. However, a key concern is how the algorithm performs in real-world settings where the common effect within a cluster may not be as strong. For example, it would be helpful for the authors to report the actual value of the within-cluster correlation in their experiments to illustrate what constitutes a typical setting in real-world data.
 
+Thank you for the suggestions. Our real-data analysis revealed modest within-cluster correlations: $0.05$ for step count, $0.02$ for sleep duration, and $0.05$ for mood score.
+
+To clarify the relationship between our simulation and real-world settings: The baseline scenario where $\psi = 1$ corresponds to these observed real-world correlations. When we increase $\psi$, the correlation scales proportionally - for instance, $\psi = 3$ yields correlations around 0.15. From Figure 1, we can observe that GFQI performs better than FQI and other methods in almost all settings when correlation is around $0.15$, indicating the performance improvement of GFQI algorithm by taking account of the correlation structure. 
+	
+Moreover, we identified another interventional mobile health study that exhibits higher within-cluster correlations of approximately $0.3$ [1]. We will incorporate analysis of this additional dataset in the final manuscript to strengthen our empirical validation.
+
+[1] Wang, Jitao, et al. "Effectiveness of gamified team competition as mHealth intervention for medical interns: a cluster micro-randomized trial." _NPJ Digital Medicine_ 6.1 (2023): 4. 
+
 ### Novelty Justification:
 * This work applies GEE to the estimation of Q-functions. This appears to be a relatively straightforward combination of the widely used methods GEE and FQI. While there may be additional technical challenges involved, these challenges are not clearly discussed in the paper.
  
@@ -475,7 +483,7 @@ The robustness properties of Theorem 1 and Theorem 2 are established for a gener
 
     Thank you for the detailed feedback. In response: 
 
-    - First, we would like to clarify that GFQI **does** get asymptotically better in general as the number of clusters increases. Referring to the first row of Figure 5, the overall trend indicates that the regret decreases as the number of clusters increases. However, we acknowledge that this trend is not perfectly monotonic in some cases. For example, in the first panel, the regret slightly increases when the number of clusters changes from 20 to 25. This fluctuation may be due to randomness introduced by the random seed or an insufficient number of simulation repetitions. To address this, we conducted additional experiments with 30 clusters and observed that the regret decreases again, confirming GFQI's consistency.
+    - First, we would like to clarify that GFQI **does** get asymptotically better in general as the number of clusters increases. Referring to the first row of Figure 5, the overall trend indicates that the regret decreases as the number of clusters increases. However, we acknowledge that this trend is not perfectly monotonic in some cases. For example, in the first panel, the regret slightly increases when the number of clusters changes from 20 to 25. This fluctuation may be due to randomness introduced by the random seed or an insufficient number of simulation repetitions. To address this, we conducted additional experiments with 30 clusters and observed that the regret decreases again, confirming GFQI's consistency. See Figure 1.
 
     - The performance of GFQI is dependent upon the strength of intra-cluster correlations, as shown in the panels with varying \(\psi\) in Figure 5 and detailed below. In most cases, GFQI demonstrates superior performance, and even in scenarios where it is not the best, its performance remains close to the optimal. 
 
