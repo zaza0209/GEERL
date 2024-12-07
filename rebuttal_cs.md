@@ -326,15 +326,19 @@ We hope these details can address your concerns. Thank you again for your feedba
 
 
 * A description of the real data used would provide helpful context, including the number of users, the number of clusters, and the duration of the study.
+    - A total of $1565$ interns from $258$ institutions were included in the Intern Health Study. The study lasted for $26$ weeks. For each week, each intern had equal probability to be assigned to mood, activity, sleep or no notification week. Given a week when an intern was randomized to receiving notifications, every day they were further randomized (with $50\%$ probability) to receive a notification on that day.
 
 * The motivation for the methodology would be stronger if the authors discussed the strength of within-cluster correlation in the real data and the generality of clustered data problems.
+    - Thank you for the suggestions. Our real-data analysis revealed modest within-cluster correlations: $0.05$ for step count, $0.02$ for sleep duration, and $0.05$ for mood score. 
+  
+    - Clustered data structures are particularly prevalent in personalized healthcare settings. When developing reinforcement learning systems for medical treatment recommendations, data collection naturally follows hierarchical patterns. For instance, patient data is often collected across multiple hospitals. Individuals within the same hospital may share some characteristics such as race, ethnicity, social-economic status, therefore showing correlation with the same hospital. Another example is our real-data exmaple, where intern's data are collected from multiple medical insititutions. The correlation may due to several factors, including the shared curricula and training, social and peer interactions, and geographic location, resulting in correlations among clusters. The clustering issue is also common when collecting data from social network, where user behavior and interactions naturally form interconnected groups. Social media platforms, for example, exhibit clustering based on friend networks, shared interests, and geographic proximity.
 
 * Additionally, I have some questions about the notations:
 
     In model II on page 4, $m$ seems to represent the total number of subjects in a cluster, being an observed value of $M$ and taking values from 1 to infinity. However, in the next paragraph, $m$ is used as the index of each trajectory in a cluster, taking values from 1 to $M$. If this understanding is correct, using distinct notations for these cases would reduce ambiguity.
     In the simulation study, the number of decision times per week is unclear. It seems that there is an action for each day $t$, so there are 7 actions in a week. However, the horizon is defined as the number of weeks $T$.
 
-    - Thank you for pointing out the ambiguity regarding the notation in Model II on page 4 and the number of decision times in the simulation study. 
+    - Thank you for pointing out the ambiguity regarding the notation in Model II on page 4 and the number of decision times in the simulation study. We have changed the unit of horizon to days in both figures and text.
 
     - You are correct in your understanding that in Model II, $ m $ is used in two different contexts: initially, it represents the total number of subjects in a cluster, which is an observed value of $M $, and then it is used as the index of each trajectory within a cluster, taking values from 1 to $M$. To avoid this confusion, we will revise the manuscript to use distinct notations for these two cases. Specifically, we will use $M$ to denote the total number of subjects in a cluster, and $m$ will continue to represent the index of each trajectory within the cluster.
 
@@ -497,7 +501,8 @@ The robustness properties of Theorem 1 and Theorem 2 are established for a gener
 
 ### Clarity
 * Figure 1 is not sufficiently motivating. What is the key takeaway here? There are no axes labels, and while there are some clustered color groups (e.g., more blue in the lower left of the grid), it is not clear that there is strong intra-cluster correlation. Please explain this more.
-
+    
+    -  We use the following procedure to test the existence of intra-cluster correlation. We begin by conducting a linear regression of daily outcome (step count, sleep duration or mood score) against multiple predictors: the previous day's step count, sleep duration, mood score, whether receiving a message, and week index, using linear basis functions. Next, we extracted the residuals from this regression and analyzed them using a linear mixed effects model implemented using `lme4` package in R. This model incorporated both a fixed intercept and random intercepts for each institution. Finally, we use `ranova` function in `lmerTest` R package to test the significance of the random effect. The resulting p-value for all three variables (step count, sleep duration or mood score) are less than $2.2 \times 10^{-16}$, indicating the existence of intra-cluster correlation.
   
 * In Figure 2, why does the delta between FQI/GFQI get smaller as the number of clusters increase? Is it because with a larger number of clusters, there is more shared structure between clusters that an algorithm can capitalize on? Is the distance between the clusters a factor here? Also is is the performance of GFQI similar to FQI if there is 1 cluster?
 
