@@ -85,94 +85,10 @@ We will revise the manuscript to clarify these points and include a discussion o
 
 
 
-    - First, we would like to clarify that the regret discussed in our paper is not the cumulative regret commonly used in online settings, which measures the cumulative sub-optimality from the initial time step to the end of an episode. Instead, our focus is on the offline setting, where regret is defined as the sub-optimality gap in the expected $\gamma$-discounted cumulative reward under the learned policy compared to the optimal policy. This type of regret corresponds to the sub-optimality gap in policy performance, which is closely related to simple regret in RL literature.
-
-    - We initially omitted these definitions in the main text to make the paper less technical to improve the flow, but we are more than happy to use the extra page to formally define the regret & value function in the main text to avoid confusion，shall paper be accepted.
+    - First, we would like to clarify that the regret discussed in our paper is not the cumulative regret commonly used in online settings. Instead, our focus is on the offline setting and the regret is defined as the sub-optimality gap, i.e., the expected $\gamma$-discounted cumulative reward under the learned policy compared to the optimal policy. This type of regret is commonly employed in offline RL literature. We initially omitted these definitions in the main text to make the paper less technical to improve the flow, but we are more than happy to use the extra page to formally define the regret & value function in the main text to avoid confusion，shall paper be accepted.
  
     
     - If the covariance matrix of the temporal difference error is pluged in, the regret is still $-\frac{1}{2}\mathrm{tr}(\mathrm{Var}(\widehat{\theta})H)+O(N^{-3/2})$ as in Theorem 2 we do not assume the correct covariance matrix is used. As $N$ is the total number of data tuples, the episode length and number of episodes affect the regret through $N$.
-
-    - Under the linear MDP assumption, there is no approximation error of the optimal Q function. The regret bound is irrelavant of the dimension of the state but relevant of the number of the basis function. We can prove that the regret is
-
-        $$
-        \sup_{\mathbf{A}, \mathbf{S}}|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) \widehat{\beta}-Q^{*}(\mathbf{A}, \mathbf{S})|= O\left(\frac{L \sqrt{\log (MT)}}{(1-\gamma)^2 \sqrt{\epsilon MT} }\right)
-        $$
-
-with probability at least $1-O\left(N^{-1}\right)$. Here $L$ is the number of basis functions.
-
-To upper bound $\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^1(\mathbf{A}, \mathbf{S})\left(\beta^{(k) *}-\beta^{(k)}\right)\right|$, we define two intermediate quantity
-
-$$
-I_1 = \frac{\Sigma^{-1}}{N} \sum_{i, t} \mathbf{\Phi}_L  \left\( A_t^{(i)}, S_t^{(i)} \right\) \\{ R_t^{(i)} + \gamma  \max\_{a^{\prime}} \mathbf{\Phi}_L^{\top}  ( a^{\prime}, S\_{t+1}^{(i)} ) \beta^{(k-1)} - \mathbf{\Phi}_L ( A_t^{(i)}, S_t^{(i)}  ) \beta^{(k) \*}\\}
-$$
-
-$$
-I_2 = \mathbb{E}(I_1)
-$$
-
-It follows from (5) that
-
-$$
-\left\|\beta^{(k) *}-\beta^{(k)}-I_1\right\|_2= O\left(\frac{L  \sqrt{N^{-1} \log (N)}}{(1-\gamma)^2}\right),
-$$
-
-with probability at least $1-O\left(N^{-1} \right)$.
-
-
-Meanwhile, using similar arguments to bounding the $\ell_2$ norm in the RHS of (7) in the supplementary, we obtain with probability at least $1-O\left(N^{-1} \right)$ that
-
-$$
-\left\|I_1-I_2\right\|_2=O\left(\frac{\sqrt{L  N^{-1} \log (N)}}{1-\gamma}\right)
-$$
-
-
-Combining these bound we obtain that
-
-
-$$
-\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S})\left(\beta^{(k) \*}-\beta^{(k)}\right)\right|
-$$
-
-$$
-\leq \sup_{\mathbf{A}, \mathbf{S}}\left\|\mathbf{\Phi}_L(\mathbf{A}, \mathbf{S})\right\|_2  \left\|\beta^{(k) \*}-\beta^{(k)} - I_1 \right\| 
-$$
-
-$$
-\+ \sup_{\mathbf{A}, \mathbf{S}}\|\mathbf{\Phi}_L(\mathbf{A}, \mathbf{S})\|_2\|I_1-I_1\|_2 +\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) I_2\right|
-$$
-
-$$
-=O\left(\frac{L \sqrt{(\epsilon N)^{-1} \log (N)}}{1-\gamma}\right)+\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) I_2\right|,
-$$
-
-
-
-under the conditions on $L$ that $L$ is proportional to $N^{c_4}$ for some $0 < c_4 < 1/4$.
-
-Finally, we can show that $\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) I_2\right|=O\left((1-\gamma)^{-1} \right)$ by induction similar to the proof of (4) in the supplementary. 
-
-<!--
-by employing the bias control techniques developed by Huang (2003) (see Lemma 5.1 and Theorem A. 1 therein), based on which we can show that the basis function $\phi_L$ satisfies
-
-$$
-\left[\sup _{\mathbf{A}, \mathbf{S}}\left|h\left(A_t^{(i)}, S_t^{(i)}\right)\right|\right]^{-1} \sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S}) \frac{\Sigma^{-1}}{N} \sum_{i,t} \mathbb{E}\mathbf{\Phi}_L\left(A_t^{(i)}, S_t^{(i)}\right) h\left(A_t^{(i)}, S_t^{(i)}\right)\right|=O(1),
-$$
-
-where the big- $O$ term on the RHS is uniform in any nonzero function $h$.-->
-
-Consequently, we have
-
-$$
-\sup _{\mathbf{A}, \mathbf{S}}\left|\mathbf{\Phi}_L^{\top}(\mathbf{A}, \mathbf{S})\left(\beta^{(k) *}-\beta^{(k)}\right)\right|=O\left(\frac{L \sqrt{ N ^{-1} \log (N)}}{1-\gamma}\right)+O\left(\frac{1}{1-\gamma}\right),
-$$
-
-and hence $\sup _{\mathbf{A}, \mathbf{S}}\left|Q^{(k) *}(\mathbf{A}, \mathbf{S})-Q^{(k)}(\mathbf{A}, \mathbf{S})\right|$ is of the same order of magnitude. It follows from the error analysis in the proof of Theorem 1 in the supplementary that
-
-$$
-\sup _{\mathbf{A}, \mathbf{S}}\left|Q^{*}(\mathbf{A}, \mathbf{S})-Q^{(k)}(\mathbf{A}, \mathbf{S})\right|=O\left(\frac{L \sqrt{N^{-1} \log (N)}}{(1-\gamma)^2}\right)+O\left(\frac{1}{(1-\gamma)^2}\right),
-$$
-
-with probability at least $1-O\left(N^{-1}\right)$. This establishes the rate of regret by noting that the number of FQI iterations much larger than $\log (N)$.
 
 
 ### Significance Justification:
