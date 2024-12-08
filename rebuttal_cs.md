@@ -110,7 +110,7 @@ Moreover, we identified another interventional mobile health study that exhibits
 
 - Second, we would like to clarify the technical challenges. The major challenge lies in identifying an optimal basis function that minimizes the mean squared error or variance of the Q-function estimator. This task is particularly challenging because:
 
-  * In RL, most works derive upper error bounds on the Q-function estimator, with less focus on its (asymptotic) variance -- not to mention how to identify the basis function that minimizes the variance. There a few expections that study the asymptotic variance, (mention the GTD paper, https://arxiv.org/abs/2001.04515), however, they only considered policy evaluation where the Q-function is estimated from a single set of estimating equation. In contrast, we consider policy learning, which involves iteratively solving a sequence of GEEs. Hence, the error accumulated by the iterative process should be carefully taken into consideration.
+  * In RL, most works derive upper error bounds on the Q-function estimator, with less focus on its (asymptotic) variance -- not to mention how to identify the basis function that minimizes the variance. There a few expections that study the asymptotic variance, see e.g., the GTD [paper](https://arxiv.org/abs/2001.04515). However, they only considered policy evaluation where the Q-function is estimated from a single set of estimating equation. In contrast, we consider policy learning, which involves iteratively solving a sequence of GEEs. Hence, the error accumulated by the iterative process should be carefully taken into consideration.
 
   * Similarly, in the GEE literature, the problem is simpler as the GEE is typically solved once. It does not account for the error accumulation over multiple iterations.
 
@@ -131,22 +131,22 @@ Thank you for pointing this out. We agree that our paper devotes a lot of space 
 
 
 #### Key Differences Between FQI, AGTD and GFQI:
-We will highlight the differences between GFQI and two closely related methods: FQI and GTD. While both of these methods are already discussed in Section 4, we recognize the importance of explicitly emphasizing the unique contributions of GFQI.
+We will highlight the differences between GFQI and two closely related methods: FQI and GTD. Notice that these methods are detailed in Section 4 as well.
 
-1. **Handling of Intra-Cluster Correlations:**
-    - The primary difference lies in how the two methods handle data dependencies. FQI assumes that all observations are i.i.d., which ignores intra-cluster correlations commonly present in clustered data. In contrast, GFQI incorporates Generalized Estimating Equations (GEE) to explicitly model and account for these correlations via a working correlation matrix. This enables GFQI to achieve more efficient Q-function estimation and reduced regret in settings with clustered data.
+1. **Methodological differences:**
 
-    - AGTD is designed for policy evaluation, aiming to estimate the value function for a fixed policy. Our work focuses on the more complex problem of policy learning, where the goal is to learn an optimal policy that maximizes cumulative reward. Even if AGTD were extended to policy learning (as discussed in Section 4, Algorithm 2), it still fundamentally differs from GFQI because it does not handle intra-cluster correlations. Unlike GFQI, AGTD treats all observations as independent and does not leverage the dependency structure within clusters to improve efficiency.
+    - FQI assumes that all observations are i.i.d., which ignores intra-cluster correlations commonly present in clustered data. In contrast, GFQI incorporates Generalized Estimating Equations (GEE) to explicitly model and account for these correlations via a working correlation matrix. This enables GFQI to achieve more efficient Q-function estimation and reduced regret in settings with clustered data.
+
+    - GTD is designed for policy evaluation, aiming to estimate the value function for a fixed policy. Our work focuses on the more complex problem of policy learning, where the goal is to learn an optimal policy that maximizes cumulative reward. Even if AGTD were extended to policy learning (as discussed in Section 4, Algorithm 2), it still fundamentally differs from GFQI because it does not handle intra-cluster correlations. Unlike GFQI, AGTD treats all observations as independent and does not leverage the dependency structure within clusters to improve efficiency.
     
-   <!-- - FQI assumes that all data points are i.i.d., ignoring any dependencies between data points within the same cluster. This can lead to suboptimal policy estimates in settings where intra-cluster correlations are present.
    - GFQI, on the other hand, incorporates Generalized Estimating Equations (GEE) to explicitly model and account for intra-cluster correlations via a working correlation matrix. This adjustment improves sample efficiency and ensures more accurate Q-function estimation in clustered data scenarios. In addition, GFQI allows for flexible working correlation structures (e.g., exchangeable or other forms) to better capture the dependencies within clusters. This leads to more efficient parameter estimation when the correlation structure is appropriately specified.-->
 
  
 
-2. **Theoretical Improvements:**
+3. **Theoretical Improvements:**
     GFQI achieves minimal asymptotic variance and regret in its Q-function estimation when the working correlation matrix is correctly specified, as shown in our theoretical results (Theorem 1). FQI and AGTD does not provide this advantage, as it does not model intra-cluster correlations.
 
-3. **Empirical performance:**
+4. **Empirical performance:**
     Empirically, GFQI significantly outperforms FQI in settings with strong intra-cluster correlations or small sample size, as demonstrated in our numerical studies. This highlights its practical advantage in scenarios where traditional FQI struggles due to its independence assumption.
 
 We will incorporate these points into the revised manuscript to emphasize the novel contributions of GFQI compared to FQI. 
