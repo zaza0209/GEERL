@@ -430,7 +430,7 @@ The robustness properties of Theorem 1 and Theorem 2 are established for a gener
   
 * In Figure 2, why does the delta between FQI/GFQI get smaller as the number of clusters increase? Is it because with a larger number of clusters, there is more shared structure between clusters that an algorithm can capitalize on? Is the distance between the clusters a factor here? Also is is the performance of GFQI similar to FQI if there is 1 cluster?
 
-    - The decrease of delta with the number of clusters is expected. To elaborate, consider the case where the number of clusters increases to infinity. In that case, the total sample size grows to infinity, causing both FQI and GFQI to converge towards the same consistent estimator. Consequently, this leads to the gap between them decaying to zero. 
+    - The decrease of delta with the number of clusters is expected. To elaborate, consider the case where the number of clusters increases to infinity. In that case, the total sample size grows to infinity, causing both FQI and GFQI to converge towards the same optimal policy. Consequently, this leads to the gap between them decaying to zero. 
 
     - This observation also aligns with the theoretical results in Theorem 1, where the convergence rate for all (G)FQI estimators, regardless of the working correlation matrix, is of the order $O((MN)^{-1/2})$, where $N$ is the number of state-action-reward-next-state tuples in the dataset, which depends on the number of clusters.
  
@@ -446,21 +446,7 @@ The robustness properties of Theorem 1 and Theorem 2 are established for a gener
 
 * It would be nice to clarify that Figures 3 and 4 define causal relationships (which are referred to as paths) between components of the MDP. It is still not clear to me whether a correlation (rather than a causation) also violates the independence assumption.
 
-Thank you for your feedback and for pointing out the need for clarification regarding the causal relationships and correlations in Figures 3 and 4. We appreciate the opportunity to address this point.
-
-**Clarification on Causal Relationships and Correlations**
-
-In Figures 3 and 4, we indeed define causal relationships (referred to as paths) between components of the Markov Decision Process (MDP). These paths illustrate the dependencies and transitions within the MDP framework.
-
-**Independence Assumption**
-
-The independence assumption in the standard MDP requires that the state-action-reward triplets be independent across different trajectories. This means that there should be no directed paths connecting these triplets across different trajectories. [1]
-
-**Impact of Correlation**
-
-Correlation can indeed violate the independence assumption. If there is a correlation between the state-action-reward triplets across different trajectories, it implies a dependency that is not accounted for in the standard MDP framework. This correlation can arise due to various factors, such as shared environmental conditions, social interactions, or other common influences within clusters.
-
-[1]. https://www.stat.cmu.edu/~larry/=sml/DAGs.pdf
+Following your suggestion, we will mention that Figures 3 and 4 define causal relationships between components of the MDP in their titles. Independence is determined through associational relationships. In particular, if two random variables are independent, they must be uncorrelated. Therefore, if there is any correlation between them, regardless of the causal direction, the independence assumption is violated.
 
 
 * You don’t define many terms including regret, MLE, and DGP. Please define these terms early in the paper for reader clarity.
