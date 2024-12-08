@@ -505,6 +505,8 @@ The robustness properties of Theorem 1 and Theorem 2 are established for a gener
     - We appreciate the reviewer’s acknowledgment of the novelty of using GEE to improve the sample efficiency of FQI. Regarding the performance of GFQI under misspecified correlation structures, we acknowledge that this is a critical aspect to consider.
 
     - To address this concern, we have added a figure...
+  
+    - To address this concern, we perform an additional semi-synthetic analysis where the working correlation matrix is not correctly specified. Specifically, for each pair of individuals within the same cluster, we modified the global correlation coefficient $\rho$ by multiplying it by a random scale factor drawn from a uniform distribution over $[0.5, 2]$. Therefore, the correlations between individuals are not the same, leading to the correlation matrix not being exchangeable. When implementing GFQI, we use exchangeable as the working correlation matrix to show the robustness of our algorithm. The results are presented in Figure 2.
 
     - Our preliminary results show that GFQI retains its robustness under misspecification, aligning with the theoretical guarantee of asymptotic normality. However, as expected, its efficiency (e.g., variance reduction and regret minimization) is reduced compared to the case of a well-specified structure. We believe this additional analysis will provide greater clarity on the practical applicability and limitations of GFQI when the correlation structure is misspecified.
 
