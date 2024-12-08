@@ -379,13 +379,13 @@ The robustness properties of Theorem 1 and Theorem 2 are established for a gener
 -->
 
 ### Significance: somewhat significant (e.g., significant performance in some but not all experiments, missing a baseline)
-- We appreciate your comment and would like to clarify that we have indeed included
+- We appreciate your comment and would like to clarify that we indeed included the following baselines in the experiments to provide a comprehensive evaluation:
     - the ordinary Fitted Q Iteration.
     - Adapted GTD (AGTD), 
     - Conservative Q-Learning (CQL), 
     - Double Deep Q-Network (DDQN), and 
     - the behavior policy used in the Intern Health Study (IHS)
-    to provide a comprehensive evaluation.
+    
 
 
 ### Significance justification
