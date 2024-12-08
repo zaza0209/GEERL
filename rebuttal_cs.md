@@ -136,6 +136,8 @@ Moreover, we identified another interventional mobile health study that exhibits
 
 [0] Wang, Jitao, et al. "Effectiveness of gamified team competition as mHealth intervention for medical interns: a cluster micro-randomized trial." _NPJ Digital Medicine_ 6.1 (2023): 4. 
 
+---
+
 ### Novelty Justification:
 __Q:This work applies GEE to the estimation of Q-functions. This appears to be a relatively straightforward combination of the widely used methods GEE and FQI. While there may be additional technical challenges involved, these challenges are not clearly discussed in the paper.__
 
@@ -210,8 +212,6 @@ $\log(N)\ll K = O(N^{c^\prime})$ for any $c^\prime > 0$.
     Let $\pi(\beta)$ be the greedy policy derived by $\phi(a,s)^\top\beta$. Then the expected cumulative reward for $\pi(\beta)$ has third-order derivative w.r.t $\beta$. 
 
 
----
-
 #### __Theorem 1: Asymptotic Distribution of $\widehat{\beta}$__
 
 * **Formal Statement:**
@@ -229,7 +229,6 @@ $\log(N)\ll K = O(N^{c^\prime})$ for any $c^\prime > 0$.
 2. When the correlation structure of the TD errors is correctly specified, and the estimator $\widehat{\Phi}^*(\mathbf{A}, \mathbf{S})$ converges to $\Phi^*(\mathbf{A}, \mathbf{S})$ with a rate at least $O(N^{-b} \log^{-1}(N))$ for some $b > 0$, $\widehat{\beta}$ achieves the minimal asymptotic variance:
     $$W(\Phi^*)^{-1}.$$
 
----
 
 #### __Theorem 2: Regret of the Estimated Optimal Policy__
 
@@ -245,8 +244,6 @@ Suppose Assumptions 1 and 3 are satisfied. The regret of the estimated optimal p
     $$
     \pi(\beta) = \arg \max_a \phi(a, s)^\top \beta.
     $$
-
----
 
 We hope these details can address your concerns. Thank you again for your feedback, which has been invaluable in helping us improve the clarity and depth of our presentation.
 
@@ -268,8 +265,6 @@ Clustered data structures are particularly prevalent in personalized healthcare 
 
 __Q:Additionally, I have some questions about the notations:__
 __In model II on page 4, $m$ seems to represent the total number of subjects in a cluster, being an observed value of $M$ and taking values from 1 to infinity. However, in the next paragraph, $m$ is used as the index of each trajectory in a cluster, taking values from 1 to $M$. If this understanding is correct, using distinct notations for these cases would reduce ambiguity. In the simulation study, the number of decision times per week is unclear. It seems that there is an action for each day $t$, so there are 7 actions in a week. However, the horizon is defined as the number of weeks $T$.__
-
-Thank you for pointing out the ambiguity regarding the notation in Model II on page 4 and the number of decision times in the simulation study. We will change the unit of horizon to days in both figures and text in the final version of the paper.
 
 You are correct in your understanding that in Model II, $m$ is used in two different contexts: initially, it represents the total number of subjects in a cluster, which is an observed value of $M$, and then it is used as the index of each trajectory within a cluster, taking values from 1 to $M$. To avoid this confusion, we will revise the manuscript to use distinct notations for these two cases. Specifically, we will use $M$ to denote the total number of subjects in a cluster, and $m$ will continue to represent the index of each trajectory within the cluster.
 
