@@ -169,10 +169,9 @@ Due to the page limit, we decided to move tho assumptions and formal theoretical
    This assumption ensures that the Q-function and the environment dynamics can be represented by linear structures, which is central to deriving the properties of the GFQI estimator.
 
 2. **Stability**  
-    The matrix
-    $$M^{-1}
-\lambda_{\min}\mathbb{E} \left[\Phi^\top(\mathbf{A}, \mathbf{S})\phi(\mathbf{A}, \mathbf{S})-\gamma \Phi^\top(\mathbf{A}, \mathbf{S})\phi(\pi^{*}(\mathbf{S}^\prime),\mathbf{S}^\prime)\right]
-    $$ is uniformly bounded away from zero.
+    The matrix 
+    $$M^{-1} \lambda_{\min}\mathbb{E} \left[\Phi^\top(\mathbf{A}, \mathbf{S})\phi(\mathbf{A}, \mathbf{S})-\gamma \Phi^\top(\mathbf{A}, \mathbf{S})\phi(\pi^{*}(\mathbf{S}^\prime),\mathbf{S}^\prime)\right]$$ 
+    is uniformly bounded away from zero.
 
 3. **Uniqueness**
     $\pi^{*}$ is unique.
@@ -196,7 +195,7 @@ Then the expected cumulative reward for $\pi(\beta)$ has third-order derivative 
 **Formal Statement:**
 Suppose Assumptions 1 and 2 are satisfied. The estimator $\widehat{\beta}$, computed by Algorithm 1 (Optimal FQI), has the following properties:
 
-1. The asymptotic distribution of $\sqrt{MN}(\widehat{\beta} - \beta^{\*})$ is normal:
+1. The asymptotic distribution of $\sqrt{MN}(\widehat{\beta} - \beta^{*})$ is normal:
    
    $$
    \mathcal{N}(\mathbf{0}, W^{-1} \Sigma W^{-1\top}),
@@ -204,16 +203,12 @@ Suppose Assumptions 1 and 2 are satisfied. The estimator $\widehat{\beta}$, comp
 
    where:
    
-     $$
-   W(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E}\left\[ \mathbf{\Phi}(\mathbf{A}, \mathbf{S}) \left\\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\\} \right\],
-   $$
+   $$ W(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E}\left[ \mathbf{\Phi}(\mathbf{A}, \mathbf{S}) \left\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\} \right],$$
 
    and $\Sigma(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E} \left( \mathbf{\Phi} \mathbf{V}^* \mathbf{\Phi}^\top \right)$.
 
 2. When the correlation structure of the TD errors is correctly specified, and the estimator $\widehat{\Phi}^*(\mathbf{A}, \mathbf{S})$ converges to $\Phi^*(\mathbf{A}, \mathbf{S})$ with a rate at least $O(N^{-b} \log^{-1}(N))$ for some $b > 0$, $\widehat{\beta}$ achieves the minimal asymptotic variance:
-   \[
-   W(\Phi^*)^{-1}.
-   \]
+   $$W(\Phi^*)^{-1}.$$
 
 ---
 
@@ -280,11 +275,11 @@ We next elaborate the first and the last points in more detail below.
 - **Realizability**: the optimal Q-function belongs to the nonlinear function class $F$.
 - **Completeness**: For any $f\in F$, $\mathcal{T} f\in F$ as well where $\mathcal{T}$ denotes the Bellman operator.
 
-Notice that the realizability and completeness assumptions are widely imposed in the RL literature. They can be further relaxed to allow approximation error to exist. Under the two assumptions, we use $F$ to parameterize the Q-function estimator at each FQI iteration. Equation (5) in our paper (with the linear function class replaced with $F$) remains valid to estimate the parameter $\beta^*$ involved in the optimal Q-function. Meanwhile, similar to Theorem 1, it can be shown that the optimal basis function $\mathbf{\Phi}^{\*}$ equals  
+Notice that the realizability and completeness assumptions are widely imposed in the RL literature. They can be further relaxed to allow approximation error to exist. Under the two assumptions, we use $F$ to parameterize the Q-function estimator at each FQI iteration. Equation (5) in our paper (with the linear function class replaced with $F$) remains valid to estimate the parameter $\beta^*$ involved in the optimal Q-function. Meanwhile, similar to Theorem 1, it can be shown that the optimal basis function $\mathbf{\Phi}^{*}$ equals  
 
-$$\mathbf{\Phi}^{\*}(\mathbf{A}, \mathbf{S}) = \Big[\phi^{\*}(A^{(1)}, S^{(1)}), \cdots, \phi^{\*}(A^{(M)}, S^{(M)})\Big]\mathbf{V}^{-1}$$,
+$$\mathbf{\Phi}^{*}(\mathbf{A}, \mathbf{S}) = \Big[\phi^{*}(A^{(1)}, S^{(1)}), \cdots, \phi^{*}(A^{(M)}, S^{(M)})\Big]\mathbf{V}^{-1},$$
 
-where $\mathbf{V}$ is the covariance matrix of the cluster-wise TD error and $\phi^{\*}(a,s)=\frac{\partial f^{\*}(a,s;\beta)}{\partial \beta^{\*}}-\gamma \mathbb{E} \Big[\frac{\partial f^{\*}(\pi^{\*}(S'),S';\beta)}{\partial \beta^{\*}}|A=a,S=s\Big]$.  
+where $\mathbf{V}$ is the covariance matrix of the cluster-wise TD error and $\phi^{*}(a,s)=\frac{\partial f^{*}(a,s;\beta)}{\partial \beta^{*}}-\gamma \mathbb{E} \Big[\frac{\partial f^{*}(\pi^{*}(S'),S';\beta)}{\partial \beta^{*}}|A=a,S=s\Big]$.  
 
 **Clarification on the Benefits of GFQI:** The efficiency claimed in Theorem 1 refers to the asymptotic variance of the estimator $\widehat{\beta}$. Specifically, when the correlation matrix is correctly specified, GFQI achieves the minimal asymptotic variance among the class of estimators computed by solving (5). This is a significant improvement over the ordinary FQI, which uses an independence correlation structure and thus does not account for the intra-cluster correlations.
 
@@ -299,7 +294,7 @@ To reiterate, Theorem 1 states that:
    where:
    
    $$
-   W(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E}\left\[ \mathbf{\Phi}(\mathbf{A}, \mathbf{S}) \left\\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\\} \right\],
+   W(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E}\left[ \mathbf{\Phi}(\mathbf{A}, \mathbf{S}) \left\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\} \right],
    $$
 
    and $\Sigma(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E} \left( \mathbf{\Phi} \mathbf{V}^* \mathbf{\Phi}^\top \right)$.
@@ -334,7 +329,7 @@ This regret bound further underscores the benefits of GFQI, as it shows that the
 
 
     - Thank you for your insightful comments and for suggesting a discussion on the impact of a maximally misspecified correlation matrix on the results of Theorem 1 and Theorem 2. We appreciate this opportunity to provide further clarification.
-    - For estimator with correct correlation matrix, the asymptotic varianceis $W^{\* -1}$ where $W^*=  \frac{1}{M} \mathbb{E}\left\[ \mathbf{\Phi}^{\*}(\mathbf{A}, \mathbf{S}) \left\\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\\} \right\]$. For any estimator obtained with misspecified correlation, the asymptotic variance is $W^{-1} \Sigma W^{-1\top}$ where $W$ depends on the $\mathbf{\Phi}$ which contains the misspecified correlation matrix. The difference between the two asymptotic variance would be $W^{\* -1} - W^{-1} \Sigma W^{-1\top}$. Similarly, the difference between the regret for correct and misspecified correlation structures would be proportional to $\mathrm{tr}(W^{\* -1} - W^{-1} \Sigma W^{-1\top})$ according to Theorem 2.
+    - For estimator with correct correlation matrix, the asymptotic varianceis $W^{* -1}$ where $W^*=  \frac{1}{M} \mathbb{E}\left[ \mathbf{\Phi}^{*}(\mathbf{A}, \mathbf{S}) \left\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\} \right]$. For any estimator obtained with misspecified correlation, the asymptotic variance is $W^{-1} \Sigma W^{-1\top}$ where $W$ depends on the $\mathbf{\Phi}$ which contains the misspecified correlation matrix. The difference between the two asymptotic variance would be $W^{* -1} - W^{-1} \Sigma W^{-1\top}$. Similarly, the difference between the regret for correct and misspecified correlation structures would be proportional to $\mathrm{tr}(W^{* -1} - W^{-1} \Sigma W^{-1\top})$ according to Theorem 2.
 
 <!--
 **Impact of Misspecified Correlation Matrix:**
