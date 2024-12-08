@@ -276,7 +276,7 @@ Thank you for your thoughtful comments. We appreciate the opportunity to clarify
 
 - The linear MDP assumption is to simplify the procedure and the theoretical analysis. Meanwhile, the proposed GFQI can be easily extended to accommodate nonlinear environments. 
 - The use of linear models results in interpretable Q-function estimators and decision rules, which are particularly valuable in biomedical studies (including our motivating example) where interpretability is important.
-- Theorem 1 proves the efficiency of the estimator parameters in the Q-function estimator. In particular, it implies that the estimator computed by the proposed GFQI is more efficient compared to those by FQI or GTD-type policy learning algorithms. Such an efficiency in the parameter estimates further translates into a smaller regret, as demonstrated in Theorem 2.
+- Theorem 1 proves the efficiency of the estimated parameters in the Q-function estimator. In particular, it implies that the estimator computed by the proposed GFQI is more efficient compared to those by FQI or GTD-type policy learning algorithms. Such an efficiency in the parameter estimates further translates into a smaller regret, as demonstrated in Theorem 2.
 
 We next elaborate the first and the last points in more detail below. 
 
