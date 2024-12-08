@@ -133,20 +133,15 @@ Thank you for pointing this out. We agree that our paper devotes a lot of space 
 #### Key Differences Between FQI, AGTD and GFQI:
 We will highlight the differences between GFQI and two closely related methods: FQI and GTD. Notice that these methods are detailed in Section 4 as well.
 
-1. **Methodological differences:**
+**Methodological differences:**
 
     - FQI assumes that all observations are i.i.d., which ignores intra-cluster correlations commonly present in clustered data. In contrast, GFQI incorporates GEE to explicitly model and account for these correlations via a working correlation matrix. This enables GFQI to achieve more efficient Q-function estimation and reduced regret in settings with clustered data.
 
     - GTD is designed for policy evaluation, aiming to estimate the value function for a fixed policy. The proposed GFQI focuses on the more complex problem of policy learning, where policy evaluation often serves as an intermediate step (Sutton and Barto, 2018). Even if GTD can be extended to policy learning (as discussed in Section 4, Algorithm 2), it still fundamentally differs from GFQI because it does not handle intra-cluster correlations.
  
+**Theoretical differences:** GFQI achieves minimal asymptotic variance and regret in its Q-function estimation when the working correlation matrix is correctly specified, as shown in our theoretical results (Theorems 1 and 2). Consequently, GFQI achieves smaller asymptotic variance and regret than FQI and AGTD.
 
-3. **Theoretical differences:**
-   
-    GFQI achieves minimal asymptotic variance and regret in its Q-function estimation when the working correlation matrix is correctly specified, as shown in our theoretical results (Theorems 1 and 2). Consequently, GFQI achieves smaller asymptotic variance and regret than FQI and AGTD.
-
-5. **Empirical differences:**
-   
-    Empirically, GFQI significantly outperforms FQI and AGTD in settings with strong intra-cluster correlations or small sample size, as demonstrated in our numerical studies. 
+**Empirical differences:** Empirically, GFQI significantly outperforms FQI and AGTD in settings with strong intra-cluster correlations or small sample size, as demonstrated in our numerical studies. 
 
 
 * In contrast, the proposed method is discussed in less detail. For example, key assumptions and theoretical results are omitted from the main paper, making it difficult for readers to grasp the foundation of the proposed method. Without details of Theorem 1, it is hard to understand why the optimal $\Phi$ has the given form on page 6.
