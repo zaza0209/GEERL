@@ -135,23 +135,18 @@ We will highlight the differences between GFQI and two closely related methods: 
 
 1. **Methodological differences:**
 
-    - FQI assumes that all observations are i.i.d., which ignores intra-cluster correlations commonly present in clustered data. In contrast, GFQI incorporates Generalized Estimating Equations (GEE) to explicitly model and account for these correlations via a working correlation matrix. This enables GFQI to achieve more efficient Q-function estimation and reduced regret in settings with clustered data.
+    - FQI assumes that all observations are i.i.d., which ignores intra-cluster correlations commonly present in clustered data. In contrast, GFQI incorporates GEE to explicitly model and account for these correlations via a working correlation matrix. This enables GFQI to achieve more efficient Q-function estimation and reduced regret in settings with clustered data.
 
-    - GTD is designed for policy evaluation, aiming to estimate the value function for a fixed policy. Our work focuses on the more complex problem of policy learning, where the goal is to learn an optimal policy that maximizes cumulative reward. Even if AGTD were extended to policy learning (as discussed in Section 4, Algorithm 2), it still fundamentally differs from GFQI because it does not handle intra-cluster correlations. Unlike GFQI, AGTD treats all observations as independent and does not leverage the dependency structure within clusters to improve efficiency.
-    
-   - GFQI, on the other hand, incorporates Generalized Estimating Equations (GEE) to explicitly model and account for intra-cluster correlations via a working correlation matrix. This adjustment improves sample efficiency and ensures more accurate Q-function estimation in clustered data scenarios. In addition, GFQI allows for flexible working correlation structures (e.g., exchangeable or other forms) to better capture the dependencies within clusters. This leads to more efficient parameter estimation when the correlation structure is appropriately specified.-->
-
+    - GTD is designed for policy evaluation, aiming to estimate the value function for a fixed policy. The proposed GFQI focuses on the more complex problem of policy learning, where policy evaluation often serves as an intermediate step (Sutton and Barto, 2018). Even if GTD can be extended to policy learning (as discussed in Section 4, Algorithm 2), it still fundamentally differs from GFQI because it does not handle intra-cluster correlations.
  
 
-3. **Theoretical Improvements:**
-    GFQI achieves minimal asymptotic variance and regret in its Q-function estimation when the working correlation matrix is correctly specified, as shown in our theoretical results (Theorem 1). FQI and AGTD does not provide this advantage, as it does not model intra-cluster correlations.
+3. **Theoretical differences:**
+   
+    GFQI achieves minimal asymptotic variance and regret in its Q-function estimation when the working correlation matrix is correctly specified, as shown in our theoretical results (Theorems 1 and 2). Consequently, GFQI achieves smaller asymptotic variance and regret than FQI and AGTD.
 
-4. **Empirical performance:**
-    Empirically, GFQI significantly outperforms FQI in settings with strong intra-cluster correlations or small sample size, as demonstrated in our numerical studies. This highlights its practical advantage in scenarios where traditional FQI struggles due to its independence assumption.
-
-We will incorporate these points into the revised manuscript to emphasize the novel contributions of GFQI compared to FQI. 
-
-Thank you for this valuable feedback.
+5. **Empirical differences:**
+   
+    Empirically, GFQI significantly outperforms FQI and AGTD in settings with strong intra-cluster correlations or small sample size, as demonstrated in our numerical studies. 
 
 
 * In contrast, the proposed method is discussed in less detail. For example, key assumptions and theoretical results are omitted from the main paper, making it difficult for readers to grasp the foundation of the proposed method. Without details of Theorem 1, it is hard to understand why the optimal $\Phi$ has the given form on page 6.
