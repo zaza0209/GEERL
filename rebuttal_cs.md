@@ -195,7 +195,7 @@ Due to the page limit, we decided to move the assumptions and formal theoretical
 
 2. **Stability**  
     The matrix 
-    $$M^{-1} \lambda_{\min}\mathbb{E} \left[\Phi^\top(\mathbf{A}, \mathbf{S})\phi(\mathbf{A}, \mathbf{S})-\gamma \Phi^\top(\mathbf{A}, \mathbf{S})\phi(\pi^{*}(\mathbf{S}^\prime),\mathbf{S}^\prime)\right]$$ 
+    $$M^{-1} \lambda_{\min}\mathbb{E} [\Phi^\top(\mathbf{A}, \mathbf{S})\phi(\mathbf{A}, \mathbf{S})-\gamma \Phi^\top(\mathbf{A}, \mathbf{S})\phi(\pi^{*}(\mathbf{S}^\prime),\mathbf{S}^\prime)]$$ 
     is uniformly bounded away from zero.
 
 3. **Uniqueness**
@@ -222,9 +222,9 @@ $\log(N)\ll K = O(N^{c^\prime})$ for any $c^\prime > 0$.
 
    where:
    
-   $$ W(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E}\left[ \mathbf{\Phi}(\mathbf{A}, \mathbf{S}) \left\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\} \right],$$
+   $$ W(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E}[ \mathbf{\Phi}(\mathbf{A}, \mathbf{S}) \{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \} ],$$
 
-   and $\Sigma(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E} \left( \mathbf{\Phi} \mathbf{V}^* \mathbf{\Phi}^\top \right)$.
+   and $\Sigma(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E} ( \mathbf{\Phi} \mathbf{V}^* \mathbf{\Phi}^\top )$.
 
 2. When the correlation structure of the TD errors is correctly specified, and the estimator $\widehat{\Phi}^*(\mathbf{A}, \mathbf{S})$ converges to $\Phi^*(\mathbf{A}, \mathbf{S})$ with a rate at least $O(N^{-b} \log^{-1}(N))$ for some $b > 0$, $\widehat{\beta}$ achieves the minimal asymptotic variance:
     $$W(\Phi^*)^{-1}.$$
@@ -310,7 +310,7 @@ To reiterate, Theorem 1 states that:
    where:
    
    $$
-   W(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E}\left[ \mathbf{\Phi}(\mathbf{A}, \mathbf{S}) \left\{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \right\} \right],
+   W(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E}[ \mathbf{\Phi}(\mathbf{A}, \mathbf{S}) \{ \phi(\mathbf{A}, \mathbf{S}) - \gamma \phi(\pi^*(\mathbf{S}^\prime), \mathbf{S}^\prime) \} ],
    $$
 
    and $\Sigma(\mathbf{\Phi}) = \frac{1}{M} \mathbb{E} \left( \mathbf{\Phi} \mathbf{V}^* \mathbf{\Phi}^\top \right)$.
@@ -503,7 +503,7 @@ Table 2:  Regret of the average reward with varying correlations $\psi$ and clus
 
 Table 3:  Regret of the average reward with varying correlations $\psi$ and horizon lengths (days). 
 
-Our preliminary results show that GFQI retains its robustness under misspecification, aligning with the theoretical guarantee of asymptotic normality. However, as expected,its efficiency (e.g., variance reduction and regret minimization) is reduced compared to the case of a well-specified structure. We believe this additional analysis willprovide greater clarity on the practical applicability and limitations of GFQI when the correlation structure is misspecified.
+Our preliminary results show that GFQI retains its robustness under misspecification, aligning with the theoretical guarantee of asymptotic normality. However, as expected,its efficiency (e.g., variance reduction and regret minimization) is reduced compared to the case of a well-specified structure. We believe this additional analysis will provide greater clarity on the practical applicability and limitations of GFQI when the correlation structure is misspecified.
 
 Thank you for highlighting this important consideration. We will ensure that the revised manuscript reflects this additional evaluation.
 
