@@ -2,21 +2,22 @@ Dear Reviewer u1HY,
 
 Many thanks for your prompt feedback before the discussion deadline. As you have seen, we have provided a comprehensive response to your comments during the rebuttal, with **7** official comments posted, covering:  
 * Refined theorical results and their connections to the existing literature (Official Comment 3); 
-* Extensions to our proposed methodology as well as their differences from the existing methods (Official Comments 1 \& 4); 
-* 
+* Extensions to our proposed methodology as well as their differences from the existing methods (Official Comments 1 \& 5); 
+* Significance justifications of our empirical studies (Official Comments 4 \& 7);
+* Presentations (Official Comments 3, 6 \& 7);
+* Novelty Justifications (Official Comment 5).
 
-We have already developed a comprehensive plan to address these concerns during the revision process. Specifically, we will:
+We are glad to know that most of your concerns have been addressed and believe our paper has been improved quiet a bit by addressing these comments. Now, the only primary concern left appears to be the clarity and presentation. To address this remaining comment, we have prepared a plan below on how to revise the paper. As you can see, all the points have been mentioned in our responses and can be readily incorporated in the paper. 
 
-1. **Add a subsection at the beginning of the paper** to introduce symbols and definitions, such as the defintion of the value function and regret, enhancing clarity for readers.
-2. **Remove some non-essential content** to free up space within the 9-page limit, allowing us to present the complete theoretical conditions and results (see e.g., our reponse to the second point of your comments on Clarity).
-3. **Provide more detailed descriptions of the real-world data** we use, to improve understanding and relevance (see our reponse to the third and forth points of your comments on Clarity and on Significance Justification).
-4. **Highlight the contribution** The integration of generalized estimating equations (GEE), a classical statistical tool for longitudinal and clustered data, into the reinforcement learning (RL) framework is unconventional. This approach bridges the gap between statistical methods for correlated data and modern RL techniques, addressing a unique set of challenges rarely explored in RL literature.
-
+1. We plan to **add a subsection at the beginning of the paper** to introduce the symbols and definitions, including the defintion of the value function and regret (as per our Officient Comment 3), to enhance clarity for the readers.
+2. We plan to use the extra page to **present the complete theoretical conditions and results** discussed in Official Comments 3 \& 6 in the statistical properties section. 
+3. We plan to add the discussions in our Official Comment 7 in the motivation paragraph in the introduction to **better motivate the real-world data application** we use, as well as the discussions in Official Comment 4 in the empirical studies to justify the significance of our empirical findings.
+4. We plan to add our discussions in our Official Comments 4 \& 5 in the introduction and related work sections to **better highlight the contributions**.
  
-We also wanted to bring your attention that writing clarity and presentation, while important, are not critical issues that affect the core contributions of our work. These changes will focus on improving the presentation without altering the core algorithm or model, which remains unchanged. 
-We believe these revisions will address your concerns and further strengthen the paper's communication of its contributions.
+We also wanted to argue that writing clarity and presentation, while important, are not critical to affect the core contributions and significances of our work. We hope this can address your remaining comment. If that's the case, we kindly respectfully request your reconsideration of the assigned score.
 
-Additionally, we have provided a comprehensive reply ranging from theoretical aspects to empirical results and other concerns, and we are glad to know that your concerns regarding those are addressed. Regarding the concern about presentation, we have come up with a plan and we believe this is not so critical.
+Again, thank you very much for your constructive feedback, which leads to a much improved version of our paper. Health and happiness to you and yours in the new year ahead! 
 
-Thank you again for your constructive feedback.
+Best,
+Authors
 
