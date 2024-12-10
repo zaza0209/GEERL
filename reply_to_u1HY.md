@@ -7,7 +7,7 @@ Many thanks for your prompt feedback before the discussion deadline. As you have
 * Presentations (Official Comments 3, 6 \& 7);
 * Novelty Justifications (Official Comment 5).
 
-We are glad to know that most of your concerns have been addressed and believe our paper has been improved quiet a bit by addressing these comments. Now, the only primary concern left appears to be the clarity and presentation. To address this remaining comment, we have prepared a plan below on how to revise the paper. As you can see, all the points have been mentioned in our responses and can be readily incorporated in the paper. 
+We are glad to know that most of your concerns have been addressed and believe our paper has improved quiet a bit by addressing these comments. Now, the only concern left appears to be the clarity and presentation. To address this remaining comment, we have prepared a plan below on how to revise the paper. As you can see, all the points have been mentioned in our responses and can be readily incorporated into the paper: 
 
 1. We plan to **add a subsection at the beginning of the paper** to introduce the symbols and definitions, including the defintion of the value function and regret (as per our Officient Comment 3), to enhance clarity for the readers.
 2. We plan to use the extra page to **present the complete theoretical conditions and results** discussed in Official Comments 3 \& 6 in the statistical properties section. 
