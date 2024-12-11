@@ -1,6 +1,6 @@
 Dear AC,
 
-Many thanks for handling our paper. For your convenience, we would like to provide a concise summary of our detailed responses prepared during the rebuttal to the feedback from all three reviewers:
+Many thanks for handling our paper. To assist you in decision making, we provide a concise summary of our detailed responses prepared during the rebuttal to the feedback from all three reviewers:
 
 ---
 
