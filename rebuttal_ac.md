@@ -13,10 +13,10 @@ For your convenience, we would like to provide a concise summary of our detailed
 ---
 
 #### **2. Empirical Studies:**
+- Conducted additional numerical studies to investigate the performance of GFQI under misspecified correlation structures, showing its robustness to model misspecification.
 - Provided detailed descriptions of the real-world datasets, including the number of users, clusters, and study duration, to improve transparency and understanding.  
 - Discussed the strength of intra-cluster correlations in the real data and the generality of clustered data problems.  
 - Explained why the gap between GFQI and FQI decreases as the number of clusters increases, highlighting the convergence properties of GEE.  
-- Provided additional analysis on the performance of GFQI under misspecified correlation structures, showing robustness despite reduced efficiency.
 
 ---
 
