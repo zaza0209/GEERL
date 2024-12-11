@@ -6,7 +6,7 @@ Many thanks for handling our paper. For your convenience, we would like to provi
 
 #### **1. Theory:**
 - Refined the regret bound in Theorem 2, including its scaling with key factors such as the dimension of the state space, episode length, and number of episodes.  
-- Clarified the assumptions and technical details of Theorem 1, including the uniqueness and marginal assumptions to ensure regularity.  
+- Clarified the assumptions and technical details of our theories, including the uniqueness and marginal assumptions to ensure regularity.  
 - Discussed the theoretical performance of GFQI under misspecified correlation structures, aligning with the theoretical guarantees of GEE.
 
 ---
