@@ -29,7 +29,7 @@ Many thanks for handling our paper. For your convenience, we would like to provi
 ---
 
 
-We also would like to bring your attention to Reviewer u1HY, who initially assigned a score of 1 and later increased it to 2. The reviewer acknowledged that all their concerns regarding contributions, theoretical soundness, and empirical relevance were addressed in our rebuttal. However, they still raised concerns about writing clarity and presentation, which we believe are not critical issues affecting the core contributions of our work. We have already developed a comprehensive plan to address these concerns during the revision process, as outlined above.
+We also would like to bring your attention to Reviewer u1HY, who initially assigned a score of 1 and later increased it to 2. The reviewer acknowledged that all their concerns regarding contributions, theoretical soundness, and empirical relevance were addressed in our rebuttal. However, they still raised concerns about writing clarity and presentation, which we believe are not critical issues affecting the core contributions of our work. We have already developed a comprehensive plan to address these concerns during the revision process; refer to our response to Reviewer u1HY. 
 
 Best regards,  
 Authors
