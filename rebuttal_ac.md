@@ -1,4 +1,6 @@
-We would like to summarize our detailed responses to the feedback from all three reviewers, categorizing the responses into **Theory**, **Empirical Studies**, and **Methodology**. Below is a concise overview of how we addressed the reviewers' concerns in each area:
+Dear AC,
+
+For your convenience, we would like to provide a concise summary of our detailed responses to the feedback from all three reviewers:
 
 ---
 
