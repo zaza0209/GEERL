@@ -5,10 +5,9 @@ Many thanks for handling our paper. For your convenience, we would like to provi
 ---
 
 #### **1. Theory:**
+- Refined the regret bound in Theorem 2, including its scaling with key factors such as the dimension of the state space, episode length, and number of episodes.  
 - Clarified the assumptions and technical details of Theorem 1, including the uniqueness and marginal assumptions to ensure regularity.  
-- Provided a detailed explanation of the regret bound in Theorem 2, including its scaling with key factors such as the dimension of the state space, episode length, and number of episodes.  
-- Emphasized that the method focuses on between-episode correlations and does not explicitly address within-episode correlations, which is a limitation for future work.  
-- Discussed the robustness of GFQI under misspecified correlation structures, aligning with the theoretical guarantees of GEE.
+- Discussed the theoretical performance of GFQI under misspecified correlation structures, aligning with the theoretical guarantees of GEE.
 
 ---
 
@@ -21,7 +20,8 @@ Many thanks for handling our paper. For your convenience, we would like to provi
 ---
 
 #### **3. Methodology:**
-- Elaborated on the technical challenges of combining GEE and FQI, such as adapting GEE for temporal dependencies, optimizing basis functions, and ensuring robustness under misspecified correlation structures.  
+- Elaborated on the technical challenges of combining GEE and FQI, such as adapting GEE for temporal dependencies, optimizing basis functions, and ensuring robustness under misspecified correlation structures.
+- Emphasized that the method focuses on between-episode correlations and does not explicitly address within-episode correlations, which is a limitation for future work.  
 - Streamlined the background explanation and emphasized the differences between GFQI and FQI.  
 - Discussed the appropriateness of GFQI in different scenarios, noting that its advantage depends on the strength of intra-cluster correlations and the degree of misspecification of the correlation structure.  
 - Addressed the limitations of linear assumptions in GEE and RL by highlighting the flexibility of basis functions and link functions.
